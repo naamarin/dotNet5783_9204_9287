@@ -14,19 +14,19 @@ public struct OrderItem
     /// <summary>
     /// ID number of the product
     /// </summary>
-    public int ProductID { get; set; }
+    public int? ProductID { get; set; }
     /// <summary>
     /// ID number of the order
     /// </summary>
-    public int OrderID { get; set; }
+    public int? OrderID { get; set; }
     /// <summary>
     /// Price per unit
     /// </summary>
-    public double Price { get; set; }
+    public double? Price { get; set; }
     /// <summary>
     /// Product amount 
     /// </summary>
-    public int Amount { get; set; }
+    public int? Amount { get; set; }
 
     /// <summary>
     /// A function that prints all the details of the item in the order

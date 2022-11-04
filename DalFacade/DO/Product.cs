@@ -12,19 +12,19 @@ public struct Product
     /// <summary>
     /// Product Name
     /// </summary>
-    public string Name { get; set; }
+    public string? Name { get; set; }
     /// <summary>
     /// The product category
     /// </summary>
-    public double Price { get; set; }
+    public double? Price { get; set; }
     /// <summary>
     /// The price of the product
     /// </summary>
-    public string Category { get; set; }
+    public string? Category { get; set; }
     /// <summary>
     /// Product quantity in stock
     /// </summary>
-    public int InStock { get; set; }
+    public int? InStock { get; set; }
 
     /// <summary>
     /// A function that prints all the product details
