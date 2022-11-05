@@ -19,6 +19,10 @@ public struct Order
     /// </summary>
     public string? CustomerName { get; set; }
     /// <summary>
+    /// Customer's email
+    /// </summary>
+    public string? CustomerEmail { get; set; }
+    /// <summary>
     /// Customer's cell phone number
     /// </summary>
     public int? CustomerNumber { get; set; }
@@ -46,6 +50,7 @@ public struct Order
     public override string ToString() => $@"
     ID: {ID}
     Customer Name: {CustomerName}
+    Customer Email: {CustomerEmail}
     Customer Number: {CustomerNumber}
     customer Address: {CustomerAdress}
     Order Date: {OrderDate}
