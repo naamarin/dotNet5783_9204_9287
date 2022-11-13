@@ -24,17 +24,17 @@ public struct Product
     /// <summary>
     /// Product quantity in stock
     /// </summary>
-    public int? InStock { get; set; }
+    public int InStock { get; set; }
 
     /// <summary>
     /// A function that prints all the product details
     /// </summary>
     /// <returns></returns>
     public override string ToString() => $@"
-    Product ID={ID}: {Name}, 
-    category - {Category}
-    Price: {Price}
-    Amount in stock: {InStock}
+ProductID={ID}: {Name}, 
+category= {Category},
+Price= {Price},
+AmountInStock= {InStock}
 ";
 
 }
