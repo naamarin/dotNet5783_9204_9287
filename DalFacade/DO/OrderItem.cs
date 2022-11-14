@@ -11,7 +11,7 @@ public struct OrderItem
     /// Unique ID number of an item in the order
     /// </summary>
     public int ID { get; set; }
-    /// <summary>
+    // <summary>
     /// ID number of the product
     /// </summary>
     public int ProductID { get; set; }
@@ -33,12 +33,12 @@ public struct OrderItem
     /// </summary>
     /// <returns></returns>
     public override string ToString() => $@"
-    ID: {ID}
-    Product ID: {ProductID} 
-    Order ID: {OrderID}
-    Price: {Price}
-    Amount: {Amount}
-    ";
+ID= {ID},
+ProductID= {ProductID} ,
+OrderID= {OrderID},
+Price= {Price},
+Amount= {Amount}
+";
    
 
 }

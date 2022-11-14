@@ -17,7 +17,11 @@ public struct Order
     /// <summary>
     /// The customer's name
     /// </summary>
-    public string CustomerName { get; set; }
+    public string? CustomerName { get; set; }
+    /// <summary>
+    /// Customer's email
+    /// </summary>
+    public string? CustomerEmail { get; set; }
     /// <summary>
     /// Customer's cell phone number
     /// </summary>
@@ -25,32 +29,33 @@ public struct Order
     /// <summary>
     /// Shipping address
     /// </summary>
-    public string CustomerAdress { get; set; }
+    public string? CustomerAdress { get; set; }
     /// <summary>
     /// Order creation date
     /// </summary>
-    public DateTime OrderDate { get; set; }
+    public DateTime? OrderDate { get; set; }
     /// <summary>
     /// delivery date
     /// </summary>
-    public DateTime ShipDate { get; set; }
+    public DateTime? ShipDate { get; set; }
     /// <summary>
     /// Date of delivery
     /// </summary>
-    public DateTime DeliveryDate { get; set; }
+    public DateTime? DeliveryDate { get; set; }
 
     /// <summary>
     /// A function that prints all the order details
     /// </summary>
     /// <returns></returns>
     public override string ToString() => $@"
-    ID: {ID}
-    Customer Name: {CustomerName}
-    Customer Number: {CustomerNumber}
-    customer Address: {CustomerAdress}
-    Order Date: {OrderDate}
-    Ship Date: {ShipDate}
-    Delivery Date: {DeliveryDate}
-    ";
+ID= {ID},
+CustomerName={CustomerName},
+CustomerEmail={CustomerEmail},
+CustomerNumber= {CustomerNumber},
+customerAddress= {CustomerAdress},
+OrderDate= {OrderDate},
+ShipDate= {ShipDate},
+DeliveryDate= {DeliveryDate}
+";
 }
 
