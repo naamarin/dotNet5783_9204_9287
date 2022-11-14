@@ -26,7 +26,7 @@ internal static class DataSource
 
     internal static List<Product?> ProductList { get; } = new List<Product?>();
 
-    internal static List<Order?> OrderList { get; } = new List<Order?>();
+    internal static List<Order?> OrderList { get; set; } = new List<Order?>();
 
     internal static List<OrderItem?> OrderItemsList { get; } = new List<OrderItem?>();
 
@@ -74,7 +74,7 @@ internal static class DataSource
         "Rab'd 31","Ben Zakai 29","Shamai 52","Avtalion 9","Ibn Gvirol 6","Mayiri 42","Haran 4","Yosef Karo 10","Tena 13"};
         int indexDelivery = 0;
         int indexShip = 0;
-        //DateTime[] dates = { }
+        int count = 0;
         for (int i = 0; i <= 25; i++)
         {
             Order order = new Order();
@@ -87,17 +87,22 @@ internal static class DataSource
             int hour = rand.Next(1,12);
             int minute = rand.Next(1,59);
             int second = rand.Next(1,59);
-            order.OrderDate = new DateTime(2022, 11, 14, hour, minute, second);
+            order.OrderDate = DateTime.Now.AddMinutes(count);
+            count += 30;
             if (indexShip < 18)
             {
-                order.ShipDate = new DateTime(2022, 11, 14, hour, minute + 30, second + 2);
+                order.ShipDate = order.OrderDate.Value.AddMinutes(31);
                 indexShip++;
             }
+            else
+                order.ShipDate = null;
             if (indexDelivery < 5)
             {
-                order.DeliveryDate = new DateTime(2022, 11, 14, hour, minute + 50, second + 12);
+                order.DeliveryDate = order.ShipDate.Value.AddMinutes(23);
                 indexDelivery++;
             }
+            else
+                order.DeliveryDate = null;
             OrderList.Add(order);
         }
     }

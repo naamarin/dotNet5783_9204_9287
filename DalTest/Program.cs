@@ -2,8 +2,6 @@
 using Dal;
 using DO;
 
-Console.WriteLine("Hello, World!");
-
 namespace DalTest
 {
     public class program
@@ -12,7 +10,7 @@ namespace DalTest
         private static DalOrderItem DalOrderItemObj = new DalOrderItem();
         private static DalProduct DalProductObj = new DalProduct();
 
-        static void Main()
+        static void Main(string[] args)
         {
             string action;
             int id, id2;
@@ -52,7 +50,7 @@ press 5 to Delete an order");
                                     order.CustomerEmail = Console.ReadLine();
                                     Console.WriteLine("Enter your address: \n");
                                     order.CustomerAdress = Console.ReadLine();
-                                    order.OrderDate= DateTime.Now;
+                                    order.OrderDate = DateTime.Now;
                                     DalOrderObj.Add(order);
                                     break;
                                 case "2":
@@ -217,8 +215,6 @@ press 7 to Find an item on the order");
                                     Console.WriteLine("Enter product ID: \n");
                                     id2 = Convert.ToInt32(Console.ReadLine());
                                     or = DalOrderItemObj.getOrderItems(id2, id);
-                                    if (or == null)
-                                        throw new Exception("there is no such orderItem");
                                     Console.WriteLine(or?.ToString());
                                     break;
                             };
