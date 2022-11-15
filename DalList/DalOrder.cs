@@ -3,7 +3,7 @@ using DO;
 
 namespace Dal;
 
-public struct DalOrder
+public class DalOrder
 {
     public int Add (Order order) 
     {

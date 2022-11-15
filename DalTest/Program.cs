@@ -22,7 +22,7 @@ namespace DalTest
 press 0 to exit
 press 1 for Order
 press 2 for Product
-press 3 for OrderItem\n");
+press 3 for OrderItem");
             string user_choice = Console.ReadLine();
             while (user_choice != "0")
             {
@@ -48,10 +48,11 @@ press 5 to Delete an order");
                                     order.CustomerNumber = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("Enter your email: ");
                                     order.CustomerEmail = Console.ReadLine();
-                                    Console.WriteLine("Enter your address: \n");
+                                    Console.WriteLine("Enter your address: ");
                                     order.CustomerAdress = Console.ReadLine();
                                     order.OrderDate = DateTime.Now;
-                                    DalOrderObj.Add(order);
+                                    id = DalOrderObj.Add(order);
+                                    Console.WriteLine($@"Your order ID is: {id}");
                                     break;
                                 case "2":
                                     Console.WriteLine("Enter order ID: ");
@@ -76,7 +77,7 @@ press 5 to Delete an order");
                                     order.CustomerNumber = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("Enter your email: ");
                                     order.CustomerEmail = Console.ReadLine();
-                                    Console.WriteLine("Enter your address: \n");
+                                    Console.WriteLine("Enter your address: ");
                                     order.CustomerAdress = Console.ReadLine();
                                     order.OrderDate = DateTime.Now;
                                     DalOrderObj.Update(order);
@@ -108,9 +109,9 @@ press 5 to Deleting an product");
                                     product.Price = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("Enter product category: ");
                                     product.Category = Console.ReadLine();
-                                    Console.WriteLine("Enter product amount in stock: \n");
+                                    Console.WriteLine("Enter product amount in stock: ");
                                     product.InStock = Convert.ToInt32(Console.ReadLine());
-                                    DalProductObj.Add(product);
+                                    id = DalProductObj.Add(product);
                                     break;
                                 case "2":
                                     Console.WriteLine("Enter product ID: ");
@@ -135,7 +136,7 @@ press 5 to Deleting an product");
                                     product.Price = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("Enter product category: ");
                                     product.Category = Console.ReadLine();
-                                    Console.WriteLine("Enter product amount in stock: \n");
+                                    Console.WriteLine("Enter product amount in stock: ");
                                     product.InStock = Convert.ToInt32(Console.ReadLine());
                                     DalProductObj.Update(product);
                                     break;
@@ -164,11 +165,12 @@ press 7 to Find an item on the order");
                                     orderItem.OrderID = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("Enter product ID: ");
                                     orderItem.ProductID = Convert.ToInt32(Console.ReadLine());
-                                    Console.WriteLine("Enter amount of this product: \n");
+                                    Console.WriteLine("Enter amount of this product: ");
                                     orderItem.Amount = Convert.ToInt32(Console.ReadLine());
                                     product = DalProductObj.GetById(orderItem.ProductID);
                                     orderItem.Price = Convert.ToDouble(orderItem.Amount) * product.Price.Value;
-                                    DalOrderItemObj.Add(orderItem);
+                                    id = DalOrderItemObj.Add(orderItem);
+                                    Console.WriteLine($@"Your orderItem ID is: {id}");
                                     break;
                                 case "2":
                                     Console.WriteLine("Enter orderItem ID: ");
@@ -189,7 +191,7 @@ press 7 to Find an item on the order");
                                     orderItem.OrderID = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("Enter product ID: ");
                                     orderItem.ProductID = Convert.ToInt32(Console.ReadLine());
-                                    Console.WriteLine("Enter amount of this product: \n");
+                                    Console.WriteLine("Enter amount of this product: ");
                                     orderItem.Amount = Convert.ToInt32(Console.ReadLine());
                                     product = DalProductObj.GetById(orderItem.ProductID);
                                     orderItem.Price = Convert.ToDouble(orderItem.Amount) * product.Price.Value;
@@ -230,7 +232,7 @@ press 7 to Find an item on the order");
 press 0 to exit
 press 1 for Order
 press 2 for Product
-press 3 for OrderItem\n");
+press 3 for OrderItem");
                 user_choice = Console.ReadLine();
             }
             // static 

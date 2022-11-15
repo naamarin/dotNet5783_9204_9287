@@ -3,7 +3,7 @@ using DO;
 
 namespace Dal;
 
-public struct DalProduct
+public class DalProduct
 {
 
     public int Add(Product product)

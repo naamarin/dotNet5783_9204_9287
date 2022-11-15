@@ -99,7 +99,9 @@ internal static class DataSource
             int minute = rand.Next(1,59);
             int second = rand.Next(1,59);
             order.OrderDate = DateTime.Now.AddMinutes(count);
+            //order.OrderDate = DateTime.MinValue;
             count += 30;
+            //TimeSpan ts = 
             if (indexShip < 18)
             {
                 order.ShipDate = order.OrderDate.Value.AddMinutes(31);
