@@ -194,6 +194,7 @@ press 7 to Find an item on the order");
                                     Console.WriteLine("Enter amount of this product: ");
                                     orderItem.Amount = Convert.ToInt32(Console.ReadLine());
                                     product = DalProductObj.GetById(orderItem.ProductID);
+                                    product.InStock--;
                                     orderItem.Price = Convert.ToDouble(orderItem.Amount) * product.Price.Value;
                                     DalOrderItemObj.Update(orderItem);
                                     break;
