@@ -5,7 +5,6 @@ namespace Dal;
 
 internal static class DataSource
 {
-    // internal static DataSource DSInstance { get; } = new DataSource();
 
     static DataSource()
     {
@@ -26,7 +25,7 @@ internal static class DataSource
 
     internal static List<Product?> ProductList { get; } = new List<Product?>();
 
-    internal static List<Order?> OrderList { get; set; } = new List<Order?>();
+    internal static List<Order?> OrderList { get; } = new List<Order?>();
 
     internal static List<OrderItem?> OrderItemsList { get; } = new List<OrderItem?>();
 
@@ -88,7 +87,9 @@ internal static class DataSource
             int minute = rand.Next(1,59);
             int second = rand.Next(1,59);
             order.OrderDate = DateTime.Now.AddMinutes(count);
+            //order.OrderDate = DateTime.MinValue;
             count += 30;
+            //TimeSpan ts = 
             if (indexShip < 18)
             {
                 order.ShipDate = order.OrderDate.Value.AddMinutes(31);
@@ -121,7 +122,8 @@ internal static class DataSource
             int rando = rand.Next(0, productsIds.Length);
             orderItem.ProductID = productsIds[rando];
             orderItem.Amount = amounts[i];
-            orderItem.Price = prices[rando]*orderItem.Amount;            OrderItemsList.Add(orderItem);
+            orderItem.Price = prices[rando]*orderItem.Amount;            
+            OrderItemsList.Add(orderItem);
         }
     }
     static readonly Random rand = new Random();
