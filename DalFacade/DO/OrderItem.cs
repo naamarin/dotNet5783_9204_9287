@@ -33,11 +33,11 @@ public struct OrderItem
     /// </summary>
     /// <returns></returns>
     public override string ToString() => $@"
-ID= {ID},
-ProductID= {ProductID} ,
-OrderID= {OrderID},
-Price= {Price},
-Amount= {Amount}
+ID: {ID}
+Product ID:  {ProductID} 
+Order ID:  {OrderID}
+Price:  {Price}
+Amount:  {Amount}
 ";
    
 

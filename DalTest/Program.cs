@@ -42,11 +42,11 @@ press 5 to Delete an order");
                             {
                                 case "1":
                                     order = new Order();
-                                    Console.WriteLine("Enter your full name: \n");
+                                    Console.WriteLine("Enter your full name: ");
                                     order.CustomerName = Console.ReadLine();
-                                    Console.WriteLine("Enter your number: \n");
+                                    Console.WriteLine("Enter your number: ");
                                     order.CustomerNumber = Convert.ToInt32(Console.ReadLine());
-                                    Console.WriteLine("Enter your email: \n");
+                                    Console.WriteLine("Enter your email: ");
                                     order.CustomerEmail = Console.ReadLine();
                                     Console.WriteLine("Enter your address: \n");
                                     order.CustomerAdress = Console.ReadLine();
@@ -54,27 +54,27 @@ press 5 to Delete an order");
                                     DalOrderObj.Add(order);
                                     break;
                                 case "2":
-                                    Console.WriteLine("Enter order ID: \n");
+                                    Console.WriteLine("Enter order ID: ");
                                     id = Convert.ToInt32(Console.ReadLine());
                                     order = DalOrderObj.GetById(id);
-                                    Console.WriteLine(order.ToString());
+                                    Console.WriteLine(order);
                                     break;
                                 case "3":
                                     IEnumerable<Order?> list = DalOrderObj.GetAll();
                                     foreach (var item in list)
                                     {
-                                        Console.WriteLine(item?.ToString());
+                                        Console.WriteLine(item);
                                     }
                                     break;
                                 case "4":
                                     order = new Order();
-                                    Console.WriteLine("Enter your order ID: \n");
+                                    Console.WriteLine("Enter your order ID: ");
                                     order.ID = Convert.ToInt32(Console.ReadLine());
-                                    Console.WriteLine("Enter your full name: \n");
+                                    Console.WriteLine("Enter your full name: ");
                                     order.CustomerName = Console.ReadLine();
-                                    Console.WriteLine("Enter your number: \n");
+                                    Console.WriteLine("Enter your number: ");
                                     order.CustomerNumber = Convert.ToInt32(Console.ReadLine());
-                                    Console.WriteLine("Enter your email: \n");
+                                    Console.WriteLine("Enter your email: ");
                                     order.CustomerEmail = Console.ReadLine();
                                     Console.WriteLine("Enter your address: \n");
                                     order.CustomerAdress = Console.ReadLine();
@@ -82,7 +82,7 @@ press 5 to Delete an order");
                                     DalOrderObj.Update(order);
                                     break;
                                 case "5":
-                                    Console.WriteLine("Enter order ID: \n");
+                                    Console.WriteLine("Enter order ID: ");
                                     id = Convert.ToInt32(Console.ReadLine());
                                     DalOrderObj.Delete(id);
                                     break;
@@ -100,47 +100,47 @@ press 5 to Deleting an product");
                             {
                                 case "1":
                                     product = new Product();
-                                    Console.WriteLine("Enter product ID: \n");
+                                    Console.WriteLine("Enter product ID: ");
                                     product.ID = Convert.ToInt32(Console.ReadLine());
-                                    Console.WriteLine("Enter product name: \n");
+                                    Console.WriteLine("Enter product name: ");
                                     product.Name = Console.ReadLine();
-                                    Console.WriteLine("Enter product price: \n");
+                                    Console.WriteLine("Enter product price: ");
                                     product.Price = Convert.ToInt32(Console.ReadLine());
-                                    Console.WriteLine("Enter product category: \n");
+                                    Console.WriteLine("Enter product category: ");
                                     product.Category = Console.ReadLine();
                                     Console.WriteLine("Enter product amount in stock: \n");
                                     product.InStock = Convert.ToInt32(Console.ReadLine());
                                     DalProductObj.Add(product);
                                     break;
                                 case "2":
-                                    Console.WriteLine("Enter product ID: \n");
+                                    Console.WriteLine("Enter product ID: ");
                                     id = Convert.ToInt32(Console.ReadLine());
                                     product = DalProductObj.GetById(id);
-                                    Console.WriteLine(product.ToString());
+                                    Console.WriteLine(product);
                                     break;
                                 case "3":
                                     IEnumerable<Product?> list = DalProductObj.GetAll();
                                     foreach (var item in list)
                                     {
-                                        Console.WriteLine(item?.ToString());
+                                        Console.WriteLine(item);
                                     }
                                     break;
                                 case "4":
                                     product = new Product();
-                                    Console.WriteLine("Enter product ID: \n");
+                                    Console.WriteLine("Enter product ID: ");
                                     product.ID = Convert.ToInt32(Console.ReadLine());
-                                    Console.WriteLine("Enter product name: \n");
+                                    Console.WriteLine("Enter product name: ");
                                     product.Name = Console.ReadLine();
-                                    Console.WriteLine("Enter product price: \n");
+                                    Console.WriteLine("Enter product price: ");
                                     product.Price = Convert.ToInt32(Console.ReadLine());
-                                    Console.WriteLine("Enter product category: \n");
+                                    Console.WriteLine("Enter product category: ");
                                     product.Category = Console.ReadLine();
                                     Console.WriteLine("Enter product amount in stock: \n");
                                     product.InStock = Convert.ToInt32(Console.ReadLine());
                                     DalProductObj.Update(product);
                                     break;
                                 case "5":
-                                    Console.WriteLine("Enter order ID: \n");
+                                    Console.WriteLine("Enter order ID: ");
                                     id = Convert.ToInt32(Console.ReadLine());
                                     DalProductObj.Delete(id);
                                     break;
@@ -160,9 +160,9 @@ press 7 to Find an item on the order");
                             {
                                 case "1":
                                     orderItem = new OrderItem();
-                                    Console.WriteLine("Enter order ID: \n");
+                                    Console.WriteLine("Enter order ID: ");
                                     orderItem.OrderID = Convert.ToInt32(Console.ReadLine());
-                                    Console.WriteLine("Enter product ID: \n");
+                                    Console.WriteLine("Enter product ID: ");
                                     orderItem.ProductID = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("Enter amount of this product: \n");
                                     orderItem.Amount = Convert.ToInt32(Console.ReadLine());
@@ -171,23 +171,23 @@ press 7 to Find an item on the order");
                                     DalOrderItemObj.Add(orderItem);
                                     break;
                                 case "2":
-                                    Console.WriteLine("Enter orderItem ID: \n");
+                                    Console.WriteLine("Enter orderItem ID: ");
                                     id = Convert.ToInt32(Console.ReadLine());
                                     orderItem = DalOrderItemObj.GetById(id);
-                                    Console.WriteLine(orderItem.ToString());
+                                    Console.WriteLine(orderItem);
                                     break;
                                 case "3":
                                     IEnumerable<OrderItem?> list = DalOrderItemObj.GetAll();
                                     foreach (var item in list)
                                     {
-                                        Console.WriteLine(item?.ToString());
+                                        Console.WriteLine(item);
                                     }
                                     break;
                                 case "4":
                                     orderItem = new OrderItem();
-                                    Console.WriteLine("Enter order ID: \n");
+                                    Console.WriteLine("Enter order ID: ");
                                     orderItem.OrderID = Convert.ToInt32(Console.ReadLine());
-                                    Console.WriteLine("Enter product ID: \n");
+                                    Console.WriteLine("Enter product ID: ");
                                     orderItem.ProductID = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("Enter amount of this product: \n");
                                     orderItem.Amount = Convert.ToInt32(Console.ReadLine());
@@ -196,26 +196,26 @@ press 7 to Find an item on the order");
                                     DalOrderItemObj.Update(orderItem);
                                     break;
                                 case "5":
-                                    Console.WriteLine("Enter orderItem ID: \n");
+                                    Console.WriteLine("Enter orderItem ID: ");
                                     id = Convert.ToInt32(Console.ReadLine());
                                     DalOrderItemObj.Delete(id);
                                     break;
                                 case "6":
-                                    Console.WriteLine("Enter order ID: \n");
+                                    Console.WriteLine("Enter order ID: ");
                                     id = Convert.ToInt32(Console.ReadLine());
                                     list = DalOrderItemObj.getAllOrderItems(id);
                                     foreach (var item in list)
                                     {
-                                        Console.WriteLine(item?.ToString());
+                                        Console.WriteLine(item);
                                     }
                                     break;
                                 case "7":
-                                    Console.WriteLine("Enter order ID: \n");
+                                    Console.WriteLine("Enter order ID: ");
                                     id = Convert.ToInt32(Console.ReadLine());
-                                    Console.WriteLine("Enter product ID: \n");
+                                    Console.WriteLine("Enter product ID: ");
                                     id2 = Convert.ToInt32(Console.ReadLine());
                                     or = DalOrderItemObj.getOrderItems(id2, id);
-                                    Console.WriteLine(or?.ToString());
+                                    Console.WriteLine(or);
                                     break;
                             };
                             break;
