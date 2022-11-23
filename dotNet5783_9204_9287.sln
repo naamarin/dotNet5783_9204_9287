@@ -14,7 +14,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalFacade", "DalFacade\DalF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalList", "DalList\DalList.csproj", "{AD9AF357-A165-4860-9003-39384A87135A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalTest", "DalTest\DalTest.csproj", "{C38505F4-54A7-4293-9766-171210003A24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalTest", "DalTest\DalTest.csproj", "{C38505F4-54A7-4293-9766-171210003A24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{C2CBDB19-12B2-419C-881D-A4C106E031C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlTest", "BlTest\BlTest.csproj", "{C702AC42-3901-4D24-8626-577E188AECDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +42,14 @@ Global
 		{C38505F4-54A7-4293-9766-171210003A24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C38505F4-54A7-4293-9766-171210003A24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C38505F4-54A7-4293-9766-171210003A24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2CBDB19-12B2-419C-881D-A4C106E031C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2CBDB19-12B2-419C-881D-A4C106E031C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2CBDB19-12B2-419C-881D-A4C106E031C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2CBDB19-12B2-419C-881D-A4C106E031C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C702AC42-3901-4D24-8626-577E188AECDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C702AC42-3901-4D24-8626-577E188AECDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C702AC42-3901-4D24-8626-577E188AECDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C702AC42-3901-4D24-8626-577E188AECDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

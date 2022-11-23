@@ -1,9 +1,10 @@
 ﻿
 using DO;
+using DalApi;
 
 namespace Dal;
 
-public class DalOrderItem
+internal class DalOrderItem : IOrderItem
 {
     public int Add(OrderItem orderItem)
     {
@@ -16,7 +17,7 @@ public class DalOrderItem
     {
         if (!DataSource.OrderItemsList.Exists(x => x?.ID == id))
         {
-            throw new Exception("order item not exists");
+            throw new DalDoesNotExistException("order item not exists");
         }
         return (OrderItem)DataSource.OrderItemsList.Find(x => x?.ID == id);
     }
@@ -25,7 +26,7 @@ public class DalOrderItem
     {
         if (!DataSource.OrderItemsList.Exists(x => x?.ID == orderItem.ID))
         {
-            throw new Exception("order item not exists");
+            throw new DalDoesNotExistException("order item not exists");
         }
         DataSource.OrderItemsList.Remove(DataSource.OrderItemsList.Find(x => x?.ID == orderItem.ID));
         DataSource.OrderItemsList.Add(orderItem);
@@ -35,7 +36,7 @@ public class DalOrderItem
     {
         if (!DataSource.OrderItemsList.Exists(x => x?.ID == id))
         {
-            throw new Exception("order item not exists");
+            throw new DalDoesNotExistException("order item not exists");
         }
         DataSource.OrderItemsList.Remove(DataSource.OrderItemsList.Find(x => x?.ID == id));
     }
@@ -70,7 +71,7 @@ public class DalOrderItem
                 orderItem = DataSource.OrderItemsList[i];
         }
         if (orderItem == null)
-            throw new Exception("order item not exists");
+            throw new DalDoesNotExistException("order item not exists");
         return orderItem;
     }
 }

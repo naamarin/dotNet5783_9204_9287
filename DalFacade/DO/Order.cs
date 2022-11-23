@@ -47,15 +47,20 @@ public struct Order
     /// A function that prints all the order details
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => $@"
-ID: {ID},
-Customer Name: {CustomerName}
-Customer Email: {CustomerEmail}
-Customer Number: 0{CustomerNumber}
-customer Address: {CustomerAdress}
-Order Date: {OrderDate}
-Ship Date: {ShipDate}
-Delivery Date: {DeliveryDate}
-";
+    public override string ToString()
+    {
+        return Tools.ToStringProperty(this);
+    }
 }
+//=> $@"
+//ID: {ID},
+//Customer Name: {CustomerName}
+//Customer Email: {CustomerEmail}
+//Customer Number: 0{CustomerNumber}
+//customer Address: {CustomerAdress}
+//Order Date: {OrderDate}
+//Ship Date: {ShipDate}
+//Delivery Date: {DeliveryDate}
+//";
+//}
 

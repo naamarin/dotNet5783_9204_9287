@@ -30,12 +30,16 @@ public struct Product
     /// A function that prints all the product details
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => $@"
-Product ID: {ID}
-Name: {Name}
-Category: {Category}
-Price: {Price}
-Amount in stock: {InStock}
-";
+    public override string ToString()
+    {
+        return Tools.ToStringProperty(this);
+    }
+//    => $@"
+//Product ID: {ID}
+//Name: {Name}
+//Category: {Category}
+//Price: {Price}
+//Amount in stock: {InStock}
+//";
 
 }

@@ -1,13 +1,16 @@
 ﻿
 using DO;
+using DalApi;
 
 namespace Dal;
 
-public class DalProduct
+internal class DalProduct : IProduct
 {
 
     public int Add(Product product)
     {
+        if (DataSource.ProductList.Exists(x => x.Value.ID == product.ID))
+            throw new DalAlreadyExistException("ID Product already exsists");
         DataSource.ProductList.Add(product);
         return product.ID;
     }
@@ -16,7 +19,7 @@ public class DalProduct
     {
         if (!DataSource.ProductList.Exists(x => x?.ID == id))
         {
-            throw new Exception("product not exists");
+            throw new DalDoesNotExistException("product not exists");
         }
         return (Product)DataSource.ProductList.Find(x => x?.ID == id);
     }
@@ -25,7 +28,7 @@ public class DalProduct
     {
         if (!DataSource.ProductList.Exists(x => x?.ID == product.ID))
         {
-            throw new Exception("product not exists");
+            throw new DalDoesNotExistException("product not exists");
         }
         DataSource.ProductList.Remove(DataSource.ProductList.Find(x => x?.ID == product.ID));
         DataSource.ProductList.Add(product);
@@ -35,7 +38,7 @@ public class DalProduct
     {
         if (!DataSource.ProductList.Exists(x => x?.ID == id))
         {
-            throw new Exception("product not exists");
+            throw new DalDoesNotExistException("product not exists");
         }
         DataSource.ProductList.Remove(DataSource.ProductList.Find(x => x?.ID == id));
     }
