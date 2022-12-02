@@ -101,7 +101,6 @@ internal static class DataSource
             order.OrderDate = DateTime.Now.AddMinutes(count);
             //order.OrderDate = DateTime.MinValue;
             count += 30;
-            //TimeSpan ts = 
             if (indexShip < 18)
             {
                 order.ShipDate = order.OrderDate.Value.AddMinutes(31);
