@@ -41,7 +41,7 @@ internal class DalOrder : IOrder
         DataSource.OrderList.Remove(DataSource.OrderList.Find(x => x?.ID == id));
     }
 
-    public IEnumerable<Order?> GetAll()
+    public IEnumerable<Order?> GetAll(Func<Order?, bool>? filter = null)
     {
         List<Order?> newList = new List<Order?>();
         for (int i = 0; i < DataSource.OrderList.Count; i++)

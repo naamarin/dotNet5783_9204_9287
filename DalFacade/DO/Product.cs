@@ -1,7 +1,7 @@
 ﻿
 namespace DO;
 /// <summary>
-/// This stuct describes a single product in the store
+/// This stuct describes a single product in the store - type DO
 /// </summary>
 public struct Product
 {
@@ -16,11 +16,11 @@ public struct Product
     /// <summary>
     /// The product category
     /// </summary>
-    public double? Price { get; set; }
+    public double Price { get; set; }
     /// <summary>
     /// The price of the product
     /// </summary>
-    public string? Category { get; set; }
+    public Category? Category { get; set; }
     /// <summary>
     /// Product quantity in stock
     /// </summary>

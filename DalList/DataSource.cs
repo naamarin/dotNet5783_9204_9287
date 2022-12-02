@@ -53,13 +53,13 @@ internal static class DataSource
         "Desserts","Desserts","Desserts","Drinks","Drinks","Drinks","Sauces","Sauces","Sauces"};
 
         for (int i= 0; i < ids.Length; i++)
-        {
+        { 
             Product product = new Product();
             product.ID = ids[i];
             product.Name = names[i];
             product.InStock = amounts[i];
             product.Price = prices[i];
-            product.Category = category[i];
+            product.Category = (Category)int.Parse(category[i]);
             ProductList.Add(product);
         }
     }

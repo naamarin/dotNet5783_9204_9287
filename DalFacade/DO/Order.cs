@@ -6,7 +6,7 @@ using System.Xml.Linq;
 namespace DO;
 
 /// <summary>
-/// This struct describes a single customer order 
+/// This struct describes a single customer order - type DO
 /// </summary>
 public struct Order
 {

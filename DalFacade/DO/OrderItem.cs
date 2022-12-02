@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace DO;
 /// <summary>
-/// This struct describes a single item on the order
+/// This struct describes a single item on the order - type DO
 /// </summary>
 public struct OrderItem
 {

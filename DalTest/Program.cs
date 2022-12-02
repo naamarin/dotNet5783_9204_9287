@@ -11,7 +11,7 @@ namespace DalTest
 
         static void Main(string[] args)
         {
-            string action;
+            string action, category;
             int id, id2;
             Order order;
             Product product;
@@ -107,7 +107,8 @@ press 5 to Deleting an product");
                                     Console.WriteLine("Enter product price: ");
                                     product.Price = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("Enter product category: ");
-                                    product.Category = Console.ReadLine();
+                                    category = Console.ReadLine();
+                                    product.Category = (Category)int.Parse(category);
                                     Console.WriteLine("Enter product amount in stock: ");
                                     product.InStock = Convert.ToInt32(Console.ReadLine());
                                     id = dal.Product.Add(product);

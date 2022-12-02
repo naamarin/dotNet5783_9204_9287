@@ -1,6 +1,7 @@
 ﻿
 using DO;
 using DalApi;
+using System.Security.Cryptography;
 
 namespace Dal;
 
@@ -43,14 +44,15 @@ internal class DalProduct : IProduct
         DataSource.ProductList.Remove(DataSource.ProductList.Find(x => x?.ID == id));
     }
 
-    public IEnumerable<Product?> GetAll()
+    public IEnumerable<Product?> GetAll(Func<Product?, bool>? filter = null)
     {
-        List<Product?> newList = new List<Product?>();
-        for (int i = 0; i < DataSource.ProductList.Count; i++)
-        {
-            newList.Add(DataSource.ProductList[i]);
-        }
-        return newList;
+        return from pl in DataSource.ProductList select pl;
+        //List<Product?> newList = new List<Product?>();
+        //for (int i = 0; i < DataSource.ProductList.Count; i++)
+        //{
+        //    newList.Add(DataSource.ProductList[i]);
+        //}
+        //return newList;
     }
 }
 
