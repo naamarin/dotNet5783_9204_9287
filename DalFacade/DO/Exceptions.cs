@@ -15,3 +15,8 @@ public class DalAlreadyExistException : Exception
 {
     public DalAlreadyExistException(string? message) : base(message) { }
 }
+
+public class DalMissingIdException:Exception
+{
+    public DalMissingIdException(string? message) : base(message) { }
+}
