@@ -1,7 +1,7 @@
 ﻿
 namespace DO;
 /// <summary>
-/// This stuct describes a single product in the store
+/// This stuct describes a single product in the store - type DO
 /// </summary>
 public struct Product
 {
@@ -16,11 +16,11 @@ public struct Product
     /// <summary>
     /// The product category
     /// </summary>
-    public double? Price { get; set; }
+    public double Price { get; set; }
     /// <summary>
     /// The price of the product
     /// </summary>
-    public string? Category { get; set; }
+    public Category? Category { get; set; }
     /// <summary>
     /// Product quantity in stock
     /// </summary>
@@ -30,12 +30,16 @@ public struct Product
     /// A function that prints all the product details
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => $@"
-Product ID: {ID}
-Name: {Name}
-Category: {Category}
-Price: {Price}
-Amount in stock: {InStock}
-";
+    public override string ToString()
+    {
+        return Tools.ToStringProperty(this);
+    }
+//    => $@"
+//Product ID: {ID}
+//Name: {Name}
+//Category: {Category}
+//Price: {Price}
+//Amount in stock: {InStock}
+//";
 
 }

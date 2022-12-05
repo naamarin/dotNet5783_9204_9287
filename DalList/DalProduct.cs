@@ -1,9 +1,11 @@
 ﻿
 using DO;
+using DalApi;
+using System.Security.Cryptography;
 
 namespace Dal;
 
-public class DalProduct
+internal class DalProduct : IProduct
 {
     /// <summary>
     ///Function to create a new product
@@ -12,6 +14,8 @@ public class DalProduct
     /// <returns></returns>
     public int Add(Product product)
     {
+        if (DataSource.ProductList.Exists(x => x.Value.ID == product.ID))
+            throw new DalAlreadyExistException("ID Product already exsists");
         DataSource.ProductList.Add(product);
         return product.ID;
     }
@@ -25,7 +29,7 @@ public class DalProduct
     {
         if (!DataSource.ProductList.Exists(x => x?.ID == id))
         {
-            throw new Exception("product not exists");
+            throw new DalDoesNotExistException("product not exists");
         }
         return (Product)DataSource.ProductList.Find(x => x?.ID == id);
     }
@@ -38,7 +42,7 @@ public class DalProduct
     {
         if (!DataSource.ProductList.Exists(x => x?.ID == product.ID))
         {
-            throw new Exception("product not exists");
+            throw new DalDoesNotExistException("product not exists");
         }
         DataSource.ProductList.Remove(DataSource.ProductList.Find(x => x?.ID == product.ID));
         DataSource.ProductList.Add(product);
@@ -52,22 +56,20 @@ public class DalProduct
     {
         if (!DataSource.ProductList.Exists(x => x?.ID == id))
         {
-            throw new Exception("product not exists");
+            throw new DalDoesNotExistException("product not exists");
         }
         DataSource.ProductList.Remove(DataSource.ProductList.Find(x => x?.ID == id));
     }
-    /// <summary>
-    /// Function to return all products
-    /// </summary>
-    /// <returns></returns>
-    public IEnumerable<Product?> GetAll()
+
+    public IEnumerable<Product?> GetAll(Func<Product?, bool>? filter = null)
     {
-        List<Product?> newList = new List<Product?>();
-        for (int i = 0; i < DataSource.ProductList.Count; i++)
-        {
-            newList.Add(DataSource.ProductList[i]);
-        }
-        return newList;
+        return from pl in DataSource.ProductList select pl;
+        //List<Product?> newList = new List<Product?>();
+        //for (int i = 0; i < DataSource.ProductList.Count; i++)
+        //{
+        //    newList.Add(DataSource.ProductList[i]);
+        //}
+        //return newList;
     }
 }
 

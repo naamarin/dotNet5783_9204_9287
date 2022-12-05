@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace DO;
 /// <summary>
-/// This struct describes a single item on the order
+/// This struct describes a single item on the order - type DO
 /// </summary>
 public struct OrderItem
 {
@@ -32,13 +32,17 @@ public struct OrderItem
     /// A function that prints all the details of the item in the order
     /// </summary>
     /// <returns></returns>
-    public override string ToString() => $@"
-ID: {ID}
-Product ID:  {ProductID} 
-Order ID:  {OrderID}
-Price:  {Price}
-Amount:  {Amount}
-";
-   
+    public override string ToString()
+    {
+        return Tools.ToStringProperty(this);
+    }
+    //=> $@"
+    //ID: {ID}
+    //Product ID:  {ProductID} 
+    //Order ID:  {OrderID}
+    //Price:  {Price}
+    //Amount:  {Amount}
+    //";
+
 
 }

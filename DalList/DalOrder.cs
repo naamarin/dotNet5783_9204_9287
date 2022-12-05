@@ -1,9 +1,10 @@
 ﻿
 using DO;
+using DalApi;
 
 namespace Dal;
 
-public class DalOrder
+internal class DalOrder : IOrder
 {
     /// <summary>
     /// /// <summary>
@@ -28,7 +29,7 @@ public class DalOrder
     {
         if(! DataSource.OrderList.Exists(x=>x?.ID == id))
         {
-            throw new Exception("order not exists"); 
+            throw new DalDoesNotExistException("order not exists"); 
         }
         return (Order)DataSource.OrderList.Find(x => x?.ID == id);
     }
@@ -41,7 +42,7 @@ public class DalOrder
     {
         if (!DataSource.OrderList.Exists(x => x?.ID == order.ID))
         {
-            throw new Exception("order not exists"); 
+            throw new DalDoesNotExistException("order not exists"); 
         }
         DataSource.OrderList.Remove(DataSource.OrderList.Find(x => x?.ID == order.ID));
         DataSource.OrderList.Add(order);
@@ -55,14 +56,11 @@ public class DalOrder
     {
         if (!DataSource.OrderList.Exists(x => x?.ID == id))
         {
-            throw new Exception("order not exists");
+            throw new DalDoesNotExistException("order not exists");
         }
         DataSource.OrderList.Remove(DataSource.OrderList.Find(x => x?.ID == id));
     }
-    /// <summary>
-    /// Function to return all orders
-    /// </summary>
-    /// <returns></returns>
+
     public IEnumerable<Order?> GetAll()
     {
         List<Order?> newList = new List<Order?>();

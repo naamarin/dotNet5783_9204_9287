@@ -1,9 +1,10 @@
 ﻿
 using DO;
+using DalApi;
 
 namespace Dal;
 
-public class DalOrderItem
+internal class DalOrderItem : IOrderItem
 {
     /// <summary>
     /// Function to create a product on order
@@ -26,7 +27,7 @@ public class DalOrderItem
     {
         if (!DataSource.OrderItemsList.Exists(x => x?.ID == id))
         {
-            throw new Exception("order item not exists");
+            throw new DalDoesNotExistException("order item not exists");
         }
         return (OrderItem)DataSource.OrderItemsList.Find(x => x?.ID == id);
     }
@@ -40,7 +41,7 @@ public class DalOrderItem
     {
         if (!DataSource.OrderItemsList.Exists(x => x?.ID == orderItem.ID))
         {
-            throw new Exception("order item not exists");
+            throw new DalDoesNotExistException("order item not exists");
         }
         DataSource.OrderItemsList.Remove(DataSource.OrderItemsList.Find(x => x?.ID == orderItem.ID));
         DataSource.OrderItemsList.Add(orderItem);
@@ -54,7 +55,7 @@ public class DalOrderItem
     {
         if (!DataSource.OrderItemsList.Exists(x => x?.ID == id))
         {
-            throw new Exception("order item not exists");
+            throw new DalDoesNotExistException("order item not exists");
         }
         DataSource.OrderItemsList.Remove(DataSource.OrderItemsList.Find(x => x?.ID == id));
     }
@@ -63,6 +64,8 @@ public class DalOrderItem
     /// </summary>
     /// <returns></returns>
     public IEnumerable<OrderItem?> GetAll()
+
+    public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? filter = null)
     {
         List<OrderItem?> newList = new List<OrderItem?>();
         for (int i = 0; i < DataSource.OrderItemsList.Count; i++)
@@ -92,7 +95,7 @@ public class DalOrderItem
                 orderItem = DataSource.OrderItemsList[i];
         }
         if (orderItem == null)
-            throw new Exception("order item not exists");
+            throw new DalDoesNotExistException("order item not exists");
         return orderItem;
     }
 }
