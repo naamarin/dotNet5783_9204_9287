@@ -58,19 +58,6 @@ internal class Product : IProduct
         dal.Product.Add(doProduct);
     }
 
-    //        if (boProduct.ID <= 0)
-    //            throw new ArgumentException("Invalid ID");
-    //        else
-    //        {
-    //            try
-    //            {
-    //                doProduct.ID = boProduct.ID;
-    //            }
-    //            catch (DO.DalAlreadyExistException daee)
-    //{
-    //    Console.WriteLine("{0} Exception caught.", daee);
-    //}
-
     public void RemoveProduct(int idProduct)
     {
         //***************************************************************************************
