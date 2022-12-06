@@ -135,7 +135,7 @@ press 5 to Deleting an product");
                                     Console.WriteLine("Enter product price: ");
                                     product.Price = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("Enter product category: ");
-                                    product.Category = Console.ReadLine();
+                                    product.Category = (DO.Category)int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter product amount in stock: ");
                                     product.InStock = Convert.ToInt32(Console.ReadLine());
                                     dal.Product.Update(product);
@@ -195,7 +195,7 @@ press 7 to Find an item on the order");
                                     orderItem.Amount = Convert.ToInt32(Console.ReadLine());
                                     product = dal.Product.GetById(orderItem.ProductID);
                                     product.InStock--;
-                                    orderItem.Price = Convert.ToDouble(orderItem.Amount) * product.Price.Value;//***********************************
+                                    orderItem.Price = Convert.ToDouble(orderItem.Amount) * product.Price.Value;
                                     dal.OrderItem.Update(orderItem);
                                     break;
                                 case "5":

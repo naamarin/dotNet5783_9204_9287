@@ -67,12 +67,17 @@ internal class DalOrderItem : IOrderItem
 
     public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? filter = null)
     {
-        List<OrderItem?> newList = new List<OrderItem?>();
-        for (int i = 0; i < DataSource.OrderItemsList.Count; i++)
+        if (filter == null)
         {
-            newList.Add(DataSource.OrderItemsList[i]);
+            return from OrderItem? orderItem in DataSource.OrderItemsList
+                   select orderItem;
         }
-        return newList;
+        else
+        {
+            return from OrderItem? orderItem in DataSource.OrderItemsList
+                   where filter(orderItem)
+                   select orderItem;
+        }
     }
 
     public List<OrderItem?> getAllOrderItems(int id)

@@ -63,11 +63,16 @@ internal class DalOrder : IOrder
 
     public IEnumerable<Order?> GetAll()
     {
-        List<Order?> newList = new List<Order?>();
-        for (int i = 0; i < DataSource.OrderList.Count; i++)
+        if (filter == null)
         {
-            newList.Add(DataSource.OrderList[i]);
+            return from Order? order in DataSource.OrderList
+                   select order;
         }
-        return newList;
+        else
+        {
+            return from Order? order in DataSource.OrderList
+                   where filter(order)
+                   select order;
+        }
     }
 }
