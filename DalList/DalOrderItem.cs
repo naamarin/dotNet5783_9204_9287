@@ -6,13 +6,23 @@ namespace Dal;
 
 internal class DalOrderItem : IOrderItem
 {
+    /// <summary>
+    /// Function to create a product on order
+    /// </summary>
+    /// <param name="orderItem"></param>
+    /// <returns></returns>
     public int Add(OrderItem orderItem)
     {
         orderItem.ID = DataSource.Config.NextOrderItemNumber;
         DataSource.OrderItemsList.Add(orderItem);
         return orderItem.ID;
     }
-
+    /// <summary>
+    /// Function to return a product in an order
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception">throw Exception when id is not found</exception>
     public OrderItem GetById(int id)
     {
         if (!DataSource.OrderItemsList.Exists(x => x?.ID == id))
@@ -21,7 +31,12 @@ internal class DalOrderItem : IOrderItem
         }
         return (OrderItem)DataSource.OrderItemsList.Find(x => x?.ID == id);
     }
-
+    /// <summary>
+    /// A function to update a product in an order
+    /// </summary>
+    /// <param name="orderItem"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception">throw Exception when id is not found</exception>
     public void Update(OrderItem orderItem)
     {
         if (!DataSource.OrderItemsList.Exists(x => x?.ID == orderItem.ID))
@@ -31,7 +46,11 @@ internal class DalOrderItem : IOrderItem
         DataSource.OrderItemsList.Remove(DataSource.OrderItemsList.Find(x => x?.ID == orderItem.ID));
         DataSource.OrderItemsList.Add(orderItem);
     }
-
+    /// <summary>
+    /// Function to delete a product from the order
+    /// </summary>
+    /// <param name="id"></param>
+    /// <exception cref="Exception">throw Exception when id is not found</exception>
     public void Delete(int id)
     {
         if (!DataSource.OrderItemsList.Exists(x => x?.ID == id))
@@ -40,6 +59,11 @@ internal class DalOrderItem : IOrderItem
         }
         DataSource.OrderItemsList.Remove(DataSource.OrderItemsList.Find(x => x?.ID == id));
     }
+    /// <summary>
+    /// Function to return all products in the order
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerable<OrderItem?> GetAll()
 
     public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? filter = null)
     {

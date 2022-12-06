@@ -61,6 +61,8 @@ internal class Product : IProduct
 
     public void RemoveProduct(int idProduct)
     {
+        //***************************************************************************************
+
         IEnumerable<DO.OrderItem> odl = from DO.Order? doOrders in dal.Order.GetAll() from List<DO.OrderItem?> t in dal.OrderItem.getAllOrderItems(doOrders.Value.ID) from DO.OrderItem g in t where g.ProductID == idProduct select g;
         //List<DO.OrderItem?> orderItems = from o in doOrders select from t in dal.OrderItem.getAllOrderItems(o.Value.ID) where t.Value.ProductID == idProduct select;
         if (odl.Count() > 0)

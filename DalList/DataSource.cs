@@ -13,6 +13,9 @@ internal static class DataSource
     }
     private static readonly Random s_rand = new();
 
+    /// <summary>
+    /// a function for handling running numbers
+    /// </summary>
     internal static class Config
     {
         internal static int s_startOrderNumber = 1000;
@@ -30,13 +33,18 @@ internal static class DataSource
 
     internal static List<OrderItem?> OrderItemsList { get; } = new List<OrderItem?>();
 
+    /// <summary>
+    /// A function to create new objects from any type of entity
+    /// </summary>
     private static void s_Initialize()
     {
         createAndInitProducts();
         createAndInitOrders();
         createAndInitOrderItems();
     }
-
+    /// <summary>
+    /// A function to create new objects of product type
+    /// </summary>
     private static void createAndInitProducts()
     {
         int[] ids = { 9621542, 7586215, 4658921, 9359824, 6587469, 2589457, 5462876, 1548256,
@@ -63,6 +71,9 @@ internal static class DataSource
             ProductList.Add(product);
         }
     }
+    /// <summary>
+    /// A function to create new objects of order type
+    /// </summary>
     private static void createAndInitOrders()
     {
         string[] firstNames = { "Naama", "Shira", "Avigail", "David", "Roi", "Noa", "Shimon", "Yael","Sari",
@@ -99,19 +110,17 @@ internal static class DataSource
             int minute = rand.Next(1,59);
             int second = rand.Next(1,59);
             order.OrderDate = DateTime.Now.AddMinutes(count);
-            //order.OrderDate = DateTime.MinValue;
             count += 30;
-            //TimeSpan ts = 
             if (indexShip < 18)
             {
-                order.ShipDate = order.OrderDate.Value.AddMinutes(31);
+                order.ShipDate = order.OrderDate.Value.AddMinutes(31);//********************************************
                 indexShip++;
             }
             else
                 order.ShipDate = null;
             if (indexDelivery < 5)
             {
-                order.DeliveryDate = order.ShipDate.Value.AddMinutes(23);
+                order.DeliveryDate = order.ShipDate.Value.AddMinutes(23);//***************************************
                 indexDelivery++;
             }
             else
@@ -119,6 +128,9 @@ internal static class DataSource
             OrderList.Add(order);
         }
     }
+    /// <summary>
+    /// A function to create new objects of order item type
+    /// </summary>
     private static void createAndInitOrderItems()
     {
         int[] productsIds = { 9621542, 7586215, 4658921, 9359824, 6587469, 2589457, 5462876, 1548256,
@@ -136,6 +148,8 @@ internal static class DataSource
             orderItem.ProductID = productsIds[rando];
             orderItem.Amount = amounts[i];
             orderItem.Price = prices[rando]*orderItem.Amount;           
+            orderItem.Price = prices[rando]*orderItem.Amount;            
+
             OrderItemsList.Add(orderItem);
         }
     }

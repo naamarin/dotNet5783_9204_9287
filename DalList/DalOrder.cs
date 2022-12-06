@@ -6,13 +6,25 @@ namespace Dal;
 
 internal class DalOrder : IOrder
 {
+    /// <summary>
+    /// /// <summary>
+    /// Function to create a new order
+    /// </summary>
+    /// </summary>
+    /// <param name="order"></param>
+    /// <returns></returns>
     public int Add (Order order) 
     {
         order.ID = DataSource.Config.NextOrderNumber;
         DataSource.OrderList.Add(order);
         return order.ID;
     }
-
+    /// <summary>
+    /// A function to return an existing order
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public Order GetById(int id) 
     {
         if(! DataSource.OrderList.Exists(x=>x?.ID == id))
@@ -21,7 +33,11 @@ internal class DalOrder : IOrder
         }
         return (Order)DataSource.OrderList.Find(x => x?.ID == id);
     }
-
+    /// <summary>
+    /// Order update function
+    /// </summary>
+    /// <param name="order"></param>
+    /// <exception cref="Exception"></exception>
     public void Update(Order order)
     {
         if (!DataSource.OrderList.Exists(x => x?.ID == order.ID))
@@ -31,7 +47,11 @@ internal class DalOrder : IOrder
         DataSource.OrderList.Remove(DataSource.OrderList.Find(x => x?.ID == order.ID));
         DataSource.OrderList.Add(order);
     }
-
+    /// <summary>
+    /// Function to delete an existing order
+    /// </summary>
+    /// <param name="id"></param>
+    /// <exception cref="Exception"></exception>
     public void Delete(int id) 
     {
         if (!DataSource.OrderList.Exists(x => x?.ID == id))
@@ -41,7 +61,7 @@ internal class DalOrder : IOrder
         DataSource.OrderList.Remove(DataSource.OrderList.Find(x => x?.ID == id));
     }
 
-    public IEnumerable<Order?> GetAll(Func<Order?, bool>? filter = null)
+    public IEnumerable<Order?> GetAll()
     {
         if (filter == null)
         {
