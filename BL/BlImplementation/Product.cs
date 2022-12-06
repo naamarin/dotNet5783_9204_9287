@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization.Formatters;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,57 +34,76 @@ internal class Product : IProduct
             DO.Product? doProduct = dal.Product.GetById(id);
             return new BO.Product()
             {
-                ID = doProduct?.ID ??  BO.NullPropertyException("Null producr ID"),
+                ID = doProduct?.ID ?? throw new BO.BlNullPropertyException("Null producr ID"),
                 Category = (BO.Category?)doProduct?.Category ?? throw new BO.BlWrongCategoryException("Product does not exist"),
                 Price = doProduct?.Price ?? 0,
                 Name = doProduct?.Name ?? "",
                 StockCount = doProduct?.InStock ?? 0
             };
         }
-        catch(DO.DalMissingIdException ex)
+        catch (DO.DalMissingIdException ex)
         {
             throw new BO.BlMissingEntityException("Product already Exist", ex);
         }
     }
-    public void AddProduct(BO.Product boProduct)
+    public void AddProduct(BO.Product? boProduct)
     {
-        DO.Product doProduct = new DO.Product();
-        if (boProduct.ID <= 0)
-            throw new ArgumentException("Invalid ID");
-        else
+        DO.Product doProduct = new DO.Product()
         {
-            try
-            {
-                doProduct.ID = boProduct.ID;
-            }
-            catch (DO.DalAlreadyExistException daee)
-            {
-                Console.WriteLine("{0} Exception caught.", daee);
-            }
-        }
-        if (boProduct.Name == null)
-            throw new ArgumentException("Invalid name");
-        else
-            doProduct.Name = boProduct.Name;
-        if (boProduct.Price <= 0)
-            throw new ArgumentException("Invalid price");
-        else
-            doProduct.Price = boProduct.Price;
-        if (boProduct.StockCount < 0)
-            throw new ArgumentException("Invalid stock amount");
-        else
-            doProduct.InStock = boProduct.StockCount;
-        doProduct.Category = (DO.Category)boProduct.Category;
+            ID = boProduct?.ID ?? throw new ArgumentException("Invalid ID"),
+            Name = boProduct?.Name ?? throw new ArgumentException("Invalid name"),
+            Price = boProduct?.Price ?? throw new ArgumentException("Invalid price"),
+            InStock = boProduct?.StockCount ?? throw new ArgumentException("Invalid stock amount"),
+        };
         dal.Product.Add(doProduct);
-
     }
+
+    //        if (boProduct.ID <= 0)
+    //            throw new ArgumentException("Invalid ID");
+    //        else
+    //        {
+    //            try
+    //            {
+    //                doProduct.ID = boProduct.ID;
+    //            }
+    //            catch (DO.DalAlreadyExistException daee)
+    //{
+    //    Console.WriteLine("{0} Exception caught.", daee);
+    //}
+
     public void RemoveProduct(int idProduct)
     {
-        IEnumerable<DO.Order?> doOrders = dal.Order.GetAll();
-        //from DO.OrderItem? doItem in dal.OrderItem.getAllOrderItems(doOrder.Value.ID)
-        //where doItem.Value.ProductID == idProduct
-        //select;
+        IEnumerable<DO.OrderItem> odl = from DO.Order? doOrders in dal.Order.GetAll() from List<DO.OrderItem?> t in dal.OrderItem.getAllOrderItems(doOrders.Value.ID) from DO.OrderItem g in t where g.ProductID == idProduct select g;
+        //List<DO.OrderItem?> orderItems = from o in doOrders select from t in dal.OrderItem.getAllOrderItems(o.Value.ID) where t.Value.ProductID == idProduct select;
+        if (odl.Count() > 0)
+            dal.Product.Delete(idProduct);
+    }
 
+    public void UpdateProduct(BO.Product boProduct)
+    {
+        if (boProduct.ID < 0)
+            throw new ArgumentException("Invalid ID");
+        if (boProduct.Name != "")
+            throw new ArgumentException("Invalid name");
+        if (boProduct.Price > 0)
+            throw new ArgumentException("Invalid price");
+        if (boProduct.StockCount >= 0)
+            throw new ArgumentException("Invalid stock amount");
+        DO.Product doProduct = new DO.Product()
+        {
+            ID = boProduct.ID, //?? throw new ArgumentException("Invalid ID"),
+            Name = boProduct.Name,// ?? throw new ArgumentException("Invalid name"),
+            Price = boProduct.Price,// ?? throw new ArgumentException("Invalid price"),
+            InStock = boProduct.StockCount,// ?? throw new ArgumentException("Invalid stock amount"),
+        };
+        try
+        {
+            dal.Product.Update(doProduct);
+        }
+        catch(DO.DalDoesNotExistException ex)
+        {
+            throw new BO.BlProductDoesNotExsist("Product canot be upgrade because its not exsist", ex);
+        }
     }
 
 }
