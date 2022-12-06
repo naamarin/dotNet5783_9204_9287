@@ -46,13 +46,17 @@ internal class DalProduct : IProduct
 
     public IEnumerable<Product?> GetAll(Func<Product?, bool>? filter = null)
     {
-        return from pl in DataSource.ProductList select pl;
-        //List<Product?> newList = new List<Product?>();
-        //for (int i = 0; i < DataSource.ProductList.Count; i++)
-        //{
-        //    newList.Add(DataSource.ProductList[i]);
-        //}
-        //return newList;
+        if (filter == null)
+        {
+            return from Product? product in DataSource.ProductList
+                   select product;
+        }
+        else
+        {
+            return from Product? product in DataSource.ProductList
+                   where filter(product)
+                   select product;
+        }
     }
 }
 

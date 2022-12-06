@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Runtime.Serialization.Formatters;
 using System.Security.Cryptography;
@@ -58,19 +59,6 @@ internal class Product : IProduct
         dal.Product.Add(doProduct);
     }
 
-    //        if (boProduct.ID <= 0)
-    //            throw new ArgumentException("Invalid ID");
-    //        else
-    //        {
-    //            try
-    //            {
-    //                doProduct.ID = boProduct.ID;
-    //            }
-    //            catch (DO.DalAlreadyExistException daee)
-    //{
-    //    Console.WriteLine("{0} Exception caught.", daee);
-    //}
-
     public void RemoveProduct(int idProduct)
     {
         IEnumerable<DO.OrderItem> odl = from DO.Order? doOrders in dal.Order.GetAll() from List<DO.OrderItem?> t in dal.OrderItem.getAllOrderItems(doOrders.Value.ID) from DO.OrderItem g in t where g.ProductID == idProduct select g;
@@ -106,4 +94,38 @@ internal class Product : IProduct
         }
     }
 
+    public IEnumerable<BO.ProductItem> Catalog()
+    {
+        return from DO.Product doProduct in dal.Product.GetAll()
+            select new BO.ProductItem()
+            {
+                ID = doProduct.ID,
+                Name = doProduct.Name,
+                Price = doProduct.Price,
+                Category = (BO.Category?)doProduct.Category ?? throw new NullReferenceException("Missing category"),
+                Amount = doProduct.InStock,
+                InStock = doProduct.InStock > 0,
+            };
+    }
+    public BO.ProductItem ProductDeatails( int productID)
+    {
+        DO.Product product;
+        try
+        {
+            product = dal.Product.GetById(productID);
+        }
+        catch (DO.DalMissingIdException ex)
+        {
+            throw new BO.BlMissingEntityException("Product not Exist", ex);
+        }
+        return new BO.ProductItem
+        {
+            ID = productID,
+            Name = product.Name,
+            Price = product.Price,
+            Amount = product.InStock,
+            Category = (BO.Category?)product.Category ?? throw new NullReferenceException("Missing category"),
+            InStock = product.InStock > 0,
+        };
+    }
 }

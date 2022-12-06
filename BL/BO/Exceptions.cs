@@ -30,3 +30,13 @@ public class BlOrderDoesNotExsist : Exception
 {
     public BlOrderDoesNotExsist(string? message, DO.DalDoesNotExistException ex) : base(message, ex) { }
 }
+
+public class BlOrderAlreadyDelivered : Exception
+{
+    public BlOrderAlreadyDelivered(string? message) : base(message) { }
+}
+
+public class BlClientDeatalesNotValid : Exception
+{
+    public BlClientDeatalesNotValid(string? message) : base(message) { }
+}
