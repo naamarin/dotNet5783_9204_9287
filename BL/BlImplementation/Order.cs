@@ -30,11 +30,11 @@ internal class Order : IOrder
         IEnumerable<BO.OrderForList?> odl2 = from DO.Order? doOrders in dal.Order.GetAll()
                                              select new BO.OrderForList
                                              {
-                                                 ID = doOrders.Value.ID,
-                                                 CustomerName = doOrders.Value.CustomerName,
-                                                 AmountOfItems = dal.OrderItem.getAllOrderItems(doOrders.Value.ID).Count(),
+                                                 ID = doOrders.Value.ID,//********************************
+                                                 CustomerName = doOrders.Value.CustomerName,//**********************
+                                                 AmountOfItems = dal.OrderItem.getAllOrderItems(doOrders.Value.ID).Count(),//************************
                                                  Status = Statu(doOrders),
-                                                TotalPrice = (from DO.OrderItem oi in dal.OrderItem.getAllOrderItems(doOrders.Value.ID) select oi.Price*oi.Amount).Sum(),
+                                                TotalPrice = (from DO.OrderItem oi in dal.OrderItem.getAllOrderItems(doOrders.Value.ID) select oi.Price*oi.Amount).Sum(),//****************************************
                                             };
         return odl2;
     }
@@ -63,7 +63,7 @@ internal class Order : IOrder
                                    };
         return new BO.Order()
         {
-            ID = o.Value.ID,
+            ID = o.Value.ID, //*****************************************
             CustomerName = o?.CustomerName,
             CustomerEmail = o?.CustomerEmail,
             CustomerAddress = o?.CustomerAdress,

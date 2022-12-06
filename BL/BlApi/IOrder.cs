@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BlApi;
-//הצהרות לפונקציות
+
 public interface IOrder
 {
 

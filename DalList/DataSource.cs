@@ -113,14 +113,14 @@ internal static class DataSource
             count += 30;
             if (indexShip < 18)
             {
-                order.ShipDate = order.OrderDate.Value.AddMinutes(31);
+                order.ShipDate = order.OrderDate.Value.AddMinutes(31);//********************************************
                 indexShip++;
             }
             else
                 order.ShipDate = null;
             if (indexDelivery < 5)
             {
-                order.DeliveryDate = order.ShipDate.Value.AddMinutes(23);
+                order.DeliveryDate = order.ShipDate.Value.AddMinutes(23);//***************************************
                 indexDelivery++;
             }
             else

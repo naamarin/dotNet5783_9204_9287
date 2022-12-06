@@ -168,7 +168,7 @@ press 7 to Find an item on the order");
                                     Console.WriteLine("Enter amount of this product: ");
                                     orderItem.Amount = Convert.ToInt32(Console.ReadLine());
                                     product = dal.Product.GetById(orderItem.ProductID);
-                                    orderItem.Price = Convert.ToDouble(orderItem.Amount) * product.Price.Value;
+                                    orderItem.Price = Convert.ToDouble(orderItem.Amount) * product.Price.Value;//**************************************
                                     id = dal.OrderItem.Add(orderItem);
                                     Console.WriteLine($@"Your orderItem ID is: {id}");
                                     break;
@@ -195,7 +195,7 @@ press 7 to Find an item on the order");
                                     orderItem.Amount = Convert.ToInt32(Console.ReadLine());
                                     product = dal.Product.GetById(orderItem.ProductID);
                                     product.InStock--;
-                                    orderItem.Price = Convert.ToDouble(orderItem.Amount) * product.Price.Value;
+                                    orderItem.Price = Convert.ToDouble(orderItem.Amount) * product.Price.Value;//***********************************
                                     dal.OrderItem.Update(orderItem);
                                     break;
                                 case "5":
