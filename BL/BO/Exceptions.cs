@@ -40,3 +40,13 @@ public class BlClientDeatalesNotValid : Exception
 {
     public BlClientDeatalesNotValid(string? message) : base(message) { }
 }
+
+public class BlIdAlreadyExistException : Exception
+{
+    public BlIdAlreadyExistException(string? message) : base(message) { }
+}
+
+public class BlIncorrectDateException : Exception
+{
+    public BlIncorrectDateException(string? message) : base(message) { }
+}

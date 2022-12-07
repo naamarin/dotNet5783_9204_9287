@@ -44,6 +44,6 @@ public class ProductItem
 
     public override string ToString()
     {
-         return this.ToStringProperty();
+         return this.ToStringProperty( );
     }
 }

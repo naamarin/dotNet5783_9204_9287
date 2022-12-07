@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using BO;
+//using BO;
 using System.Security.Cryptography;
 using System.Linq.Expressions;
 
 namespace BlImplementation;
 
-internal class Order : IOrder
+internal class Order : BlApi.IOrder
 {
     DalApi.IDal dal = new Dal.DalList();
     public BO.OrderStatus Statu(DO.Order? o)
@@ -26,6 +26,38 @@ internal class Order : IOrder
         else
             return BO.OrderStatus.Delivered;
     }
+
+    public BO.Order GetById(int id)
+    {
+        DO.Order order = dal.Order.GetById(id);
+        IEnumerable<BO.OrderItem?> boItems = from DO.OrderItem doOrderItem in dal.OrderItem.getAllOrderItems(id)
+                                             select new BO.OrderItem()
+                                             {
+                                                 ID =doOrderItem.ID,
+                                                 Name = (dal.Product.GetById(doOrderItem.ProductID)).Name,
+                                                 ProductID = doOrderItem.ProductID,
+                                                 Amount = doOrderItem.Amount,
+                                                 Price = doOrderItem.Price,
+                                                 TotalPrice = doOrderItem.Amount* doOrderItem.Price,
+                                             };
+        IEnumerable<double> sum = from BO.OrderItem bo in boItems  
+                                  select bo.TotalPrice;
+        return new BO.Order
+        {
+            ID = id,
+            CustomerName = order.CustomerName,
+            CustomerAddress = order.CustomerAdress,
+            CustomerEmail = order.CustomerEmail,
+            ShipDate = order.ShipDate,
+            DeliveryDate = order.DeliveryDate,  
+            Status = Statu(order),
+            OrderDate = order.OrderDate,
+            PaymentDate = order.OrderDate,
+            Items = boItems,
+            TotalPrice = sum.Sum(),
+        };
+    }
+
     public IEnumerable<BO.OrderForList?> OrderListForManager()
     {
         IEnumerable<BO.OrderForList?> odl2 = from DO.Order? doOrders in dal.Order.GetAll()
@@ -42,7 +74,7 @@ internal class Order : IOrder
     public BO.Order OrderDeatals(int id)
     {
         if (id <= 0)
-            throw new BlNullPropertyException("Invalid ID");
+            throw new BO.BlNullPropertyException("Invalid ID");
         DO.Order? o = new DO.Order?();
         try
         {
@@ -86,10 +118,10 @@ internal class Order : IOrder
         }
         catch(DO.DalDoesNotExistException ex)
         {
-            throw new BlOrderDoesNotExsist("The order does  not exists", ex);
+            throw new BO.BlOrderDoesNotExsist("The order does  not exists", ex);
         }
         BO.OrderStatus orderStatus = Statu(order);
-        if (orderStatus != OrderStatus.Shipped && orderStatus != OrderStatus.Delivered)
+        if (orderStatus != BO.OrderStatus.Shipped && orderStatus != BO.OrderStatus.Delivered)
         {
             DO.Order or = new DO.Order
             {
@@ -129,7 +161,7 @@ internal class Order : IOrder
             return boOrder;
         }
         else
-            throw new BlOrderAlreadyDelivered("Order already delivered");
+            throw new BO.BlOrderAlreadyDelivered("Order already delivered");
     }
     public BO.Order OrderDeliveryUpdate(int id)
     {
@@ -140,10 +172,10 @@ internal class Order : IOrder
         }
         catch (DO.DalDoesNotExistException ex)
         {
-            throw new BlOrderDoesNotExsist("The order does  not exists", ex);
+            throw new BO.BlOrderDoesNotExsist("The order does  not exists", ex);
         }
         BO.OrderStatus orderStatus = Statu(order);
-        if (orderStatus != OrderStatus.Delivered)
+        if (orderStatus != BO.OrderStatus.Delivered)
         {
             DO.Order or = new DO.Order
             {
@@ -183,7 +215,7 @@ internal class Order : IOrder
             return boOrder;
         }
         else
-            throw new BlOrderAlreadyDelivered("Order already delivered");
+            throw new BO.BlOrderAlreadyDelivered("Order already delivered");
     }
     public BO.OrderTracking TrackingOrder(int orderID)
     {
@@ -194,11 +226,11 @@ internal class Order : IOrder
         }
         catch (DO.DalDoesNotExistException ex)
         {
-            throw new BlOrderDoesNotExsist("The order does  not exists", ex);
+            throw new BO.BlOrderDoesNotExsist("The order does  not exists", ex);
         }
-        if (Statu(order) == OrderStatus.Delivered)
+        if (Statu(order) == BO.OrderStatus.Delivered)
         {
-            return new OrderTracking
+            return new BO.OrderTracking
             {
                 ID = order.Value.ID,
                 Status = Statu(order),
@@ -207,9 +239,9 @@ internal class Order : IOrder
 
             };
         }
-        else if (Statu(order) == OrderStatus.Shipped)
+        else if (Statu(order) == BO.OrderStatus.Shipped)
         {
-            return new OrderTracking
+            return new BO.OrderTracking
             {
                 ID = order.Value.ID,
                 Status = Statu(order),
@@ -220,7 +252,7 @@ internal class Order : IOrder
         }
         else
         {
-            return new OrderTracking
+            return new BO.OrderTracking
             {
                 ID = order.Value.ID,
                 Status = Statu(order),

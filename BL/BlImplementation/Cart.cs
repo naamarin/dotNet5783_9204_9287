@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using BlApi;
-using BO;
-using Dal;
-using DalApi;
+//using BlApi;
+//using BO;
+//using Dal;
+//using DalApi;
 
 namespace BlImplementation;
 
-internal class Cart : ICart
+internal class Cart : BlApi.ICart
 {
     DalApi.IDal dal = new Dal.DalList();
-    public void AddItemToCart(BO.Cart cart, int productID)
+
+    public BO.Cart AddItemToCart(BO.Cart cart, int productID)
     {
         DO.Product product;
         try
@@ -30,22 +31,25 @@ internal class Cart : ICart
         {
             if (product.InStock > 0)
             {
-                cart.Items.Append(new BO.OrderItem
+                cart.Items = cart.Items.Append(new BO.OrderItem
                 {
                     Name = product.Name,
                     Amount = 1,
-                    ProductID = productID,  
+                    ProductID = productID,
                     ID = 0,
                     Price = product.Price,
                     TotalPrice = product.Price,
                 });
+                cart.TotalPrice += product.Price;
             }
         }
         else
         {
             cart = UpdateCart(cart, productID, 1);
         }
+        return cart;
     }
+
     public BO.Cart UpdateCart(BO.Cart cart, int productID, int amount)
     {
         DO.Product product;
@@ -60,18 +64,29 @@ internal class Cart : ICart
         if (amount != 0)
         {
             IEnumerable<BO.OrderItem?> boOrder = from BO.OrderItem boOrderItem in cart.Items
-                                   where boOrderItem.ProductID == productID
-                                   select boOrderItem;
-            cart.Items = from BO.OrderItem boOrderItem in boOrder 
-                         select new BO.OrderItem
-                         {
-                             ID = boOrderItem.ID,
-                             Name = boOrderItem.Name,
-                             Price = boOrderItem.Price,
-                             ProductID = productID,
-                             Amount = amount,
-                             TotalPrice = amount* boOrderItem.Price,
-                         };
+                                                 where boOrderItem.ProductID == productID
+                                                 select new BO.OrderItem
+                                                 {
+                                                     ID = boOrderItem.ID,
+                                                     Name = boOrderItem.Name,
+                                                     Price = boOrderItem.Price,
+                                                     ProductID = productID,
+                                                     Amount = amount,
+                                                     TotalPrice = amount * boOrderItem.Price,
+                                                 };
+            if (boOrder.Any())
+            {
+                //cart.Items = from BO.OrderItem boOrderItem in boOrder
+                //             select new BO.OrderItem
+                //             {
+                //                 ID = boOrderItem.ID,
+                //                 Name = boOrderItem.Name,
+                //                 Price = boOrderItem.Price,
+                //                 ProductID = productID,
+                //                 Amount = amount,
+                //                 TotalPrice = amount * boOrderItem.Price,
+                //             };
+            }
             cart.TotalPrice -= (from BO.OrderItem boOrderItem in boOrder select boOrderItem.TotalPrice).Sum();
             cart.TotalPrice += amount * (from BO.OrderItem boOrderItem in boOrder select boOrderItem.Price).Sum();
             return cart;
@@ -87,7 +102,7 @@ internal class Cart : ICart
     public void MakeOrder(BO.Cart cart)
     {
         if (cart.CustomerName == "" || cart.CustomerAddress == "" || cart.CustomerEmail == "")
-            throw new BlClientDeatalesNotValid("Invalid client details");
+            throw new BO.BlClientDeatalesNotValid("Invalid client details");
         DO.Order order=new DO.Order() { CustomerName = cart.CustomerName ,CustomerEmail=cart.CustomerEmail,CustomerAdress=cart.CustomerAddress,
         OrderDate=DateTime.Now,DeliveryDate=null,ShipDate=null};
         int oID = dal.Order.Add(order);
@@ -95,7 +110,7 @@ internal class Cart : ICart
         foreach (BO.OrderItem oi in cart.Items)
         {
             if (p.InStock == 0)
-                throw new BlNullPropertyException("the item is not in stock");
+                throw new BO.BlNullPropertyException("the item is not in stock");
             dal.OrderItem.Add(new DO.OrderItem() { OrderID = oID, ProductID = oi.ProductID, Amount = oi.Amount });
             p=dal.Product.GetById(oi.ProductID);
             p.InStock = oi.Amount;

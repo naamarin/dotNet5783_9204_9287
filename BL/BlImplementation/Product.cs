@@ -7,14 +7,10 @@ using System.Runtime.Serialization.Formatters;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-
-using BlApi;
-using BO;
-using DO;
-
 namespace BlImplementation;
 
-internal class Product : IProduct
+
+internal class Product : BlApi.IProduct
 {
     DalApi.IDal dal = new Dal.DalList();
     public IEnumerable<BO.ProductForList> GetListProducts()
@@ -42,11 +38,12 @@ internal class Product : IProduct
                 StockCount = doProduct?.InStock ?? 0
             };
         }
-        catch (DO.DalMissingIdException ex)
+        catch (DO.DalDoesNotExistException ex)
         {
-            throw new BO.BlMissingEntityException("Product already Exist", ex);
+            throw new BO.BlProductDoesNotExsist("Product not Exist", ex);
         }
     }
+
     public void AddProduct(BO.Product? boProduct)
     {
         DO.Product doProduct = new DO.Product()
@@ -55,17 +52,31 @@ internal class Product : IProduct
             Name = boProduct?.Name ?? throw new ArgumentException("Invalid name"),
             Price = boProduct?.Price ?? throw new ArgumentException("Invalid price"),
             InStock = boProduct?.StockCount ?? throw new ArgumentException("Invalid stock amount"),
+            Category=(DO.Category)boProduct?.Category ,//?? throw new ArgumentException("Invalid category"),
         };
         dal.Product.Add(doProduct);
     }
-
+    public bool isExist(DO.Order order, int id)
+    {
+        try
+        {
+            DO.OrderItem? orderItem = dal.OrderItem.getOrderItems(order.ID, id);
+        }
+        catch(DO.DalDoesNotExistException ex)
+        {
+            return false;
+        }
+        return true;    
+    }
     public void RemoveProduct(int idProduct)
     {
         //***************************************************************************************
 
-        IEnumerable<DO.OrderItem> odl = from DO.Order? doOrders in dal.Order.GetAll() from List<DO.OrderItem?> t in dal.OrderItem.getAllOrderItems(doOrders.Value.ID) from DO.OrderItem g in t where g.ProductID == idProduct select g;
+        IEnumerable<DO.OrderItem?> odl = from DO.Order doOrders in dal.Order.GetAll() where isExist(doOrders, idProduct) select dal.OrderItem.getOrderItems(doOrders.ID, idProduct);
+
+        // IEnumerable<DO.OrderItem?> od = from DO.Order doOrder in odl select dal.OrderItem.getOrderItems(doOrder.ID, idProduct);
         //List<DO.OrderItem?> orderItems = from o in doOrders select from t in dal.OrderItem.getAllOrderItems(o.Value.ID) where t.Value.ProductID == idProduct select;
-        if (odl.Count() > 0)
+        if (!odl.Any())
             dal.Product.Delete(idProduct);
     }
 
@@ -73,11 +84,11 @@ internal class Product : IProduct
     {
         if (boProduct.ID < 0)
             throw new ArgumentException("Invalid ID");
-        if (boProduct.Name != "")
+        if (boProduct.Name == "")
             throw new ArgumentException("Invalid name");
-        if (boProduct.Price > 0)
+        if (boProduct.Price < 0)
             throw new ArgumentException("Invalid price");
-        if (boProduct.StockCount >= 0)
+        if (boProduct.StockCount <= 0)
             throw new ArgumentException("Invalid stock amount");
         DO.Product doProduct = new DO.Product()
         {
@@ -85,6 +96,7 @@ internal class Product : IProduct
             Name = boProduct.Name,// ?? throw new ArgumentException("Invalid name"),
             Price = boProduct.Price,// ?? throw new ArgumentException("Invalid price"),
             InStock = boProduct.StockCount,// ?? throw new ArgumentException("Invalid stock amount"),
+            Category = (DO.Category)boProduct?.Category,//?? throw new ArgumentException("Invalid category"),
         };
         try
         {
