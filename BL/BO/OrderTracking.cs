@@ -26,8 +26,8 @@ public class OrderTracking
     /// </summary>
     public List<Tuple<DateTime,string>>? Tracking { get; set; }
 
-    //public override string ToString()
-    //{
-    //   // return this.ToStringProperty();
-    //}
+    public override string ToString()
+    {
+         return this.ToStringProperty();
+    }
 }

@@ -63,7 +63,6 @@ internal class DalOrderItem : IOrderItem
     /// Function to return all products in the order
     /// </summary>
     /// <returns></returns>
-    public IEnumerable<OrderItem?> GetAll()
 
     public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? filter = null)
     {
@@ -100,7 +99,9 @@ internal class DalOrderItem : IOrderItem
                 orderItem = DataSource.OrderItemsList[i];
         }
         if (orderItem == null)
+        {
             throw new DalDoesNotExistException("order item not exists");
+        }
         return orderItem;
     }
 }

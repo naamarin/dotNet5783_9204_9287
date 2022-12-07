@@ -27,11 +27,11 @@ internal static class DataSource
         internal static int NextOrderItemNumber { get => s_nextOrderItemNumber++; }
     }
 
-    internal static List<Product?> ProductList { get; } = new List<Product?>();
+    internal static List<Product?> ProductList { get; set;  } = new List<Product?>();
 
     internal static List<Order?> OrderList { get; set; } = new List<Order?>();
 
-    internal static List<OrderItem?> OrderItemsList { get; } = new List<OrderItem?>();
+    internal static List<OrderItem?> OrderItemsList { get;  } = new List<OrderItem?>();
 
     /// <summary>
     /// A function to create new objects from any type of entity
@@ -57,8 +57,8 @@ internal static class DataSource
 
         int[] amounts = { 41, 36, 62, 31, 43, 20, 45, 32, 8, 13, 24, 0, 30, 25, 12, 40, 25, 0 };
 
-        string[] category = { "Meals","Meals","Meals","Children","Children","Children","Extras","Extras","Extras",
-        "Desserts","Desserts","Desserts","Drinks","Drinks","Drinks","Sauces","Sauces","Sauces"};
+        Category[] category = { Category.Meals,Category.Meals,Category.Meals,Category.Children,Category.Children,Category.Children,Category.Extras,Category.Extras,Category.Extras,
+        Category.Desserts,Category.Desserts,Category.Desserts,Category.Drinks,Category.Drinks,Category.Drinks,Category.Sauces,Category.Sauces,Category.Sauces};
 
         for (int i= 0; i < ids.Length; i++)
         { 
@@ -67,7 +67,7 @@ internal static class DataSource
             product.Name = names[i];
             product.InStock = amounts[i];
             product.Price = prices[i];
-            product.Category = (Category)int.Parse(category[i]);
+            product.Category = category[i];
             ProductList.Add(product);
         }
     }
@@ -109,8 +109,8 @@ internal static class DataSource
             int hour = rand.Next(1,12);
             int minute = rand.Next(1,59);
             int second = rand.Next(1,59);
-            order.OrderDate = DateTime.Now.AddMinutes(count);
-            count += 30;
+            order.OrderDate =DateTime.Now.AddMinutes(count);
+            count -= 9;
             if (indexShip < 18)
             {
                 order.ShipDate = order.OrderDate.Value.AddMinutes(31);//********************************************

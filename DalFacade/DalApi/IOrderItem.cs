@@ -11,5 +11,6 @@ namespace DalApi
     {
         public List<OrderItem?> getAllOrderItems(int id);
         public OrderItem? getOrderItems(int idProduct, int idOrder);
+        //public IEnumerable<OrderItem?> GetAll();
     }
 }

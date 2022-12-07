@@ -7,21 +7,25 @@ using System.Threading.Tasks;
 
 namespace BO;
 
-internal class Tools
+public static class Tools
 {
-    public static string ToStringProperty<T>(T t)
+    public static string ToStringProperty<T>(this T t)
     {
         string str = "";
+
         foreach (PropertyInfo item in t.GetType().GetProperties())
         {
-            if (item.GetType()==typeof(IEnumerable<T>))
+            str += "\n" + item.Name + ": ";
+
+            if (item.GetValue(t,null) is IEnumerable<object>)
             {
-                str += "\n" + item.Name + ": ";
-                item.ToString();
+                IEnumerable<object> lst= (IEnumerable<object>)item.GetValue(obj: t, null);
+                string s = String.Join(" ", lst);
+                str += s;
             }
             else
-                str += "\n" + item.Name + ": " + item.GetValue(t, null);
+                str += item.GetValue(t, null);
         }
-        return str;
+        return str+="\n";
     }
 }
