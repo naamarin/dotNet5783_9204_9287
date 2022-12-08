@@ -29,7 +29,15 @@ internal class Order : BlApi.IOrder
 
     public BO.Order GetById(int id)
     {
-        DO.Order order = dal.Order.GetById(id);
+        DO.Order order;
+        try
+        {
+            order = dal.Order.GetById(id);
+        }
+        catch(DO.DalDoesNotExistException ex)
+        {
+            throw new BO.BlOrderDoesNotExsist("No such order", ex);
+        }
         IEnumerable<BO.OrderItem?> boItems = from DO.OrderItem doOrderItem in dal.OrderItem.getAllOrderItems(id)
                                              select new BO.OrderItem()
                                              {

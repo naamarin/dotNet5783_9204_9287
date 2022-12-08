@@ -71,7 +71,14 @@ internal class Product : BlApi.IProduct
     public void RemoveProduct(int idProduct)
     {
         //***************************************************************************************
-
+        try
+        {
+            DO.Product product = dal.Product.GetById(idProduct);
+        }
+        catch (DO.DalDoesNotExistException ex)
+        {
+            throw new BO.BlProductDoesNotExsist("Product does not exist", ex);
+        }
         IEnumerable<DO.OrderItem?> odl = from DO.Order doOrders in dal.Order.GetAll() where isExist(doOrders, idProduct) select dal.OrderItem.getOrderItems(doOrders.ID, idProduct);
 
         // IEnumerable<DO.OrderItem?> od = from DO.Order doOrder in odl select dal.OrderItem.getOrderItems(doOrder.ID, idProduct);

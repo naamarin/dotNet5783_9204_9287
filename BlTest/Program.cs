@@ -68,6 +68,7 @@ press f for return to the menu");
             }
             catch (BO.BlIdAlreadyExistException ex) { Console.WriteLine(ex); }
             catch (BO.BlProductDoesNotExsist ex) { Console.WriteLine(ex); }
+            catch (BO.BlOrderDoesNotExsist ex) { Console.WriteLine(ex.Message); }
             catch (BO.BlIncorrectDateException ex) { Console.WriteLine(ex); }
             catch (BO.BlClientDeatalesNotValid ex) { Console.WriteLine(ex); }
             catch (BO.BlNullPropertyException ex) { Console.WriteLine(ex); }
@@ -210,6 +211,9 @@ press h for exit");
         static void CartCheck()
         {
             char choice;
+            newCart.CustomerName = "Shmuel Choen";
+            newCart.CustomerAddress = "Rabi meir 1 Elad";
+            newCart.CustomerEmail = "ShmuelChoen@gmail.com";
             Console.WriteLine("Enter your choice");
             Console.WriteLine($@"
 press a for Add Product to the cart ,

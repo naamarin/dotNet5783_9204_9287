@@ -4,10 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//using BlApi;
-//using BO;
-//using Dal;
-//using DalApi;
 
 namespace BlImplementation;
 
@@ -22,9 +18,9 @@ internal class Cart : BlApi.ICart
         {
             product = dal.Product.GetById(productID);
         }
-        catch (DO.DalMissingIdException ex)
+        catch (DO.DalDoesNotExistException ex)
         {
-            throw new BO.BlMissingEntityException("Product not Exist", ex);
+            throw new BO.BlProductDoesNotExsist("Product not Exist", ex);
         }
         IEnumerable<BO.OrderItem?> oi = from BO.OrderItem? o in cart.Items where o.ProductID == productID select o;
         if (!oi.Any())
@@ -45,7 +41,7 @@ internal class Cart : BlApi.ICart
         }
         else
         {
-            cart = UpdateCart(cart, productID, 1);
+            cart = UpdateCart(cart, productID, oi.First().Amount+1 );
         }
         return cart;
     }
@@ -57,12 +53,13 @@ internal class Cart : BlApi.ICart
         {
             product = dal.Product.GetById(productID);
         }
-        catch (DO.DalMissingIdException ex)
+        catch (DO.DalDoesNotExistException ex)
         {
-            throw new BO.BlMissingEntityException("Product not Exist", ex);
+            throw new BO.BlProductDoesNotExsist("Product not Exist", ex);
         }
         if (amount != 0)
         {
+            cart.TotalPrice -= (from BO.OrderItem boOrderItem in cart.Items where boOrderItem.ProductID == productID select boOrderItem.TotalPrice).Sum();
             IEnumerable<BO.OrderItem?> boOrder = from BO.OrderItem boOrderItem in cart.Items
                                                  where boOrderItem.ProductID == productID
                                                  select new BO.OrderItem
@@ -76,19 +73,24 @@ internal class Cart : BlApi.ICart
                                                  };
             if (boOrder.Any())
             {
-                //cart.Items = from BO.OrderItem boOrderItem in boOrder
-                //             select new BO.OrderItem
-                //             {
-                //                 ID = boOrderItem.ID,
-                //                 Name = boOrderItem.Name,
-                //                 Price = boOrderItem.Price,
-                //                 ProductID = productID,
-                //                 Amount = amount,
-                //                 TotalPrice = amount * boOrderItem.Price,
-                //             };
+                cart.Items = from BO.OrderItem boOrderItem in cart.Items
+                             where boOrderItem.ProductID != productID
+                             select boOrderItem;
+                cart.Items = cart.Items.Append(boOrder.First());
             }
-            cart.TotalPrice -= (from BO.OrderItem boOrderItem in boOrder select boOrderItem.TotalPrice).Sum();
-            cart.TotalPrice += amount * (from BO.OrderItem boOrderItem in boOrder select boOrderItem.Price).Sum();
+            else
+            {
+                cart.Items = cart.Items.Append(new BO.OrderItem
+                {
+                    ID = 0,
+                    Name = product.Name,
+                    Price = product.Price,
+                    ProductID = productID,
+                    Amount = amount,
+                    TotalPrice = amount * product.Price,
+                });
+            }
+            cart.TotalPrice += amount*product.Price;
             return cart;
         }
         else
