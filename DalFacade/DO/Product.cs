@@ -1,8 +1,9 @@
-﻿
-namespace DO;
+﻿namespace DO;
+
 /// <summary>
 /// This stuct describes a single product in the store - type DO
 /// </summary>
+
 public struct Product
 {
     /// <summary>
@@ -34,12 +35,4 @@ public struct Product
     {
         return Tools.ToStringProperty(this);
     }
-//    => $@"
-//Product ID: {ID}
-//Name: {Name}
-//Category: {Category}
-//Price: {Price}
-//Amount in stock: {InStock}
-//";
-
 }

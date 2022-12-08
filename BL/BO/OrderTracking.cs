@@ -22,10 +22,15 @@ public class OrderTracking
     public OrderStatus Status { get; set; }
 
     /// <summary>
-    /// ?
+    /// contauns couple of date and details
     /// </summary>
-    public List<Tuple<DateTime,string>>? Tracking { get; set; }
-
+    
+    public List<Tuple<DateTime?,string>>? Tracking { get; set; }
+    /// <summary>
+    /// print tracking of the order
+    /// </summary>
+    /// <returns></returns>
+    
     public override string ToString()
     {
          return this.ToStringProperty();

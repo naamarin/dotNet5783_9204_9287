@@ -42,6 +42,10 @@ public class ProductItem
     /// </summary>
     public bool InStock { get; set; }
 
+    /// <summary>
+    /// print product details for the client
+    /// </summary>
+    /// <returns></returns>
     public override string ToString()
     {
          return this.ToStringProperty( );

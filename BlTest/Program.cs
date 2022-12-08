@@ -197,6 +197,7 @@ press h for exit");
 
 
             }
+            catch (BO.BlOrderId ex) { Console.WriteLine(ex.Message); }
             catch (BO.BlMissingEntityException ex) { Console.WriteLine(ex); }
             catch (BO.BlIdAlreadyExistException ex) { Console.WriteLine(ex); }
             catch (BO.BlProductDoesNotExsist ex) { Console.WriteLine(ex.Message); }

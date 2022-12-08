@@ -35,7 +35,10 @@ public class OrderForList
     /// The total price of the order
     /// </summary>
     public double TotalPrice { get; set; }
-
+    /// <summary>
+    /// print details for all the orders
+    /// </summary>
+    /// <returns></returns>
     public override string ToString()
     {
         return this.ToStringProperty();

@@ -1,5 +1,4 @@
-﻿
-using DO;
+﻿using DO;
 using DalApi;
 
 namespace Dal;
@@ -19,6 +18,7 @@ internal class DalOrder : IOrder
         DataSource.OrderList.Add(order);
         return order.ID;
     }
+
     /// <summary>
     /// A function to return an existing order
     /// </summary>
@@ -33,6 +33,7 @@ internal class DalOrder : IOrder
         }
         return (Order)DataSource.OrderList.Find(x => x?.ID == id);
     }
+
     /// <summary>
     /// Order update function
     /// </summary>
@@ -47,6 +48,7 @@ internal class DalOrder : IOrder
         DataSource.OrderList.Remove(DataSource.OrderList.Find(x => x?.ID == order.ID));
         DataSource.OrderList.Add(order);
     }
+
     /// <summary>
     /// Function to delete an existing order
     /// </summary>
@@ -61,6 +63,11 @@ internal class DalOrder : IOrder
         DataSource.OrderList.Remove(DataSource.OrderList.Find(x => x?.ID == id));
     }
 
+    /// <summary>
+    /// function for get all the orders by specific filter
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
     public IEnumerable<Order?> GetAll(Func<Order?, bool>? filter = null)
     {
         if (filter == null)

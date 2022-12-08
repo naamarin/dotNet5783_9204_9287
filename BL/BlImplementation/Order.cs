@@ -4,16 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-//using BO;
 using System.Security.Cryptography;
 using System.Linq.Expressions;
+using BO;
 
 namespace BlImplementation;
 
 internal class Order : BlApi.IOrder
 {
     DalApi.IDal dal = new Dal.DalList();
+
+    /// <summary>
+    /// a temp function for getting the status of the order
+    /// </summary>
+    /// <param name="o"></param>
+    /// <returns></returns>
     public BO.OrderStatus Statu(DO.Order? o)
     {
         if (o?.DeliveryDate == null)
@@ -26,6 +31,12 @@ internal class Order : BlApi.IOrder
         else
             return BO.OrderStatus.Delivered;
     }
+    /// <summary>
+    /// function for get order by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlOrderDoesNotExsist"></exception>
 
     public BO.Order GetById(int id)
     {
@@ -66,19 +77,32 @@ internal class Order : BlApi.IOrder
         };
     }
 
+    /// <summary>
+    /// function for get list of all the orders (for the manager)
+    /// </summary>
+    /// <returns></returns>
     public IEnumerable<BO.OrderForList?> OrderListForManager()
     {
-        IEnumerable<BO.OrderForList?> odl2 = from DO.Order? doOrders in dal.Order.GetAll()
+        IEnumerable<BO.OrderForList?> odl2 = from DO.Order doOrders in dal.Order.GetAll()
                                              select new BO.OrderForList
                                              {
-                                                 ID = doOrders.Value.ID,
-                                                 CustomerName = doOrders.Value.CustomerName,
-                                                 AmountOfItems = dal.OrderItem.getAllOrderItems(doOrders.Value.ID).Count(),
+                                                 ID = doOrders.ID,
+                                                 CustomerName = doOrders.CustomerName,
+                                                 AmountOfItems = dal.OrderItem.getAllOrderItems(doOrders.ID).Count(),
                                                  Status = Statu(doOrders),
-                                                TotalPrice = (from DO.OrderItem oi in dal.OrderItem.getAllOrderItems(doOrders.Value.ID) select oi.Price*oi.Amount).Sum(),
+                                                TotalPrice = (from DO.OrderItem oi in dal.OrderItem.getAllOrderItems(doOrders.ID) select oi.Price*oi.Amount).Sum(),
                                             };
         return odl2;
     }
+
+    /// <summary>
+    /// function for get all the details of the order
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlNullPropertyException"></exception>
+    /// <exception cref="BO.BlOrderDoesNotExsist"></exception>
+    /// <exception cref="BlOrderId"></exception>
     public BO.Order OrderDeatals(int id)
     {
         if (id <= 0)
@@ -104,7 +128,7 @@ internal class Order : BlApi.IOrder
                                           };
         return new BO.Order()
         {
-            ID = o.Value.ID, //*****************************************
+            ID = o?.ID ?? throw new BlOrderId("Order does not exist"),
             CustomerName = o?.CustomerName,
             CustomerEmail = o?.CustomerEmail,
             CustomerAddress = o?.CustomerAdress,
@@ -117,6 +141,15 @@ internal class Order : BlApi.IOrder
             PaymentDate = o?.OrderDate,
         };
     }
+
+    /// <summary>
+    /// function for update the ship date of order
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlOrderDoesNotExsist"></exception>
+    /// <exception cref="BlOrderId"></exception>
+    /// <exception cref="BO.BlOrderAlreadyDelivered"></exception>
     public BO.Order OrderShipUpdate(int id)
     {
         DO.Order? order;
@@ -126,34 +159,34 @@ internal class Order : BlApi.IOrder
         }
         catch(DO.DalDoesNotExistException ex)
         {
-            throw new BO.BlOrderDoesNotExsist("The order does  not exists", ex);
+            throw new BO.BlOrderDoesNotExsist("The order does not exists", ex);
         }
         BO.OrderStatus orderStatus = Statu(order);
         if (orderStatus != BO.OrderStatus.Shipped && orderStatus != BO.OrderStatus.Delivered)
         {
             DO.Order or = new DO.Order
             {
-                ID = order.Value.ID,
-                CustomerName = order.Value.CustomerName,
-                CustomerAdress = order.Value.CustomerAdress,
-                CustomerEmail = order.Value.CustomerEmail,
-                CustomerNumber = order.Value.CustomerNumber,
-                OrderDate = order.Value.OrderDate,
+                ID = order?.ID ?? throw new BlOrderId("Order does not exist"),
+                CustomerName = order?.CustomerName,
+                CustomerAdress = order?.CustomerAdress,
+                CustomerEmail = order?.CustomerEmail,
+                CustomerNumber = order?.CustomerNumber ?? throw new BlOrderId("Custumer number invalid"),
+                OrderDate = order?.OrderDate,
                 ShipDate = DateTime.Now,
-                DeliveryDate = order.Value.DeliveryDate,
+                DeliveryDate = order?.DeliveryDate,
             };
             dal.Order.Update(or);
             BO.Order boOrder = new BO.Order
             {
-                ID = order.Value.ID,
-                CustomerName = order.Value.CustomerName,
-                CustomerAddress = order.Value.CustomerAdress,
-                CustomerEmail = order.Value.CustomerEmail,
-                OrderDate = order.Value.OrderDate,
+                ID = order?.ID ?? throw new BlOrderId("Order does not exist"),
+                CustomerName = order?.CustomerName,
+                CustomerAddress = order?.CustomerAdress,
+                CustomerEmail = order?.CustomerEmail,
+                OrderDate = order?.OrderDate,
                 Status = Statu(order),
                 ShipDate = DateTime.Now,
                 DeliveryDate = null,
-                PaymentDate = order.Value.OrderDate,
+                PaymentDate = order?.OrderDate,
             };
             boOrder.Items = from DO.OrderItem doOrderItem in dal.OrderItem.getAllOrderItems(id)
                             select new BO.OrderItem
@@ -171,6 +204,15 @@ internal class Order : BlApi.IOrder
         else
             throw new BO.BlOrderAlreadyDelivered("Order already delivered");
     }
+
+    /// <summary>
+    /// function for update delivery date of order
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlOrderDoesNotExsist"></exception>
+    /// <exception cref="BlOrderId"></exception>
+    /// <exception cref="BO.BlOrderAlreadyDelivered"></exception>
     public BO.Order OrderDeliveryUpdate(int id)
     {
         DO.Order? order;
@@ -187,27 +229,27 @@ internal class Order : BlApi.IOrder
         {
             DO.Order or = new DO.Order
             {
-                ID = order.Value.ID,
-                CustomerName = order.Value.CustomerName,
-                CustomerAdress = order.Value.CustomerAdress,
-                CustomerEmail = order.Value.CustomerEmail,
-                CustomerNumber = order.Value.CustomerNumber,
-                OrderDate = order.Value.OrderDate,
-                ShipDate = order.Value.ShipDate,
+                ID = order?.ID ?? throw new BlOrderId("Order does not exist"),
+                CustomerName = order?.CustomerName,
+                CustomerAdress = order?.CustomerAdress,
+                CustomerEmail = order?.CustomerEmail,
+                CustomerNumber = order?.CustomerNumber ?? throw new BlOrderId ("Custumer number invalid"),
+                OrderDate = order?.OrderDate,
+                ShipDate = order?.ShipDate,
                 DeliveryDate = DateTime.Now,
             };
             dal.Order.Update(or);
             BO.Order boOrder = new BO.Order
             {
-                ID = order.Value.ID,
-                CustomerName = order.Value.CustomerName,
-                CustomerAddress = order.Value.CustomerAdress,
-                CustomerEmail = order.Value.CustomerEmail,
-                OrderDate = order.Value.OrderDate,
+                ID = order?.ID ?? throw new BlOrderId("Order does not exist"),
+                CustomerName = order?.CustomerName,
+                CustomerAddress = order?.CustomerAdress,
+                CustomerEmail = order?.CustomerEmail,
+                OrderDate = order?.OrderDate,
                 Status = Statu(order),
-                ShipDate = order.Value.ShipDate,
+                ShipDate = order?.ShipDate,
                 DeliveryDate = DateTime.Now,
-                PaymentDate = order.Value.OrderDate,
+                PaymentDate = order?.OrderDate,
             };
             boOrder.Items = from DO.OrderItem doOrderItem in dal.OrderItem.getAllOrderItems(id)
                             select new BO.OrderItem
@@ -225,6 +267,13 @@ internal class Order : BlApi.IOrder
         else
             throw new BO.BlOrderAlreadyDelivered("Order already delivered");
     }
+
+    /// <summary>
+    /// function for tracking order
+    /// </summary>
+    /// <param name="orderID"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlOrderDoesNotExsist"></exception>
     public BO.OrderTracking TrackingOrder(int orderID)
     {
         DO.Order? order;
@@ -242,8 +291,8 @@ internal class Order : BlApi.IOrder
             {
                 ID = order.Value.ID,
                 Status = Statu(order),
-                Tracking = new List<Tuple<DateTime, string>> { new Tuple<DateTime, string>( order.Value.OrderDate.Value, "The order has been created" ),
-                 new Tuple<DateTime, string>(order.Value.ShipDate.Value,"The order is sent"), new Tuple<DateTime, string>(order.Value.DeliveryDate.Value,"The order has been delivered") },
+                Tracking = new List<Tuple<DateTime?, string>> { new Tuple<DateTime ?, string>( order?.OrderDate, "The order has been created" ),
+                 new Tuple<DateTime ?, string>(order?.ShipDate,"The order is sent"), new Tuple<DateTime ?, string>(order?.DeliveryDate,"The order has been delivered") },
 
             };
         }
@@ -253,8 +302,8 @@ internal class Order : BlApi.IOrder
             {
                 ID = order.Value.ID,
                 Status = Statu(order),
-                Tracking = new List<Tuple<DateTime, string>> { new Tuple<DateTime, string>( order.Value.OrderDate.Value, "The order has been created" ),
-                 new Tuple<DateTime, string>(order.Value.ShipDate.Value,"The order is sent") },
+                Tracking = new List<Tuple<DateTime?, string>> { new Tuple<DateTime ?, string>( order?.OrderDate, "The order has been created" ),
+                 new Tuple<DateTime ?, string>(order?.ShipDate,"The order is sent") },
 
             };
         }
@@ -264,7 +313,7 @@ internal class Order : BlApi.IOrder
             {
                 ID = order.Value.ID,
                 Status = Statu(order),
-                Tracking = new List<Tuple<DateTime, string>> { new Tuple<DateTime, string>( order.Value.OrderDate.Value, "The order has been created" ) },
+                Tracking = new List<Tuple<DateTime?, string>> { new Tuple<DateTime?, string>( order?.OrderDate , "The order has been created" ) },
                
             };
         }

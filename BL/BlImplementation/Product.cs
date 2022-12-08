@@ -7,12 +7,19 @@ using System.Runtime.Serialization.Formatters;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+
 namespace BlImplementation;
 
 
 internal class Product : BlApi.IProduct
 {
     DalApi.IDal dal = new Dal.DalList();
+
+    /// <summary>
+    /// function for get list of all the products (for the manager)
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="NullReferenceException"></exception>
     public IEnumerable<BO.ProductForList> GetListProducts()
     {
         return from DO.Product? doProduct in dal.Product.GetAll()
@@ -24,6 +31,15 @@ internal class Product : BlApi.IProduct
                    Price = doProduct?.Price ?? 0
                };
     }
+
+    /// <summary>
+    /// function for get product by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlNullPropertyException"></exception>
+    /// <exception cref="BO.BlWrongCategoryException"></exception>
+    /// <exception cref="BO.BlProductDoesNotExsist"></exception>
     public BO.Product GetById(int id)
     {
         try
@@ -44,6 +60,11 @@ internal class Product : BlApi.IProduct
         }
     }
 
+    /// <summary>
+    /// function for add product
+    /// </summary>
+    /// <param name="boProduct"></param>
+    /// <exception cref="ArgumentException"></exception>
     public void AddProduct(BO.Product? boProduct)
     {
         DO.Product doProduct = new DO.Product()
@@ -52,10 +73,17 @@ internal class Product : BlApi.IProduct
             Name = boProduct?.Name ?? throw new ArgumentException("Invalid name"),
             Price = boProduct?.Price ?? throw new ArgumentException("Invalid price"),
             InStock = boProduct?.StockCount ?? throw new ArgumentException("Invalid stock amount"),
-            Category=(DO.Category)boProduct?.Category ,//?? throw new ArgumentException("Invalid category"),
+            Category=(DO.Category)boProduct?.Category,//?? throw new ArgumentException("Invalid category"),
         };
         dal.Product.Add(doProduct);
     }
+
+    /// <summary>
+    /// a temp function for check if the product is exist
+    /// </summary>
+    /// <param name="order"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public bool isExist(DO.Order order, int id)
     {
         try
@@ -68,9 +96,15 @@ internal class Product : BlApi.IProduct
         }
         return true;    
     }
+
+    /// <summary>
+    /// function for delete product
+    /// </summary>
+    /// <param name="idProduct"></param>
+    /// <exception cref="BO.BlProductDoesNotExsist"></exception>
     public void RemoveProduct(int idProduct)
     {
-        //***************************************************************************************
+    
         try
         {
             DO.Product product = dal.Product.GetById(idProduct);
@@ -81,12 +115,16 @@ internal class Product : BlApi.IProduct
         }
         IEnumerable<DO.OrderItem?> odl = from DO.Order doOrders in dal.Order.GetAll() where isExist(doOrders, idProduct) select dal.OrderItem.getOrderItems(doOrders.ID, idProduct);
 
-        // IEnumerable<DO.OrderItem?> od = from DO.Order doOrder in odl select dal.OrderItem.getOrderItems(doOrder.ID, idProduct);
-        //List<DO.OrderItem?> orderItems = from o in doOrders select from t in dal.OrderItem.getAllOrderItems(o.Value.ID) where t.Value.ProductID == idProduct select;
         if (!odl.Any())
             dal.Product.Delete(idProduct);
     }
 
+    /// <summary>
+    /// function for update the details of product
+    /// </summary>
+    /// <param name="boProduct"></param>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="BO.BlProductDoesNotExsist"></exception>
     public void UpdateProduct(BO.Product boProduct)
     {
         if (boProduct.ID < 0)
@@ -115,6 +153,11 @@ internal class Product : BlApi.IProduct
         }
     }
 
+    /// <summary>
+    /// function for get catalog of all the products (for the client)
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="NullReferenceException"></exception>
     public IEnumerable<BO.ProductItem> Catalog()
     {
         return from DO.Product doProduct in dal.Product.GetAll()
@@ -128,6 +171,14 @@ internal class Product : BlApi.IProduct
                 InStock = doProduct.InStock > 0,
             };
     }
+
+    /// <summary>
+    /// function for get details of all the products
+    /// </summary>
+    /// <param name="productID"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlMissingEntityException"></exception>
+    /// <exception cref="NullReferenceException"></exception>
     public BO.ProductItem ProductDeatails( int productID)
     {
         DO.Product product;

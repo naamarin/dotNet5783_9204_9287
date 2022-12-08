@@ -4,13 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace BlImplementation;
 
 internal class Cart : BlApi.ICart
 {
     DalApi.IDal dal = new Dal.DalList();
-
+    /// <summary>
+    /// function for adding an item to the cart
+    /// </summary>
+    /// <param name="cart"></param>
+    /// <param name="productID"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlProductDoesNotExsist"></exception>
     public BO.Cart AddItemToCart(BO.Cart cart, int productID)
     {
         DO.Product product;
@@ -46,6 +51,14 @@ internal class Cart : BlApi.ICart
         return cart;
     }
 
+    /// <summary>
+    /// function for update the amount of the items in cart
+    /// </summary>
+    /// <param name="cart"></param>
+    /// <param name="productID"></param>
+    /// <param name="amount"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlProductDoesNotExsist"></exception>
     public BO.Cart UpdateCart(BO.Cart cart, int productID, int amount)
     {
         DO.Product product;
@@ -101,6 +114,13 @@ internal class Cart : BlApi.ICart
             return cart;
         }
     }
+
+    /// <summary>
+    /// function for paid and make order
+    /// </summary>
+    /// <param name="cart"></param>
+    /// <exception cref="BO.BlClientDeatalesNotValid"></exception>
+    /// <exception cref="BO.BlNullPropertyException"></exception>
     public void MakeOrder(BO.Cart cart)
     {
         if (cart.CustomerName == "" || cart.CustomerAddress == "" || cart.CustomerEmail == "")

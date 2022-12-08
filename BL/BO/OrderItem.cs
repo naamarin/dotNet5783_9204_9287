@@ -40,7 +40,10 @@ public class OrderItem
     /// Amount * Price
     /// </summary>
     public double TotalPrice { get; set; }
-
+    /// <summary>
+    /// print all the items in the order
+    /// </summary>
+    /// <returns></returns>
     public override string ToString()
     {
          return this.ToStringProperty();
