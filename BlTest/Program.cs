@@ -217,8 +217,8 @@ press h for exit");
             newCart.CustomerEmail = "ShmuelChoen@gmail.com";
             Console.WriteLine("Enter your choice");
             Console.WriteLine($@"
-press a for Add Product to the cart ,
-Press b for Update Amount of product in cart ,
+press a for Add Product to the cart,
+Press b for Update Amount of product in cart,
 press c for Order Confirmation,
 press f for return to the menu");
             if (!char.TryParse(Console.ReadLine(), out choice)) throw new Exception("wrong input type");
@@ -258,8 +258,8 @@ press f for return to the menu");
 
                     }
                     Console.WriteLine($@"
-press a for Add Product to the cart ,
-Press b for Update Amount of product in cart ,
+press a for Add Product to the cart,
+Press b for Update Amount of product in cart,
 press c for Order Confirmation,
 press f for return to the menu");
                     char.TryParse(Console.ReadLine(), out choice);
