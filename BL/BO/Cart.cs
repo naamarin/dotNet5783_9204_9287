@@ -37,6 +37,10 @@ public class Cart
     /// </summary>
     public double TotalPrice { get; set; }
 
+    /// <summary>
+    /// prints cart details
+    /// </summary>
+    /// <returns></returns>
     public override string ToString()
     {
         return this.ToStringProperty();

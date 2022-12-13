@@ -1,5 +1,4 @@
-﻿
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
 namespace DO;
 /// <summary>
@@ -36,13 +35,4 @@ public struct OrderItem
     {
         return Tools.ToStringProperty(this);
     }
-    //=> $@"
-    //ID: {ID}
-    //Product ID:  {ProductID} 
-    //Order ID:  {OrderID}
-    //Price:  {Price}
-    //Amount:  {Amount}
-    //";
-
-
 }

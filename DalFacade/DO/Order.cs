@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Xml.Linq;
 
@@ -52,15 +51,5 @@ public struct Order
         return Tools.ToStringProperty(this);
     }
 }
-//=> $@"
-//ID: {ID},
-//Customer Name: {CustomerName}
-//Customer Email: {CustomerEmail}
-//Customer Number: 0{CustomerNumber}
-//customer Address: {CustomerAdress}
-//Order Date: {OrderDate}
-//Ship Date: {ShipDate}
-//Delivery Date: {DeliveryDate}
-//";
-//}
+
 

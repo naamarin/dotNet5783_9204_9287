@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BO;
 
+/// <summary>
+/// property tostring method for printing
+/// </summary>
 public static class Tools
 {
     public static string ToStringProperty<T>(this T t)

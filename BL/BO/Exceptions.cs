@@ -50,3 +50,8 @@ public class BlIncorrectDateException : Exception
 {
     public BlIncorrectDateException(string? message) : base(message) { }
 }
+
+public class BlOrderId : Exception
+{
+    public BlOrderId(string? message) : base(message) { }
+}

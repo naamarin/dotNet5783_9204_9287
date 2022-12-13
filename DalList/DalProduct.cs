@@ -1,5 +1,4 @@
-﻿
-using DO;
+﻿using DO;
 using DalApi;
 using System.Security.Cryptography;
 
@@ -19,6 +18,7 @@ internal class DalProduct : IProduct
         DataSource.ProductList.Add(product);
         return product.ID;
     }
+
     /// <summary>
     /// A function to return an existing product
     /// </summary>
@@ -33,6 +33,7 @@ internal class DalProduct : IProduct
         }
         return (Product)DataSource.ProductList.Find(x => x?.ID == id);
     }
+
     /// <summary>
     /// Product update function
     /// </summary>
@@ -47,6 +48,7 @@ internal class DalProduct : IProduct
         DataSource.ProductList.Remove(DataSource.ProductList.Find(x => x?.ID == product.ID));
         DataSource.ProductList.Add(product);
     }
+
     /// <summary>
     /// A function to delete an existing product
     /// </summary>
@@ -61,6 +63,11 @@ internal class DalProduct : IProduct
         DataSource.ProductList.Remove(DataSource.ProductList.Find(x => x?.ID == id));
     }
 
+    /// <summary>
+    /// function for getting product by specific filter
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
     public IEnumerable<Product?> GetAll(Func<Product?, bool>? filter = null)
     {
         if (filter == null)

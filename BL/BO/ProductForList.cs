@@ -31,6 +31,10 @@ public class ProductForList
     /// </summary>
     public Category Category { get; set; }
 
+    /// <summary>
+    /// print details of all the product
+    /// </summary>
+    /// <returns></returns>
     public override string ToString()
     {
          return this.ToStringProperty();

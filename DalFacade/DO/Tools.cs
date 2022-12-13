@@ -6,9 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DO;
-
 internal static class Tools
 {
+    /// <summary>
+    /// property toString method for printing
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="t"></param>
+    /// <returns></returns>
     public static string ToStringProperty<T>(T t)
     {
         string str = "";

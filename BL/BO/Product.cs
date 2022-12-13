@@ -36,6 +36,10 @@ public class Product
     /// </summary>
     public int StockCount { get; set; }
 
+    /// <summary>
+    /// print details ot product
+    /// </summary>
+    /// <returns></returns>
     public override string ToString()
     {
         return this.ToStringProperty();

@@ -1,5 +1,4 @@
-﻿
-using DO;
+﻿using DO;
 using DalApi;
 
 namespace Dal;
@@ -17,6 +16,7 @@ internal class DalOrderItem : IOrderItem
         DataSource.OrderItemsList.Add(orderItem);
         return orderItem.ID;
     }
+
     /// <summary>
     /// Function to return a product in an order
     /// </summary>
@@ -31,6 +31,7 @@ internal class DalOrderItem : IOrderItem
         }
         return (OrderItem)DataSource.OrderItemsList.Find(x => x?.ID == id);
     }
+
     /// <summary>
     /// A function to update a product in an order
     /// </summary>
@@ -46,6 +47,7 @@ internal class DalOrderItem : IOrderItem
         DataSource.OrderItemsList.Remove(DataSource.OrderItemsList.Find(x => x?.ID == orderItem.ID));
         DataSource.OrderItemsList.Add(orderItem);
     }
+
     /// <summary>
     /// Function to delete a product from the order
     /// </summary>
@@ -59,11 +61,11 @@ internal class DalOrderItem : IOrderItem
         }
         DataSource.OrderItemsList.Remove(DataSource.OrderItemsList.Find(x => x?.ID == id));
     }
+
     /// <summary>
     /// Function to return all products in the order
     /// </summary>
     /// <returns></returns>
-
     public IEnumerable<OrderItem?> GetAll(Func<OrderItem?, bool>? filter = null)
     {
         if (filter == null)
@@ -79,6 +81,11 @@ internal class DalOrderItem : IOrderItem
         }
     }
 
+    /// <summary>
+    /// function for get all the items in the order
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public List<OrderItem?> getAllOrderItems(int id)
     {
         List<OrderItem?> newList = new List<OrderItem?>();
@@ -90,6 +97,13 @@ internal class DalOrderItem : IOrderItem
         return newList;
     }
 
+    /// <summary>
+    /// function for get items of the order
+    /// </summary>
+    /// <param name="idProduct"></param>
+    /// <param name="idOrder"></param>
+    /// <returns></returns>
+    /// <exception cref="DalDoesNotExistException"></exception>
     public OrderItem? getOrderItems(int idProduct, int idOrder)
     {
         OrderItem? orderItem = null;

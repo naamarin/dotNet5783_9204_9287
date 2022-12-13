@@ -5,8 +5,6 @@ namespace Dal;
 
 internal static class DataSource
 {
-    //internal static DataSource DSInstance { get; } = new DataSource();
-
     static DataSource()
     {
         s_Initialize();
@@ -113,14 +111,14 @@ internal static class DataSource
             count -= 9;
             if (indexShip < 18)
             {
-                order.ShipDate = order.OrderDate.Value.AddMinutes(31);//********************************************
+                order.ShipDate = order.OrderDate?.AddMinutes(31);
                 indexShip++;
             }
             else
                 order.ShipDate = null;
             if (indexDelivery < 5)
             {
-                order.DeliveryDate = order.ShipDate.Value.AddMinutes(23);//***************************************
+                order.DeliveryDate = order.ShipDate?.AddMinutes(23);
                 indexDelivery++;
             }
             else
@@ -128,6 +126,7 @@ internal static class DataSource
             OrderList.Add(order);
         }
     }
+
     /// <summary>
     /// A function to create new objects of order item type
     /// </summary>
