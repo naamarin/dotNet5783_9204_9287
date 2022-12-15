@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -23,6 +24,25 @@ internal class Product : BlApi.IProduct
     public IEnumerable<BO.ProductForList> GetListProducts()
     {
         return from DO.Product? doProduct in dal.Product.GetAll()
+               select new BO.ProductForList
+               {
+                   ID = doProduct?.ID ?? throw new NullReferenceException("Missing ID"),
+                   Name = doProduct?.Name ?? throw new NullReferenceException("Missing name"),
+                   Category = (BO.Category?)doProduct?.Category ?? throw new NullReferenceException("Missing category"),
+                   Price = doProduct?.Price ?? 0
+               };
+    }
+
+    /// <summary>
+    /// function for get list of all the products with selected category
+    /// </summary>
+    /// <param name="c"></param>
+    /// <returns></returns>
+    /// <exception cref="NullReferenceException"></exception>
+    public IEnumerable<BO.ProductForList> GetListProductsByCategory(BO.Category c)
+    {
+        return from DO.Product? doProduct in dal.Product.GetAll()
+               where doProduct?.Category == (DO.Category)c
                select new BO.ProductForList
                {
                    ID = doProduct?.ID ?? throw new NullReferenceException("Missing ID"),

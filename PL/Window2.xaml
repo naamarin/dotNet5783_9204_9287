@@ -22,14 +22,16 @@ VerticalAlignment="Stretch" Width="auto">
             <ComboBox Name="CategorySelector"
 HorizontalAlignment= "Stretch"
 VerticalAlignment="Stretch"
-Grid.Column="1"/>
+Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged"/>
         </Grid>
-        <ListView x:Name="ProductView" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <ListView x:Name="ProductView" Grid.Row="1" MouseDoubleClick="ProductView_MouseDoubleClick">
             <ListView.View >
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
+
         </ListView>
+        <Button Name="btnAddProduct" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="691,5,0,0" Padding="5" Height="28" VerticalAlignment="Top" Click="btnAddProduct_Click"/>
     </Grid>
 </Window>

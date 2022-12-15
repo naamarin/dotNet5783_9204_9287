@@ -7,6 +7,18 @@
         mc:Ignorable="d"
         Title="Window1" Height="450" Width="800">
     <Grid>
-        
+        <TextBox Name="txbProductID" HorizontalAlignment="Left" Margin="146,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txbProductName" HorizontalAlignment="Left" Margin="146,140,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txbProductPrice" HorizontalAlignment="Left" Margin="146,280,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txbProductStockCount" HorizontalAlignment="Left" Margin="146,350,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name="CategoryOptions" HorizontalAlignment="Left" Margin="146,210,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Name="lID" Content="Product ID:" HorizontalAlignment="Left" Margin="45,65,0,0" VerticalAlignment="Top"/>
+        <Label Name="lName" Content="Product Name:" HorizontalAlignment="Left" Margin="45,135,0,0" VerticalAlignment="Top"/>
+        <Label Name="lCategory" Content="Product category:" HorizontalAlignment="Left" Margin="45,205,0,0" VerticalAlignment="Top"/>
+        <Label Name="lPrice" Content="Product price:" HorizontalAlignment="Left" Margin="45,275,0,0" VerticalAlignment="Top"/>
+        <Label Name="lAmount" Content="Product amount:" HorizontalAlignment="Left" Margin="45,345,0,0" VerticalAlignment="Top"/>
+        <Button Name="btAddProduct" Content="Add" HorizontalAlignment="Left" Margin="636,358,0,0" VerticalAlignment="Top" Height="42" Width="130" Click="btAddProduct_Click"/>
+        <Button Name="btUpdateProduct" Content="Update" HorizontalAlignment="Left" Margin="636,358,0,0" VerticalAlignment="Top" Height="42" Width="130" Click="btUpdateProduct_Click"/>
+
     </Grid>
 </Window>

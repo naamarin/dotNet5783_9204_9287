@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace PL
 {
@@ -26,6 +27,32 @@ namespace PL
         {
             InitializeComponent();
             ProductView.ItemsSource = bl.Product.GetListProducts();
+            CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.CategoryForWPF));
+        }
+
+        private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            BO.CategoryForWPF category = (BO.CategoryForWPF)CategorySelector.SelectedItem;
+            if (category == BO.CategoryForWPF.All)
+                ProductView.ItemsSource = bl.Product.GetListProducts();
+            else
+                ProductView.ItemsSource = bl.Product.GetListProductsByCategory((BO.Category)category);
+        }
+
+        private void btnAddProduct_Click(object sender, RoutedEventArgs e)
+        {
+            new Window1().ShowDialog();
+            ProductView.ItemsSource = bl.Product.GetListProducts();
+            CategorySelector.SelectedItem = BO.CategoryForWPF.All;
+        }
+
+        private void ProductView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            int productID = ((BO.ProductForList)ProductView.SelectedItem).ID;
+            new Window1(productID).ShowDialog();
+            ProductView.ItemsSource = bl.Product.GetListProducts();
+            CategorySelector.SelectedItem = BO.CategoryForWPF.All;
+
         }
     }
 }

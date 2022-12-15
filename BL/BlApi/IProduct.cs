@@ -15,6 +15,11 @@ public interface IProduct
     public IEnumerable<BO.ProductForList> GetListProducts();
 
     /// <summary>
+    /// function for get list of all the products with selected category(for the manager)
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerable<BO.ProductForList> GetListProductsByCategory(BO.Category c);
+    /// <summary>
     /// function for get product by id
     /// </summary>
     /// <param name="id"></param>
