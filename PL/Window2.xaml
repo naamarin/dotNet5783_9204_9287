@@ -8,13 +8,13 @@
         Title="Window2" Height="640" Width="800">
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="500*"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="68*"/>
+            <RowDefinition Height="221*"/>
             <RowDefinition Height="Auto"/>
 
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
-VerticalAlignment="Stretch" Width="auto">
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -24,7 +24,7 @@ HorizontalAlignment= "Stretch"
 VerticalAlignment="Stretch"
 Grid.Column="1"/>
         </Grid>
-        <ListView x:Name="ProductView" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
+        <ListView x:Name="ProductView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,46,0,0" Grid.RowSpan="3">
             <ListView.View >
                 <GridView>
                     <GridViewColumn/>
