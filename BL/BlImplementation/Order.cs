@@ -12,7 +12,7 @@ namespace BlImplementation;
 
 internal class Order : BlApi.IOrder
 {
-    DalApi.IDal dal = new Dal.DalList();
+    DalApi.IDal? dal = DalApi.Factory.Get();
 
     /// <summary>
     /// a temp function for getting the status of the order
@@ -43,7 +43,7 @@ internal class Order : BlApi.IOrder
         DO.Order order;
         try
         {
-            order = dal.Order.GetById(id);
+            order = dal?.Order.GetById(id) ?? throw new NullReferenceException("id does not exists");
         }
         catch(DO.DalDoesNotExistException ex)
         {
@@ -83,7 +83,7 @@ internal class Order : BlApi.IOrder
     /// <returns></returns>
     public IEnumerable<BO.OrderForList?> OrderListForManager()
     {
-        IEnumerable<BO.OrderForList?> odl2 = from DO.Order doOrders in dal.Order.GetAll()
+        IEnumerable<BO.OrderForList?> odl2 = from DO.Order doOrders in dal?.Order.GetAll() ?? throw new NullReferenceException("Empty list")
                                              select new BO.OrderForList
                                              {
                                                  ID = doOrders.ID,
@@ -110,13 +110,13 @@ internal class Order : BlApi.IOrder
         DO.Order? o = new DO.Order?();
         try
         {
-            o = dal.Order.GetById(id);
+            o = dal?.Order.GetById(id);
         }
         catch (DO.DalDoesNotExistException ex)
         {
             throw new BO.BlOrderDoesNotExsist("There is no order wuth this ID", ex);
         }
-        IEnumerable<BO.OrderItem?> list = from DO.OrderItem oi in dal.OrderItem.getAllOrderItems(id)
+        IEnumerable<BO.OrderItem?> list = from DO.OrderItem oi in dal?.OrderItem.getAllOrderItems(id) ?? throw new NullReferenceException("Empty list")
                                           select new BO.OrderItem
                                           {
                                               ID = oi.ID,
@@ -155,7 +155,7 @@ internal class Order : BlApi.IOrder
         DO.Order? order;
         try
         {
-            order = dal.Order.GetById(id);
+            order = dal?.Order.GetById(id);
         }
         catch(DO.DalDoesNotExistException ex)
         {
@@ -175,7 +175,7 @@ internal class Order : BlApi.IOrder
                 ShipDate = DateTime.Now,
                 DeliveryDate = order?.DeliveryDate,
             };
-            dal.Order.Update(or);
+            dal?.Order.Update(or);
             BO.Order boOrder = new BO.Order
             {
                 ID = order?.ID ?? throw new BlOrderId("Order does not exist"),
@@ -188,7 +188,7 @@ internal class Order : BlApi.IOrder
                 DeliveryDate = null,
                 PaymentDate = order?.OrderDate,
             };
-            boOrder.Items = from DO.OrderItem doOrderItem in dal.OrderItem.getAllOrderItems(id)
+            boOrder.Items = from DO.OrderItem doOrderItem in dal?.OrderItem.getAllOrderItems(id) ?? throw new NullReferenceException("Empty list")
                             select new BO.OrderItem
                             {
                                 ID = doOrderItem.ID,
@@ -218,7 +218,7 @@ internal class Order : BlApi.IOrder
         DO.Order? order;
         try
         {
-            order = dal.Order.GetById(id);
+            order = dal?.Order.GetById(id);
         }
         catch (DO.DalDoesNotExistException ex)
         {
@@ -238,7 +238,7 @@ internal class Order : BlApi.IOrder
                 ShipDate = order?.ShipDate,
                 DeliveryDate = DateTime.Now,
             };
-            dal.Order.Update(or);
+            dal?.Order.Update(or);
             BO.Order boOrder = new BO.Order
             {
                 ID = order?.ID ?? throw new BlOrderId("Order does not exist"),
@@ -251,7 +251,7 @@ internal class Order : BlApi.IOrder
                 DeliveryDate = DateTime.Now,
                 PaymentDate = order?.OrderDate,
             };
-            boOrder.Items = from DO.OrderItem doOrderItem in dal.OrderItem.getAllOrderItems(id)
+            boOrder.Items = from DO.OrderItem doOrderItem in dal?.OrderItem.getAllOrderItems(id) ?? throw new NullReferenceException("Empty list")
                             select new BO.OrderItem
                             {
                                 ID = doOrderItem.ID,
@@ -279,7 +279,7 @@ internal class Order : BlApi.IOrder
         DO.Order? order;
         try
         {
-            order = dal.Order.GetById(orderID);
+            order = dal?.Order.GetById(orderID);
         }
         catch (DO.DalDoesNotExistException ex)
         {
@@ -289,7 +289,7 @@ internal class Order : BlApi.IOrder
         {
             return new BO.OrderTracking
             {
-                ID = order.Value.ID,
+                ID = order?.ID ?? throw new BlOrderId("Order does not exist"),
                 Status = Statu(order),
                 Tracking = new List<Tuple<DateTime?, string>> { new Tuple<DateTime ?, string>( order?.OrderDate, "The order has been created" ),
                  new Tuple<DateTime ?, string>(order?.ShipDate,"The order is sent"), new Tuple<DateTime ?, string>(order?.DeliveryDate,"The order has been delivered") },
@@ -300,7 +300,7 @@ internal class Order : BlApi.IOrder
         {
             return new BO.OrderTracking
             {
-                ID = order.Value.ID,
+                ID = order?.ID ?? throw new BlOrderId("Order does not exist"),
                 Status = Statu(order),
                 Tracking = new List<Tuple<DateTime?, string>> { new Tuple<DateTime ?, string>( order?.OrderDate, "The order has been created" ),
                  new Tuple<DateTime ?, string>(order?.ShipDate,"The order is sent") },
@@ -311,7 +311,7 @@ internal class Order : BlApi.IOrder
         {
             return new BO.OrderTracking
             {
-                ID = order.Value.ID,
+                ID = order?.ID ?? throw new BlOrderId("Order does not exist"),
                 Status = Statu(order),
                 Tracking = new List<Tuple<DateTime?, string>> { new Tuple<DateTime?, string>( order?.OrderDate , "The order has been created" ) },
                

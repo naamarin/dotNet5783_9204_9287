@@ -1,6 +1,4 @@
-﻿using BlApi;
-using BlImplementation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,14 +19,15 @@ namespace PL
     /// </summary>
     public partial class Window1 : Window
     {
-        public IBl bl = new Bl();
+        BlApi.IBl? bl = BlApi.Factory.Get();
+
         int productID;
         public Window1(int id = 0)
         {
             productID = id;
             InitializeComponent();
             CategoryOptions.ItemsSource = Enum.GetValues(typeof(BO.Category));
-            if (id !=0)
+            if (id != 0)
             {
                 BO.Product product = bl.Product.GetById(productID);
                 txbProductID.Text = product.ID.ToString();
@@ -55,53 +54,56 @@ namespace PL
                 MessageBox.Show("One or more of the requested fields are empty", "ERROR");
                 return;
             }
-                try
+            try
+            {
+                bl?.Product.AddProduct(new BO.Product
                 {
-                    bl.Product.AddProduct(new BO.Product
-                    {
-                        ID = int.Parse(txbProductID.Text),
-                        Category = (BO.Category)CategoryOptions.SelectedItem,
-                        Name = txbProductName.Text,
-                        Price = int.Parse(txbProductPrice.Text),
-                        StockCount = int.Parse(txbProductStockCount.Text),
-                    });
-                }
-                catch (ArgumentException boEx)
-                {
-                    MessageBox.Show(boEx.Message, "ERROR");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("ID, Price and amount must be numbers", "ERROR");
-                }
-
-            this.Close();
+                    ID = int.Parse(txbProductID.Text),
+                    Category = (BO.Category)CategoryOptions.SelectedItem,
+                    Name = txbProductName.Text,
+                    Price = int.Parse(txbProductPrice.Text),
+                    StockCount = int.Parse(txbProductStockCount.Text),
+                });
+                this.Close();
+            }
+            catch (ArgumentException boEx)
+            {
+                MessageBox.Show(boEx.Message, "ERROR");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ID, Price and amount must be numbers", "ERROR");
+            }
         }
 
         private void btUpdateProduct_Click(object sender, RoutedEventArgs e)
         {
-                if (txbProductID.Text == "" || CategoryOptions.SelectedItem == null || txbProductName.Text == "" || txbProductPrice.Text == "" || txbProductStockCount.Text == "")
-                    MessageBox.Show("One or more of the requested fields are empty", "ERROR");
-                try
+            if (txbProductID.Text == "" || CategoryOptions.SelectedItem == null || txbProductName.Text == "" || txbProductPrice.Text == "" || txbProductStockCount.Text == "")
+            {
+                MessageBox.Show("One or more of the requested fields are empty", "ERROR");
+                return;
+            }
+            try
+            {
+                bl?.Product.UpdateProduct(new BO.Product
                 {
-                    bl.Product.UpdateProduct(new BO.Product
-                    {
-                        ID = int.Parse(txbProductID.Text),
-                        Category = (BO.Category)CategoryOptions.SelectedItem,
-                        Name = txbProductName.Text,
-                        Price = int.Parse(txbProductPrice.Text),
-                        StockCount = int.Parse(txbProductStockCount.Text),
-                    });
-                }
-                catch (ArgumentException boEx)
-                {
-                    MessageBox.Show(boEx.Message, "ERROR");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("ID, Price and amount must be numbers", "ERROR");
-                }
-            this.Close();
+                    ID = int.Parse(txbProductID.Text),
+                    Category = (BO.Category)CategoryOptions.SelectedItem,
+                    Name = txbProductName.Text,
+                    Price = int.Parse(txbProductPrice.Text),
+                    StockCount = int.Parse(txbProductStockCount.Text),
+                });
+                this.Close();
+            }
+            catch (ArgumentException boEx)
+            {
+                MessageBox.Show(boEx.Message, "ERROR");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ID, Price and amount must be numbers", "ERROR");
+            }
+            
         }
 
     }

@@ -1,6 +1,4 @@
-﻿using BlApi;
-using BlImplementation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +20,7 @@ namespace PL
     /// </summary>
     public partial class Window2 : Window
     {
-        public IBl bl = new Bl();
+        BlApi.IBl? bl = BlApi.Factory.Get();
         public Window2()
         {
             InitializeComponent();
@@ -34,15 +32,15 @@ namespace PL
         {
             BO.CategoryForWPF category = (BO.CategoryForWPF)CategorySelector.SelectedItem;
             if (category == BO.CategoryForWPF.All)
-                ProductView.ItemsSource = bl.Product.GetListProducts();
+                ProductView.ItemsSource = bl?.Product.GetListProducts();
             else
-                ProductView.ItemsSource = bl.Product.GetListProductsByCategory((BO.Category)category);
+                ProductView.ItemsSource = bl?.Product.GetListProductsByCategory((BO.Category)category);
         }
 
         private void btnAddProduct_Click(object sender, RoutedEventArgs e)
         {
             new Window1().ShowDialog();
-            ProductView.ItemsSource = bl.Product.GetListProducts();
+            ProductView.ItemsSource = bl?.Product.GetListProducts();
             CategorySelector.SelectedItem = BO.CategoryForWPF.All;
         }
 
@@ -50,7 +48,7 @@ namespace PL
         {
             int productID = ((BO.ProductForList)ProductView.SelectedItem).ID;
             new Window1(productID).ShowDialog();
-            ProductView.ItemsSource = bl.Product.GetListProducts();
+            ProductView.ItemsSource = bl?.Product.GetListProducts();
             CategorySelector.SelectedItem = BO.CategoryForWPF.All;
 
         }

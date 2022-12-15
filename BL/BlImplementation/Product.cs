@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Runtime.Serialization.Formatters;
@@ -14,7 +15,7 @@ namespace BlImplementation;
 
 internal class Product : BlApi.IProduct
 {
-    DalApi.IDal dal = new Dal.DalList();
+    DalApi.IDal? dal = DalApi.Factory.Get();
 
     /// <summary>
     /// function for get list of all the products (for the manager)
@@ -23,7 +24,7 @@ internal class Product : BlApi.IProduct
     /// <exception cref="NullReferenceException"></exception>
     public IEnumerable<BO.ProductForList> GetListProducts()
     {
-        return from DO.Product? doProduct in dal.Product.GetAll()
+        return from DO.Product? doProduct in dal?.Product.GetAll() ?? throw new NullReferenceException("Empty list")
                select new BO.ProductForList
                {
                    ID = doProduct?.ID ?? throw new NullReferenceException("Missing ID"),
@@ -41,7 +42,7 @@ internal class Product : BlApi.IProduct
     /// <exception cref="NullReferenceException"></exception>
     public IEnumerable<BO.ProductForList> GetListProductsByCategory(BO.Category c)
     {
-        return from DO.Product? doProduct in dal.Product.GetAll()
+        return from DO.Product? doProduct in dal?.Product.GetAll() ?? throw new NullReferenceException("Empty list")
                where doProduct?.Category == (DO.Category)c
                select new BO.ProductForList
                {
@@ -64,7 +65,7 @@ internal class Product : BlApi.IProduct
     {
         try
         {
-            DO.Product? doProduct = dal.Product.GetById(id);
+            DO.Product? doProduct = dal?.Product.GetById(id) ?? throw new NullReferenceException("id does not exists");
             return new BO.Product()
             {
                 ID = doProduct?.ID ?? throw new BO.BlNullPropertyException("Null producr ID"),
@@ -95,7 +96,7 @@ internal class Product : BlApi.IProduct
             InStock = boProduct?.StockCount ?? throw new ArgumentException("Invalid stock amount"),
             Category=(DO.Category)boProduct?.Category,//?? throw new ArgumentException("Invalid category"),
         };
-        dal.Product.Add(doProduct);
+        dal?.Product.Add(doProduct);
     }
 
     /// <summary>
@@ -108,7 +109,7 @@ internal class Product : BlApi.IProduct
     {
         try
         {
-            DO.OrderItem? orderItem = dal.OrderItem.getOrderItems(order.ID, id);
+            DO.OrderItem? orderItem = dal?.OrderItem.getOrderItems(order.ID, id);
         }
         catch(DO.DalDoesNotExistException ex)
         {
@@ -127,7 +128,7 @@ internal class Product : BlApi.IProduct
     
         try
         {
-            DO.Product product = dal.Product.GetById(idProduct);
+            DO.Product product = dal?.Product.GetById(idProduct) ?? throw new NullReferenceException("id does not exist");
         }
         catch (DO.DalDoesNotExistException ex)
         {
@@ -165,7 +166,7 @@ internal class Product : BlApi.IProduct
         };
         try
         {
-            dal.Product.Update(doProduct);
+            dal?.Product.Update(doProduct);
         }
         catch(DO.DalDoesNotExistException ex)
         {
@@ -180,8 +181,8 @@ internal class Product : BlApi.IProduct
     /// <exception cref="NullReferenceException"></exception>
     public IEnumerable<BO.ProductItem> Catalog()
     {
-        return from DO.Product doProduct in dal.Product.GetAll()
-            select new BO.ProductItem()
+        return from DO.Product doProduct in dal?.Product.GetAll() ?? throw new NullReferenceException("Empty list")
+               select new BO.ProductItem()
             {
                 ID = doProduct.ID,
                 Name = doProduct.Name,
@@ -204,7 +205,7 @@ internal class Product : BlApi.IProduct
         DO.Product product;
         try
         {
-            product = dal.Product.GetById(productID);
+            product = dal?.Product.GetById(productID) ?? throw new NullReferenceException("id does not exists");
         }
         catch (DO.DalMissingIdException ex)
         {

@@ -1,13 +1,13 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using Dal;
-using DalApi;
+//using Dal;
+//using DalApi;
 using DO;
 
 namespace DalTest
 {
     public class program
     {
-        public static IDal dal = new DalList();
+        static DalApi.IDal? dal = DalApi.Factory.Get();
 
         static void Main(string[] args)
         {
@@ -50,17 +50,17 @@ press 5 to Delete an order");
                                     Console.WriteLine("Enter your address: ");
                                     order.CustomerAdress = Console.ReadLine();
                                     order.OrderDate = DateTime.Now;
-                                    id = dal.Order.Add(order);
+                                    id = dal?.Order.Add(order) ?? throw new NullReferenceException("id does not exist"); 
                                     Console.WriteLine($@"Your order ID is: {id}");
                                     break;
                                 case "2":
                                     Console.WriteLine("Enter order ID: ");
                                     id = Convert.ToInt32(Console.ReadLine());
-                                    order = dal.Order.GetById(id);
+                                    order = dal?.Order.GetById(id) ?? throw new NullReferenceException("id does not exist"); 
                                     Console.WriteLine(order);
                                     break;
                                 case "3":
-                                    IEnumerable<Order?> list = dal.Order.GetAll();
+                                    IEnumerable<Order?> list = dal?.Order.GetAll() ?? throw new NullReferenceException("empty list");
                                     foreach (var item in list)
                                     {
                                         Console.WriteLine(item);
@@ -79,12 +79,12 @@ press 5 to Delete an order");
                                     Console.WriteLine("Enter your address: ");
                                     order.CustomerAdress = Console.ReadLine();
                                     order.OrderDate = DateTime.Now;
-                                    dal.Order.Update(order);
+                                    dal?.Order.Update(order);
                                     break;
                                 case "5":
                                     Console.WriteLine("Enter order ID: ");
                                     id = Convert.ToInt32(Console.ReadLine());
-                                    dal.Order.Delete(id);
+                                    dal?.Order.Delete(id);
                                     break;
                             };
                             break;
@@ -111,16 +111,16 @@ press 5 to Deleting an product");
                                     product.Category = (Category)int.Parse(category);
                                     Console.WriteLine("Enter product amount in stock: ");
                                     product.InStock = Convert.ToInt32(Console.ReadLine());
-                                    id = dal.Product.Add(product);
+                                    id = dal?.Product.Add(product) ?? throw new NullReferenceException("id does not exist");
                                     break;
                                 case "2":
                                     Console.WriteLine("Enter product ID: ");
                                     id = Convert.ToInt32(Console.ReadLine());
-                                    product = dal.Product.GetById(id);
+                                    product = dal?.Product.GetById(id) ?? throw new NullReferenceException("id does not exist");
                                     Console.WriteLine(product);
                                     break;
                                 case "3":
-                                    IEnumerable<Product?> list = dal.Product.GetAll();
+                                    IEnumerable<Product?> list = dal?.Product.GetAll() ?? throw new NullReferenceException("empty list");
                                     foreach (var item in list)
                                     {
                                         Console.WriteLine(item);
@@ -138,12 +138,12 @@ press 5 to Deleting an product");
                                     product.Category = (DO.Category)int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter product amount in stock: ");
                                     product.InStock = Convert.ToInt32(Console.ReadLine());
-                                    dal.Product.Update(product);
+                                    dal?.Product.Update(product);
                                     break;
                                 case "5":
                                     Console.WriteLine("Enter order ID: ");
                                     id = Convert.ToInt32(Console.ReadLine());
-                                    dal.Product.Delete(id);
+                                    dal?.Product.Delete(id);
                                     break;
                             };
                             break;
@@ -167,19 +167,19 @@ press 7 to Find an item on the order");
                                     orderItem.ProductID = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("Enter amount of this product: ");
                                     orderItem.Amount = Convert.ToInt32(Console.ReadLine());
-                                    product = dal.Product.GetById(orderItem.ProductID);
-                                    orderItem.Price = Convert.ToDouble(orderItem.Amount) * product.Price;//**************************************
+                                    product = dal?.Product.GetById(orderItem.ProductID) ?? throw new NullReferenceException("id does not exist");
+                                    orderItem.Price = Convert.ToDouble(orderItem.Amount) * product.Price;
                                     id = dal.OrderItem.Add(orderItem);
                                     Console.WriteLine($@"Your orderItem ID is: {id}");
                                     break;
                                 case "2":
                                     Console.WriteLine("Enter orderItem ID: ");
                                     id = Convert.ToInt32(Console.ReadLine());
-                                    orderItem = dal.OrderItem.GetById(id);
+                                    orderItem = dal?.OrderItem.GetById(id) ?? throw new NullReferenceException("id does not exist");
                                     Console.WriteLine(orderItem);
                                     break;
                                 case "3":
-                                    IEnumerable<OrderItem?> list = dal.OrderItem.GetAll();
+                                    IEnumerable<OrderItem?> list = dal?.OrderItem.GetAll() ?? throw new NullReferenceException("empty list");
                                     foreach (var item in list)
                                     {
                                         Console.WriteLine(item);
@@ -193,7 +193,7 @@ press 7 to Find an item on the order");
                                     orderItem.ProductID = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("Enter amount of this product: ");
                                     orderItem.Amount = Convert.ToInt32(Console.ReadLine());
-                                    product = dal.Product.GetById(orderItem.ProductID);
+                                    product = dal?.Product.GetById(orderItem.ProductID) ?? throw new NullReferenceException("id does not exist");
                                     product.InStock--;
                                     orderItem.Price = Convert.ToDouble(orderItem.Amount) * product.Price;
                                     dal.OrderItem.Update(orderItem);
@@ -201,12 +201,12 @@ press 7 to Find an item on the order");
                                 case "5":
                                     Console.WriteLine("Enter orderItem ID: ");
                                     id = Convert.ToInt32(Console.ReadLine());
-                                    dal.OrderItem.Delete(id);
+                                    dal?.OrderItem.Delete(id);
                                     break;
                                 case "6":
                                     Console.WriteLine("Enter order ID: ");
                                     id = Convert.ToInt32(Console.ReadLine());
-                                    list = dal.OrderItem.getAllOrderItems(id);
+                                    list = dal?.OrderItem.getAllOrderItems(id) ?? throw new NullReferenceException("empty list");
                                     foreach (var item in list)
                                     {
                                         Console.WriteLine(item);
@@ -217,7 +217,7 @@ press 7 to Find an item on the order");
                                     id = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("Enter product ID: ");
                                     id2 = Convert.ToInt32(Console.ReadLine());
-                                    or = dal.OrderItem.getOrderItems(id2, id);
+                                    or = dal?.OrderItem.getOrderItems(id2, id);
                                     Console.WriteLine(or);
                                     break;
                             };

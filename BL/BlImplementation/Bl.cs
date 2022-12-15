@@ -8,7 +8,7 @@ using BO;
 
 namespace BlImplementation
 {
-    public class Bl : IBl
+    internal class Bl : IBl
     {
         public Bl() { }
         public IOrder Order { get; set; } = new Order();

@@ -8,7 +8,7 @@ namespace BlImplementation;
 
 internal class Cart : BlApi.ICart
 {
-    DalApi.IDal dal = new Dal.DalList();
+    DalApi.IDal? dal = DalApi.Factory.Get();
     /// <summary>
     /// function for adding an item to the cart
     /// </summary>
@@ -21,7 +21,7 @@ internal class Cart : BlApi.ICart
         DO.Product product;
         try
         {
-            product = dal.Product.GetById(productID);
+            product = dal?.Product.GetById(productID) ?? throw new NullReferenceException("id does not exist");
         }
         catch (DO.DalDoesNotExistException ex)
         {
@@ -64,7 +64,7 @@ internal class Cart : BlApi.ICart
         DO.Product product;
         try
         {
-            product = dal.Product.GetById(productID);
+            product = dal?.Product.GetById(productID) ?? throw new NullReferenceException("id does not exist");
         }
         catch (DO.DalDoesNotExistException ex)
         {
@@ -127,7 +127,7 @@ internal class Cart : BlApi.ICart
             throw new BO.BlClientDeatalesNotValid("Invalid client details");
         DO.Order order=new DO.Order() { CustomerName = cart.CustomerName ,CustomerEmail=cart.CustomerEmail,CustomerAdress=cart.CustomerAddress,
         OrderDate=DateTime.Now,DeliveryDate=null,ShipDate=null};
-        int oID = dal.Order.Add(order);
+        int oID = dal?.Order.Add(order) ?? throw new NullReferenceException("id does not exist");
         DO.Product p = new DO.Product();
         foreach (BO.OrderItem oi in cart.Items)
         {
