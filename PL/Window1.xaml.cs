@@ -38,6 +38,7 @@ namespace PL
                 btAddProduct.Visibility = Visibility.Hidden;
                 btUpdateProduct.Visibility = Visibility.Visible;
                 txbProductID.IsReadOnly = true;
+                txbProductID.Foreground =Brushes.Gray;
             }
             else
             {
@@ -51,7 +52,7 @@ namespace PL
         {
             if (txbProductID.Text == "" || CategoryOptions.SelectedItem == null || txbProductName.Text == "" || txbProductPrice.Text == "" || txbProductStockCount.Text == "")
             {
-                MessageBox.Show("One or more of the requested fields are empty", "ERROR");
+                MessageBox.Show("One or more of the requested fields are empty", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             try
@@ -68,11 +69,11 @@ namespace PL
             }
             catch (ArgumentException boEx)
             {
-                MessageBox.Show(boEx.Message, "ERROR");
+                MessageBox.Show(boEx.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("ID, Price and amount must be numbers", "ERROR");
+                MessageBox.Show("ID, Price and amount must be numbers", "ERROR",MessageBoxButton.OK,MessageBoxImage.Warning);
             }
         }
 
@@ -80,7 +81,7 @@ namespace PL
         {
             if (txbProductID.Text == "" || CategoryOptions.SelectedItem == null || txbProductName.Text == "" || txbProductPrice.Text == "" || txbProductStockCount.Text == "")
             {
-                MessageBox.Show("One or more of the requested fields are empty", "ERROR");
+                MessageBox.Show("One or more of the requested fields are empty", "ERROR",MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             try
@@ -97,11 +98,11 @@ namespace PL
             }
             catch (ArgumentException boEx)
             {
-                MessageBox.Show(boEx.Message, "ERROR");
+                MessageBox.Show(boEx.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("ID, Price and amount must be numbers", "ERROR");
+                MessageBox.Show("ID, Price and amount must be numbers", "ERROR", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             
         }

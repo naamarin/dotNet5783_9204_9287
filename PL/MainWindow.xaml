@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Name ="btnProductList"  Content="Log in" HorizontalAlignment="Left" Margin="330,180,0,0" VerticalAlignment="Top" Height="90" Width="140" Click="btnProductList_Click"/>
+        <Button Name ="btnProductList"  Content="view all product" HorizontalAlignment="Left" Margin="330,180,0,0" VerticalAlignment="Top" Height="90" Width="140" Click="btnProductList_Click"/>
 
     </Grid>
 </Window>
