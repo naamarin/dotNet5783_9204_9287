@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Name ="btnProductList"  Content="view all product" HorizontalAlignment="Left" Margin="330,180,0,0" VerticalAlignment="Top" Height="90" Width="140" Click="btnProductList_Click"/>
-
+        <Image HorizontalAlignment="Center" Height="803" VerticalAlignment="Top" Width="804" Source="/Logo.jpg" Margin="0,-180,0,0"/>
+        <Button Name ="btnProductList"  Content="view all product" HorizontalAlignment="Left" VerticalAlignment="Top" Height="56" Width="140" Click="btnProductList_Click" Margin="638,350,0,0" Background="#FF893E42" Foreground="#FF908989" FontSize="16" FontFamily="Futura Md BT"/>
     </Grid>
 </Window>

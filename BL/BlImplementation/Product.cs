@@ -17,6 +17,8 @@ internal class Product : BlApi.IProduct
 {
     DalApi.IDal? dal = DalApi.Factory.Get();
 
+    private const string _imagesPath = @"C:\Users\User\source\repos\shoham212\dotNet5783_9204_9287\bin\Images\productImages\";
+
     /// <summary>
     /// function for get list of all the products (for the manager)
     /// </summary>
@@ -30,7 +32,8 @@ internal class Product : BlApi.IProduct
                    ID = doProduct?.ID ?? throw new NullReferenceException("Missing ID"),
                    Name = doProduct?.Name ?? throw new NullReferenceException("Missing name"),
                    Category = (BO.Category?)doProduct?.Category ?? throw new NullReferenceException("Missing category"),
-                   Price = doProduct?.Price ?? 0
+                   Price = doProduct?.Price ?? 0,
+                   Image = _imagesPath + doProduct?.Name + ".png"
                };
     }
 
@@ -49,7 +52,8 @@ internal class Product : BlApi.IProduct
                    ID = doProduct?.ID ?? throw new NullReferenceException("Missing ID"),
                    Name = doProduct?.Name ?? throw new NullReferenceException("Missing name"),
                    Category = (BO.Category?)doProduct?.Category ?? throw new NullReferenceException("Missing category"),
-                   Price = doProduct?.Price ?? 0
+                   Price = doProduct?.Price ?? 0,
+                   Image = _imagesPath + doProduct?.Name + ".png"
                };
     }
 
@@ -72,7 +76,8 @@ internal class Product : BlApi.IProduct
                 Category = (BO.Category?)doProduct?.Category ?? throw new BO.BlWrongCategoryException("Product does not exist"),
                 Price = doProduct?.Price ?? 0,
                 Name = doProduct?.Name ?? "",
-                StockCount = doProduct?.InStock ?? 0
+                StockCount = doProduct?.InStock ?? 0,
+                Image = _imagesPath + doProduct?.Name + ".png"
             };
         }
         catch (DO.DalDoesNotExistException ex)

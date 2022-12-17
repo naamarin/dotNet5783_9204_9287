@@ -57,7 +57,7 @@ internal static class DataSource
 
         Category[] category = { Category.Meals,Category.Meals,Category.Meals,Category.Children,Category.Children,Category.Children,Category.Extras,Category.Extras,Category.Extras,
         Category.Desserts,Category.Desserts,Category.Desserts,Category.Drinks,Category.Drinks,Category.Drinks,Category.Sauces,Category.Sauces,Category.Sauces};
-
+        
         for (int i= 0; i < ids.Length; i++)
         { 
             Product product = new Product();
@@ -66,6 +66,7 @@ internal static class DataSource
             product.InStock = amounts[i];
             product.Price = prices[i];
             product.Category = category[i];
+            product.Image = names[i];
             ProductList.Add(product);
         }
     }

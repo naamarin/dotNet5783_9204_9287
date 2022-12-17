@@ -9,8 +9,8 @@
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="23*"/>
-            <RowDefinition Height="68*"/>
-            <RowDefinition Height="221*"/>
+            <RowDefinition Height="269*"/>
+            <RowDefinition Height="20*"/>
             <RowDefinition Height="Auto"/>
 
         </Grid.RowDefinitions>
@@ -24,14 +24,28 @@ HorizontalAlignment= "Stretch"
 VerticalAlignment="Stretch"
 Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged"/>
         </Grid>
-        <ListView x:Name="ProductView" Grid.Row="1" MouseDoubleClick="ProductView_MouseDoubleClick">
+
+        <ListView x:Name="ProductView" MouseDoubleClick="ProductView_MouseDoubleClick" Margin="0,46,0,0" Grid.RowSpan="2">
+    
             <ListView.View >
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Category}"/>
+                    <GridViewColumn Header="Image">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Image}"  Width="50" Height="50"></Image>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
 
         </ListView>
-        <Button Name="btnAddProduct" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="682,0,0,0" Padding="5" Height="28" VerticalAlignment="Center" Click="btnAddProduct_Click"/>
+        
+        <Button Name="btnAddProduct" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="676,0,0,0" Padding="5" Height="28" VerticalAlignment="Center" Click="btnAddProduct_Click" Width="104"/>
+      
     </Grid>
 </Window>

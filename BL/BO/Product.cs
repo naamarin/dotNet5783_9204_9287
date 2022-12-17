@@ -37,6 +37,11 @@ public class Product
     public int StockCount { get; set; }
 
     /// <summary>
+    /// Product Image
+    /// </summary>
+    public string? Image { get; set; }
+
+    /// <summary>
     /// print details ot product
     /// </summary>
     /// <returns></returns>

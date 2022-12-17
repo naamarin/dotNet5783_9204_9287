@@ -28,6 +28,11 @@ public struct Product
     public int InStock { get; set; }
 
     /// <summary>
+    /// Product Image
+    /// </summary>
+    public string? Image { get; set; }
+
+    /// <summary>
     /// A function that prints all the product details
     /// </summary>
     /// <returns></returns>

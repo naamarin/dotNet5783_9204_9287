@@ -32,6 +32,11 @@ public class ProductForList
     public Category Category { get; set; }
 
     /// <summary>
+    /// Product Image
+    /// </summary>
+    public string? Image { get; set; }
+
+    /// <summary>
     /// print details of all the product
     /// </summary>
     /// <returns></returns>

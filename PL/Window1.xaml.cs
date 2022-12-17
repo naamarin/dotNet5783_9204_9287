@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,16 +38,21 @@ namespace PL
                 txbProductName.Text = product.Name;
                 txbProductPrice.Text = product.Price.ToString();
                 txbProductStockCount.Text = product.StockCount.ToString();
+                NewImage.Source = new BitmapImage(new Uri(product.Image!));
                 btAddProduct.Visibility = Visibility.Hidden;
                 btUpdateProduct.Visibility = Visibility.Visible;
                 txbProductID.IsReadOnly = true;
                 txbProductID.Foreground =Brushes.Gray;
+                AddImage.Visibility = Visibility.Hidden;
+                UpdateImage.Visibility = Visibility.Visible;
             }
             else
             {
                 txbProductID.Visibility = Visibility.Visible;
                 btAddProduct.Visibility = Visibility.Visible;
                 btUpdateProduct.Visibility = Visibility.Hidden;
+                UpdateImage.Visibility = Visibility.Hidden;
+                AddImage.Visibility = Visibility.Visible;
             }
         }
 
@@ -107,5 +115,24 @@ namespace PL
             
         }
 
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog()!.Value)
+            {
+                NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                //File.Move(openFileDialog.FileName, openFileDialog.FileName);
+            }
+        }
+
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog()!.Value)
+            {
+                NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                //File.Move(openFileDialog.FileName, openFileDialog.FileName);
+            }
+        }
     }
 }

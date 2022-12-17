@@ -24,6 +24,7 @@ namespace PL
         public Window2()
         {
             InitializeComponent();
+            var v = bl.Product.GetListProducts(); 
             ProductView.ItemsSource = bl.Product.GetListProducts();
             CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.CategoryForWPF));
         }
