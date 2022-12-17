@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Window2" Height="640" Width="800">
+        Title="ProductsView" Height="640" Width="800">
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="23*"/>
@@ -32,6 +32,6 @@ Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged"/>
             </ListView.View>
 
         </ListView>
-        <Button Name="btnAddProduct" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="691,5,0,0" Padding="5" Height="28" VerticalAlignment="Top" Click="btnAddProduct_Click"/>
+        <Button Name="btnAddProduct" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="682,0,0,0" Padding="5" Height="28" VerticalAlignment="Center" Click="btnAddProduct_Click"/>
     </Grid>
 </Window>
