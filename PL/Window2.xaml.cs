@@ -27,6 +27,7 @@ namespace PL
             var v = bl.Product.GetListProducts(); 
             ProductView.ItemsSource = bl.Product.GetListProducts();
             CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.CategoryForWPF));
+            CategorySelector.SelectedItem = BO.CategoryForWPF.All;
         }
 
         private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
