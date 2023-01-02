@@ -2,6 +2,7 @@
 //using Dal;
 //using DalApi;
 using DO;
+using System.Diagnostics;
 
 namespace DalTest
 {
@@ -11,8 +12,9 @@ namespace DalTest
 
         static void Main(string[] args)
         {
+            double price;
             string action, category;
-            int id, id2;
+            int id, id2, inStock, amount, customerNumber;
             Order order;
             Product product;
             OrderItem orderItem;
@@ -44,7 +46,8 @@ press 5 to Delete an order");
                                     Console.WriteLine("Enter your full name: ");
                                     order.CustomerName = Console.ReadLine();
                                     Console.WriteLine("Enter your number: ");
-                                    order.CustomerNumber = Convert.ToInt32(Console.ReadLine());
+                                    int.TryParse(Console.ReadLine(), out customerNumber);
+                                    order.CustomerNumber = customerNumber;
                                     Console.WriteLine("Enter your email: ");
                                     order.CustomerEmail = Console.ReadLine();
                                     Console.WriteLine("Enter your address: ");
@@ -55,7 +58,7 @@ press 5 to Delete an order");
                                     break;
                                 case "2":
                                     Console.WriteLine("Enter order ID: ");
-                                    id = Convert.ToInt32(Console.ReadLine());
+                                    int.TryParse(Console.ReadLine(), out id);
                                     order = dal?.Order.GetById(id) ?? throw new NullReferenceException("id does not exist"); 
                                     Console.WriteLine(order);
                                     break;
@@ -69,11 +72,15 @@ press 5 to Delete an order");
                                 case "4":
                                     order = new Order();
                                     Console.WriteLine("Enter your order ID: ");
-                                    order.ID = Convert.ToInt32(Console.ReadLine());
+                                    if (int.TryParse(Console.ReadLine(), out id))
+                                        order.ID = id;
+                                    else
+                                        throw new NullReferenceException("id does not exist");
                                     Console.WriteLine("Enter your full name: ");
                                     order.CustomerName = Console.ReadLine();
                                     Console.WriteLine("Enter your number: ");
-                                    order.CustomerNumber = Convert.ToInt32(Console.ReadLine());
+                                    int.TryParse(Console.ReadLine(), out customerNumber);
+                                    order.CustomerNumber = customerNumber;
                                     Console.WriteLine("Enter your email: ");
                                     order.CustomerEmail = Console.ReadLine();
                                     Console.WriteLine("Enter your address: ");
@@ -83,7 +90,8 @@ press 5 to Delete an order");
                                     break;
                                 case "5":
                                     Console.WriteLine("Enter order ID: ");
-                                    id = Convert.ToInt32(Console.ReadLine());
+                                    if (!int.TryParse(Console.ReadLine(), out id))
+                                        throw new NullReferenceException("id does not exist");
                                     dal?.Order.Delete(id);
                                     break;
                             };
@@ -101,21 +109,31 @@ press 5 to Deleting an product");
                                 case "1":
                                     product = new Product();
                                     Console.WriteLine("Enter product ID: ");
-                                    product.ID = Convert.ToInt32(Console.ReadLine());
+                                    if (int.TryParse(Console.ReadLine(), out id))
+                                        product.ID = id;
+                                    else
+                                        throw new NullReferenceException("id does not valid");
                                     Console.WriteLine("Enter product name: ");
                                     product.Name = Console.ReadLine();
                                     Console.WriteLine("Enter product price: ");
-                                    product.Price = Convert.ToInt32(Console.ReadLine());
+                                    if (Double.TryParse(Console.ReadLine(), out price))
+                                        product.Price = price;
+                                    else
+                                        throw new NullReferenceException("Price does not valid");
                                     Console.WriteLine("Enter product category: ");
                                     category = Console.ReadLine();
                                     product.Category = (Category)int.Parse(category);
                                     Console.WriteLine("Enter product amount in stock: ");
-                                    product.InStock = Convert.ToInt32(Console.ReadLine());
+                                    if (int.TryParse(Console.ReadLine(), out inStock))
+                                        product.InStock = inStock;
+                                    else
+                                        throw new NullReferenceException("Amount does not valid");
                                     id = dal?.Product.Add(product) ?? throw new NullReferenceException("id does not exist");
                                     break;
                                 case "2":
                                     Console.WriteLine("Enter product ID: ");
-                                    id = Convert.ToInt32(Console.ReadLine());
+                                    if (!int.TryParse(Console.ReadLine(), out id))
+                                        throw new NullReferenceException("id does not valid");
                                     product = dal?.Product.GetById(id) ?? throw new NullReferenceException("id does not exist");
                                     Console.WriteLine(product);
                                     break;
@@ -129,20 +147,30 @@ press 5 to Deleting an product");
                                 case "4":
                                     product = new Product();
                                     Console.WriteLine("Enter product ID: ");
-                                    product.ID = Convert.ToInt32(Console.ReadLine());
+                                    if (int.TryParse(Console.ReadLine(), out id))
+                                        product.ID = id;
+                                    else
+                                        throw new NullReferenceException("id does not valid");
                                     Console.WriteLine("Enter product name: ");
                                     product.Name = Console.ReadLine();
                                     Console.WriteLine("Enter product price: ");
-                                    product.Price = Convert.ToInt32(Console.ReadLine());
+                                    if (Double.TryParse(Console.ReadLine(), out price))
+                                        product.Price = price;
+                                    else
+                                        throw new NullReferenceException("Price does not valid");
                                     Console.WriteLine("Enter product category: ");
                                     product.Category = (DO.Category)int.Parse(Console.ReadLine());
                                     Console.WriteLine("Enter product amount in stock: ");
-                                    product.InStock = Convert.ToInt32(Console.ReadLine());
+                                    if (int.TryParse(Console.ReadLine(), out inStock))
+                                        product.InStock = inStock;
+                                    else
+                                        throw new NullReferenceException("Amount does not valid");
                                     dal?.Product.Update(product);
                                     break;
                                 case "5":
                                     Console.WriteLine("Enter order ID: ");
-                                    id = Convert.ToInt32(Console.ReadLine());
+                                    if (!int.TryParse(Console.ReadLine(), out id))
+                                        throw new NullReferenceException("id does not valid");
                                     dal?.Product.Delete(id);
                                     break;
                             };
@@ -162,11 +190,20 @@ press 7 to Find an item on the order");
                                 case "1":
                                     orderItem = new OrderItem();
                                     Console.WriteLine("Enter order ID: ");
-                                    orderItem.OrderID = Convert.ToInt32(Console.ReadLine());
+                                    if (int.TryParse(Console.ReadLine(), out id))
+                                        orderItem.OrderID = id;
+                                    else
+                                        throw new NullReferenceException("order ID does not valid");
                                     Console.WriteLine("Enter product ID: ");
-                                    orderItem.ProductID = Convert.ToInt32(Console.ReadLine());
+                                    if (int.TryParse(Console.ReadLine(), out id))
+                                        orderItem.ProductID = id;
+                                    else
+                                        throw new NullReferenceException("product ID does not valid");
                                     Console.WriteLine("Enter amount of this product: ");
-                                    orderItem.Amount = Convert.ToInt32(Console.ReadLine());
+                                    if (int.TryParse(Console.ReadLine(), out amount))
+                                        orderItem.Amount = amount;
+                                    else
+                                        throw new NullReferenceException("amount does not valid");
                                     product = dal?.Product.GetById(orderItem.ProductID) ?? throw new NullReferenceException("id does not exist");
                                     orderItem.Price = Convert.ToDouble(orderItem.Amount) * product.Price;
                                     id = dal.OrderItem.Add(orderItem);
@@ -174,7 +211,7 @@ press 7 to Find an item on the order");
                                     break;
                                 case "2":
                                     Console.WriteLine("Enter orderItem ID: ");
-                                    id = Convert.ToInt32(Console.ReadLine());
+                                    int.TryParse(Console.ReadLine(), out id);
                                     orderItem = dal?.OrderItem.GetById(id) ?? throw new NullReferenceException("id does not exist");
                                     Console.WriteLine(orderItem);
                                     break;
@@ -188,11 +225,14 @@ press 7 to Find an item on the order");
                                 case "4":
                                     orderItem = new OrderItem();
                                     Console.WriteLine("Enter order ID: ");
-                                    orderItem.OrderID = Convert.ToInt32(Console.ReadLine());
+                                    int.TryParse(Console.ReadLine(), out id);
+                                    orderItem.OrderID = id;
                                     Console.WriteLine("Enter product ID: ");
-                                    orderItem.ProductID = Convert.ToInt32(Console.ReadLine());
+                                    int.TryParse(Console.ReadLine(), out id);
+                                    orderItem.ProductID = id;
                                     Console.WriteLine("Enter amount of this product: ");
-                                    orderItem.Amount = Convert.ToInt32(Console.ReadLine());
+                                    int.TryParse(Console.ReadLine(), out amount);
+                                    orderItem.Amount = amount;
                                     product = dal?.Product.GetById(orderItem.ProductID) ?? throw new NullReferenceException("id does not exist");
                                     product.InStock--;
                                     orderItem.Price = Convert.ToDouble(orderItem.Amount) * product.Price;
@@ -200,12 +240,12 @@ press 7 to Find an item on the order");
                                     break;
                                 case "5":
                                     Console.WriteLine("Enter orderItem ID: ");
-                                    id = Convert.ToInt32(Console.ReadLine());
+                                    int.TryParse(Console.ReadLine(), out id);
                                     dal?.OrderItem.Delete(id);
                                     break;
                                 case "6":
                                     Console.WriteLine("Enter order ID: ");
-                                    id = Convert.ToInt32(Console.ReadLine());
+                                    int.TryParse(Console.ReadLine(), out id);
                                     list = dal?.OrderItem.getAllOrderItems(id) ?? throw new NullReferenceException("empty list");
                                     foreach (var item in list)
                                     {
@@ -214,9 +254,9 @@ press 7 to Find an item on the order");
                                     break;
                                 case "7":
                                     Console.WriteLine("Enter order ID: ");
-                                    id = Convert.ToInt32(Console.ReadLine());
+                                    int.TryParse(Console.ReadLine(), out id);
                                     Console.WriteLine("Enter product ID: ");
-                                    id2 = Convert.ToInt32(Console.ReadLine());
+                                    int.TryParse(Console.ReadLine(), out id2);
                                     or = dal?.OrderItem.getOrderItems(id2, id);
                                     Console.WriteLine(or);
                                     break;

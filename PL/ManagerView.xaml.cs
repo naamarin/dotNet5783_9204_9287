@@ -10,36 +10,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ManagerView.xaml
     /// </summary>
-
-    public partial class MainWindow : Window
+    public partial class ManagerView : Window
     {
-        BlApi.IBl? bl = BlApi.Factory.Get();
-        public MainWindow()
+        public ManagerView()
         {
             InitializeComponent();
         }
 
-        private void btOrderTracking_Click(object sender, RoutedEventArgs e)
+        private void btProductList_Click(object sender, RoutedEventArgs e)
         {
-
+            new Window2().Show();
         }
 
-        private void btManagerView_Click(object sender, RoutedEventArgs e)
+        private void btOrderList_Click(object sender, RoutedEventArgs e)
         {
-            new ManagerView().Show();
-        }
-
-        private void btNewOrderDisplay_Click(object sender, RoutedEventArgs e)
-        {
-
+            new Order().Show();
         }
     }
 }

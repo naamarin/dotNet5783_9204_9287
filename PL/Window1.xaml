@@ -16,6 +16,7 @@
         </Style>
     </Window.Resources>
 
+
     <Grid>
         <TextBox Name="txbProductID" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="146,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox Name="txbProductName" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="146,140,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>

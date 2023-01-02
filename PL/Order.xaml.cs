@@ -10,36 +10,29 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PL
 {
+    
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Order.xaml
     /// </summary>
-
-    public partial class MainWindow : Window
+    public partial class Order : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        public MainWindow()
+        public Order()
         {
             InitializeComponent();
+            lvOrderForList.ItemsSource = bl.Order.OrderListForManager();
         }
 
-        private void btOrderTracking_Click(object sender, RoutedEventArgs e)
+        private void lvOrderForList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
-        }
-
-        private void btManagerView_Click(object sender, RoutedEventArgs e)
-        {
-            new ManagerView().Show();
-        }
-
-        private void btNewOrderDisplay_Click(object sender, RoutedEventArgs e)
-        {
-
+            int productID = ((BO.ProductForList)lvOrderForList.SelectedItem).ID;
+            new OrderDetals().ShowDialog();
+            //ProductView.ItemsSource = bl?.Product.GetListProducts();
+            //CategorySelector.SelectedItem = BO.CategoryForWPF.All;
         }
     }
 }
