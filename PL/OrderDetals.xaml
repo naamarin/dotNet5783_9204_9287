@@ -17,6 +17,24 @@
         <Label Name="lShipDate" Content="Ship date" HorizontalAlignment="Left" Margin="58,300,0,0" VerticalAlignment="Top"/>
         <Label Name="lDeliveryDate" Content="Delivery date" HorizontalAlignment="Left" Margin="58,340,0,0" VerticalAlignment="Top"/>
         <Label Name="lTotalPrice" Content="Total price" HorizontalAlignment="Left" Margin="58,380,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="txbID" HorizontalAlignment="Left" Margin="230,33,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170"/>
+        <TextBox Name="txbCustomerName" HorizontalAlignment="Left" Margin="230,73,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170"/>
+        <TextBox Name="txbCustomerEmail" HorizontalAlignment="Left" Margin="230,108,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170"/>
+        <TextBox Name="txbCustomerAddress" HorizontalAlignment="Left" Margin="230,140,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170"/>
+        <TextBox Name="txbOrderDate" HorizontalAlignment="Left" Margin="230,180,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170"/>
+        <TextBox Name="txbPaymentDate" HorizontalAlignment="Left" Margin="230,260,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170"/>
+        <TextBox Name="txbShipDate" HorizontalAlignment="Left" Margin="230,308,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170"/>
+        <TextBox Name="txbDeliveryDate" HorizontalAlignment="Left" Margin="230,353,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170"/>
+        <TextBox Name="txbToatalPrice" HorizontalAlignment="Left" Margin="230,393,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170"/>
+        <ComboBox Name="cbxStatus" HorizontalAlignment="Left" Margin="230,220,0,0" VerticalAlignment="Top" Width="170"/>
+        <ListView Name="lvOrderItem" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="452,0,10,94">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="680,371,0,0" VerticalAlignment="Top" Width="96" Height="44"/>
 
     </Grid>
 </Window>

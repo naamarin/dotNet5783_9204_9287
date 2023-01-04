@@ -134,7 +134,11 @@ internal static class DataSource
     private static void createAndInitOrderItems()
     {
         int[] productsIds = { 9621542, 7586215, 4658921, 9359824, 6587469, 2589457, 5462876, 1548256,
-             8548756, 8457953, 2548756, 3254815, 4568248, 7546285, 3658456 ,7546258,1582654,2458638};
+             8548756, 8457953, 2548756, 3254815, 4568248, 7546285, 3658456 ,7546258,1582654,2458638,9621542, 7586215, 4658921, 9359824, 6587469, 2589457, 5462876, 1548256,
+             8548756, 8457953, 2548756, 3254815, 4568248, 7546285, 3658456 ,7546258,1582654,2458638, 9621542, 7586215, 4658921, 9359824, 6587469, 2589457, 5462876, 1548256,
+             8548756, 8457953, 2548756, 3254815, 4568248};
+        int[] orderID = { 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024,
+            1025, 1026, 1027, 1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020};
         double[] prices = { 55, 55, 50, 34, 34, 34, 20, 15, 25, 14, 9, 9, 13, 13, 13, 0.5, 0.5, 0.5 };
         int[] amounts = { 2, 1, 1, 1, 2, 3, 1, 1, 2, 3, 2, 2, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 4,
         3, 2, 3, 2, 3, 2, 2, 1, 1, 2, 4, 4, 1, 1, 4, 2, 3, 2, 2, 4, 3, 3 };
@@ -143,12 +147,11 @@ internal static class DataSource
         {
             OrderItem orderItem = new OrderItem();
             orderItem.ID = Config.NextOrderItemNumber;
-            orderItem.OrderID = rand.Next(1000, 1025);
-            int rando = rand.Next(0, productsIds.Length);
-            orderItem.ProductID = productsIds[rando];
+            orderItem.OrderID = orderID[i];//rand.Next(1000, 1025);
+            int rando = rand.Next(0, prices.Length);
+            orderItem.ProductID = productsIds[i];
             orderItem.Amount = amounts[i];
-            orderItem.Price = prices[rando]*orderItem.Amount;           
-            orderItem.Price = prices[rando]*orderItem.Amount;            
+            orderItem.Price = prices[i%18];          
 
             OrderItemsList.Add(orderItem);
         }

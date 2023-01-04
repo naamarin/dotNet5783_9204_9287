@@ -29,8 +29,8 @@ namespace PL
 
         private void lvOrderForList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            int productID = ((BO.ProductForList)lvOrderForList.SelectedItem).ID;
-            new OrderDetals().ShowDialog();
+            int orderID = ((BO.OrderForList)lvOrderForList.SelectedItem).ID;
+            new OrderDetals(orderID).ShowDialog();
             //ProductView.ItemsSource = bl?.Product.GetListProducts();
             //CategorySelector.SelectedItem = BO.CategoryForWPF.All;
         }
