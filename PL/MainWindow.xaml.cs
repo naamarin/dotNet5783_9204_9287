@@ -39,7 +39,7 @@ namespace PL
 
         private void btNewOrderDisplay_Click(object sender, RoutedEventArgs e)
         {
-
+            new NewOrder().Show();
         }
     }
 }

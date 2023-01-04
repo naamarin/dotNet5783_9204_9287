@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="OrderDetals" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="0,-7,0,7">
         <Label Name="lID" Content="ID" HorizontalAlignment="Left" Margin="58,20,0,0" VerticalAlignment="Top"/>
         <Label Name="lCustomerName" Content="Customer name" HorizontalAlignment="Left" Margin="58,60,0,0" VerticalAlignment="Top"/>
         <Label Name="lCustomerEmail" Content="Customer email" HorizontalAlignment="Left" Margin="58,100,0,0" VerticalAlignment="Top"/>
@@ -34,7 +34,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="680,371,0,0" VerticalAlignment="Top" Width="96" Height="44"/>
+        <Button Name="btUpdate" Content="Update" HorizontalAlignment="Left" Margin="680,364,0,0" VerticalAlignment="Top" Width="96" Height="44" Click="btUpdate_Click"/>
+        <CheckBox Name="cbShipDate" Content="Update to now" HorizontalAlignment="Left" Margin="230,310,0,0" VerticalAlignment="Top"/>
+        <CheckBox Name="cbDeliveryDate" Content="Update to now" HorizontalAlignment="Left" Margin="230,355,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
