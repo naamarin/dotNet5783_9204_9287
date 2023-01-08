@@ -23,7 +23,13 @@ namespace PL
     public partial class Window1 : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-
+        public BO.Product? currentProduct
+        {
+            get { return (BO.Product?)GetValue(currentProductProperty); }
+            set { SetValue(currentProductProperty, value); }
+        }
+        public static readonly DependencyProperty currentProductProperty = 
+            DependencyProperty.Register("currentProduct", typeof(BO.Product), typeof(Window), new PropertyMetadata(null));
         int productID;
         public Window1(int id = 0)
         {
@@ -32,13 +38,13 @@ namespace PL
             CategoryOptions.ItemsSource = Enum.GetValues(typeof(BO.Category));
             if (id != 0)
             {
-                BO.Product product = bl.Product.GetById(productID);
-                txbProductID.Text = product.ID.ToString();
-                CategoryOptions.SelectedItem = product.Category;
-                txbProductName.Text = product.Name;
-                txbProductPrice.Text = product.Price.ToString();
-                txbProductStockCount.Text = product.StockCount.ToString();
-                NewImage.Source = new BitmapImage(new Uri(product.Image!));
+                currentProduct = bl.Product.GetById(productID);
+                //txbProductID.Text = product.ID.ToString();
+                //CategoryOptions.SelectedItem = product.Category;
+                //txbProductName.Text = product.Name;
+                //txbProductPrice.Text = product.Price.ToString();
+                //txbProductStockCount.Text = product.StockCount.ToString();
+                NewImage.Source = new BitmapImage(new Uri(currentProduct.Image!));
                 btAddProduct.Visibility = Visibility.Hidden;
                 btUpdateProduct.Visibility = Visibility.Visible;
                 txbProductID.IsReadOnly = true;
