@@ -72,6 +72,7 @@ namespace PL
             }
             try
             {
+
                 bl?.Product.AddProduct(currentProduct);
                 //bl?.Product.AddProduct(new BO.Product
                 //{
