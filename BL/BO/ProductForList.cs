@@ -34,7 +34,7 @@ public class ProductForList
     /// <summary>
     /// Product Image
     /// </summary>
-    public string? Image { get; set; }
+    public string? ImageRelativeName { get; set; }
 
     /// <summary>
     /// print details of all the product

@@ -9,18 +9,18 @@ internal static class DataSource
     {
         s_Initialize();
     }
-    private static readonly Random s_rand = new();
+   // private static readonly Random s_rand = new();
 
     /// <summary>
     /// a function for handling running numbers
     /// </summary>
     internal static class Config
     {
-        internal static int s_startOrderNumber = 1000;
+        internal const int s_startOrderNumber = 1000;
         private static int s_nextOrderNumber = s_startOrderNumber;
         internal static int NextOrderNumber { get => s_nextOrderNumber++; }
 
-        internal static int s_startOrderItemNumber = 10000;
+        internal const int s_startOrderItemNumber = 10000;
         private static int s_nextOrderItemNumber = s_startOrderItemNumber;
         internal static int NextOrderItemNumber { get => s_nextOrderItemNumber++; }
     }

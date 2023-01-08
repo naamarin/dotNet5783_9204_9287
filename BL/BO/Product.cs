@@ -39,7 +39,7 @@ public class Product
     /// <summary>
     /// Product Image
     /// </summary>
-    public string? Image { get; set; }
+    public string? ImageRelativeName { get; set; }
 
     /// <summary>
     /// print details ot product

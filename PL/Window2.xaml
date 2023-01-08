@@ -36,7 +36,7 @@ Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged"/>
                     <GridViewColumn Header="Image">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding Image}"  Width="50" Height="50"></Image>
+                                <Image Source="{Binding Path=ImageRelativeName, Converter= {StaticResource ImagePathToBitmap}}"  Width="50" Height="50"></Image>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

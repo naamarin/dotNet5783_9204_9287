@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using BO;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -44,7 +45,7 @@ namespace PL
                 //txbProductName.Text = product.Name;
                 //txbProductPrice.Text = product.Price.ToString();
                 //txbProductStockCount.Text = product.StockCount.ToString();
-                NewImage.Source = new BitmapImage(new Uri(currentProduct.Image!));
+                //NewImage.Source = new BitmapImage(new Uri(currentProduct.ImageRelativeName!));
                 btAddProduct.Visibility = Visibility.Hidden;
                 btUpdateProduct.Visibility = Visibility.Visible;
                 txbProductID.IsReadOnly = true;
@@ -125,24 +126,36 @@ namespace PL
             
         }
 
+        //private void AddButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    OpenFileDialog openFileDialog = new OpenFileDialog();
+        //    if (openFileDialog.ShowDialog()!.Value)
+        //    {
+        //        NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+        //       //File.Move(openFileDialog.FileName, openFileDialog.FileName);
+        //    }
+        //}
+
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog()!.Value)
+            if (openFileDialog.ShowDialog()==true)
             {
                 NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-                //File.Move(openFileDialog.FileName, openFileDialog.FileName);
+                openFileDialog.FileName = lName.Content.ToString();
+                //File.Move(@"C:\Users\User\source\repos\shoham212\dotNet5783_9204_9287\Images", openFileDialog.FileName);
             }
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog()!.Value)
-            {
-                NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-                //File.Move(openFileDialog.FileName, openFileDialog.FileName);
-            }
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                openFileDialog.FileName=lName.Content.ToString();
+                   // File.Move(@"C:\Users\User\source\repos\shoham212\dotNet5783_9204_9287\Images", openFileDialog.FileName);
+                }
         }
     }
 }
