@@ -54,6 +54,7 @@ namespace PL
             }
             else
             {
+                currentProduct = new BO.Product();  //?
                 txbProductID.Visibility = Visibility.Visible;
                 btAddProduct.Visibility = Visibility.Visible;
                 btUpdateProduct.Visibility = Visibility.Hidden;
@@ -71,14 +72,15 @@ namespace PL
             }
             try
             {
-                bl?.Product.AddProduct(new BO.Product
-                {
-                    ID = int.Parse(txbProductID.Text),
-                    Category = (BO.Category)CategoryOptions.SelectedItem,
-                    Name = txbProductName.Text,
-                    Price = int.Parse(txbProductPrice.Text),
-                    StockCount = int.Parse(txbProductStockCount.Text),
-                });
+                bl?.Product.AddProduct(currentProduct);
+                //bl?.Product.AddProduct(new BO.Product
+                //{
+                //    ID = int.Parse(txbProductID.Text),
+                //    Category = (BO.Category)CategoryOptions.SelectedItem,
+                //    Name = txbProductName.Text,
+                //    Price = int.Parse(txbProductPrice.Text),
+                //    StockCount = int.Parse(txbProductStockCount.Text),
+                //});
                 this.Close();
             }
             catch (ArgumentException boEx)
@@ -100,14 +102,15 @@ namespace PL
             }
             try
             {
-                bl?.Product.UpdateProduct(new BO.Product
-                {
-                    ID = int.Parse(txbProductID.Text),
-                    Category = (BO.Category)CategoryOptions.SelectedItem,
-                    Name = txbProductName.Text,
-                    Price = int.Parse(txbProductPrice.Text),
-                    StockCount = int.Parse(txbProductStockCount.Text),
-                });
+                bl?.Product.UpdateProduct(currentProduct!);
+                //bl?.Product.UpdateProduct(new BO.Product
+                //{
+                //    ID = int.Parse(txbProductID.Text),
+                //    Category = (BO.Category)CategoryOptions.SelectedItem,
+                //    Name = txbProductName.Text,
+                //    Price = int.Parse(txbProductPrice.Text),
+                //    StockCount = int.Parse(txbProductStockCount.Text),
+                //});
                 this.Close();
             }
             catch (ArgumentException boEx)
