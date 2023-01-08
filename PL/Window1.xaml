@@ -22,21 +22,21 @@
     <Grid>
         <TextBox Name="txbProductID" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,70,0,0" TextWrapping="Wrap" Text="{Binding ID, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120"/>
         <TextBox Name="txbProductName" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="txbProductPrice" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txbProductPrice" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,190,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox Name="txbProductStockCount" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,230,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <ComboBox Name="CategoryOptions" Text="{Binding Category, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Margin="160,190,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name="CategoryOptions" Text="{Binding Category, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Margin="160,150,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Name="lID" Content="Product ID:" HorizontalAlignment="Left" Margin="45,65,0,0" VerticalAlignment="Top"/>
         <Label Name="lName" Content="Product Name:" HorizontalAlignment="Left" Margin="45,105,0,0" VerticalAlignment="Top"/>
         <Label Name="lCategory" Content="Product category:" HorizontalAlignment="Left" Margin="45,145,0,0" VerticalAlignment="Top"/>
         <Label Name="lPrice" Content="Product price:" HorizontalAlignment="Left" Margin="45,185,0,0" VerticalAlignment="Top"/>
         <Label Name="lAmount" Content="Product amount:" HorizontalAlignment="Left" Margin="45,225,0,0" VerticalAlignment="Top"/>
-        <Button Name="btAddProduct" Content="Add" HorizontalAlignment="Left" Margin="636,358,0,0" VerticalAlignment="Top" Height="42" Width="130" Click="btAddProduct_Click"/>
-        <Button Name="btUpdateProduct" Content="Update" HorizontalAlignment="Left" Margin="636,358,0,0" VerticalAlignment="Top" Height="42" Width="130" Click="btUpdateProduct_Click"/>
+        <Button Name="btAddProduct" Content="Add" HorizontalAlignment="Left" Margin="290,375,0,0" VerticalAlignment="Top" Height="28" Width="88" Click="btAddProduct_Click"/>
+        <Button Name="btUpdateProduct" Content="Update" HorizontalAlignment="Left" Margin="290,375,0,0" VerticalAlignment="Top" Height="28" Width="88" Click="btUpdateProduct_Click"/>
         <Grid Margin="0,10,0,-10">
-            <Image Name="NewImage" HorizontalAlignment="Left" Height="123" VerticalAlignment="Top" Width="140" Margin="84,269,0,0"/>
+            <Image Name="NewImage" Source="{Binding Path=ImageRelativeName, Converter= {StaticResource ImagePathToBitmap}}" HorizontalAlignment="Left" Height="123" VerticalAlignment="Top" Width="140" Margin="32,269,0,0"/>
         </Grid>
-        <Button Name= "UpdateImage" Content="update Image" HorizontalAlignment="Left" Margin="290,375,0,0" VerticalAlignment="Top" Click="UpdateButton_Click" Height="28" Width="88"/>
-        <Button Name= "AddImage" Content="Add Image" HorizontalAlignment="Left" Margin="290,375,0,0" VerticalAlignment="Top" Click="AddButton_Click" Height="28" Width="88"/>
+        <Button Name= "UpdateImage" Content="update Image" HorizontalAlignment="Left" Margin="190,375,0,0" VerticalAlignment="Top" Click="UpdateButton_Click" Height="28" Width="88"/>
+        <Button Name= "AddImage" Content="Add Image" HorizontalAlignment="Left" Margin="190,375,0,0" VerticalAlignment="Top" Click="AddButton_Click" Height="28" Width="88"/>
 
     </Grid>
 </Window>
