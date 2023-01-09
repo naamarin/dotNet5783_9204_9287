@@ -142,8 +142,8 @@ namespace PL
             if (openFileDialog.ShowDialog()==true)
             {
                 NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-                openFileDialog.FileName = lName.Content.ToString();
-                //File.Move(@"C:\Users\User\source\repos\shoham212\dotNet5783_9204_9287\Images", openFileDialog.FileName);
+                openFileDialog.FileName = lName.Content.ToString() + "pnj";
+                File.Move(@"C:\Users\User\source\repos\shoham212\dotNet5783_9204_9287\Images", openFileDialog.FileName);
             }
         }
 
@@ -152,10 +152,10 @@ namespace PL
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 if (openFileDialog.ShowDialog() == true)
                 {
-                    NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-                openFileDialog.FileName=lName.Content.ToString();
-                   // File.Move(@"C:\Users\User\source\repos\shoham212\dotNet5783_9204_9287\Images", openFileDialog.FileName);
-                }
+                NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                openFileDialog.FileName = lName.Content.ToString() + "pnj";
+                File.Move(@"C:\Users\User\source\repos\shoham212\dotNet5783_9204_9287\Images", openFileDialog.FileName);
+            }
         }
     }
 }
