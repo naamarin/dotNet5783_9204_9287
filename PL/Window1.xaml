@@ -33,7 +33,7 @@
         <Button Name="btAddProduct" Content="Add" HorizontalAlignment="Left" Margin="290,375,0,0" VerticalAlignment="Top" Height="28" Width="88" Click="btAddProduct_Click"/>
         <Button Name="btUpdateProduct" Content="Update" HorizontalAlignment="Left" Margin="290,375,0,0" VerticalAlignment="Top" Height="28" Width="88" Click="btUpdateProduct_Click"/>
         <Grid Margin="0,10,0,-10">
-            <Image Name="NewImage" Source="{Binding Path=ImageRelativeName, Converter= {StaticResource ImagePathToBitmap}}" HorizontalAlignment="Left" Height="123" VerticalAlignment="Top" Width="140" Margin="32,269,0,0"/>
+            <Image Name="NewImage" Source="{Binding Path=ImageRelativeName, Converter= {StaticResource ImagePathToBitmap}" HorizontalAlignment="Left" Height="123" VerticalAlignment="Top" Width="140" Margin="32,269,0,0"/>
         </Grid>
         <Button Name= "UpdateImage" Content="update Image" HorizontalAlignment="Left" Margin="190,375,0,0" VerticalAlignment="Top" Click="UpdateButton_Click" Height="28" Width="88"/>
         <Button Name= "AddImage" Content="Add Image" HorizontalAlignment="Left" Margin="190,375,0,0" VerticalAlignment="Top" Click="AddButton_Click" Height="28" Width="88"/>
