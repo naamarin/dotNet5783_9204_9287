@@ -6,7 +6,45 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="NewOrder" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="269*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="Auto"/>
+
+        </Grid.RowDefinitions>
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+            <ComboBox Name="CategorySelector"
+HorizontalAlignment= "Stretch"
+VerticalAlignment="Stretch"
+Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged"/>
+        </Grid>
+
+        <ListView x:Name="ProductView" MouseDoubleClick="ProductView_MouseDoubleClick" Margin="0,46,0,0" Grid.RowSpan="2">
+
+            <ListView.View >
+                <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
+                    <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Category}"/>
+                    <GridViewColumn Header="Amount" DisplayMemberBinding="{Binding Amount}"/>
+                    <GridViewColumn Header="In stock" DisplayMemberBinding="{Binding InStock}"/>
+                    <GridViewColumn Header="Image">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Name="NewImageForOrder" Source="{Binding Path=ImageRelativeName, Converter= {StaticResource ImagePathToBitmap}}"  Width="50" Height="50"></Image>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+
+        </ListView>
     </Grid>
 </Window>

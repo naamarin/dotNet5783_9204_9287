@@ -126,16 +126,6 @@ namespace PL
             
         }
 
-        //private void AddButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    OpenFileDialog openFileDialog = new OpenFileDialog();
-        //    if (openFileDialog.ShowDialog()!.Value)
-        //    {
-        //        NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-        //       //File.Move(openFileDialog.FileName, openFileDialog.FileName);
-        //    }
-        //}
-
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -149,13 +139,13 @@ namespace PL
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-                OpenFileDialog openFileDialog = new OpenFileDialog();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
                 if (openFileDialog.ShowDialog() == true)
                 {
                 NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
                 openFileDialog.FileName = lName.Content.ToString() + "pnj";
                 File.Move(@"C:\Users\User\source\repos\shoham212\dotNet5783_9204_9287\Images", openFileDialog.FileName);
-            }
+                }
         }
     }
 }

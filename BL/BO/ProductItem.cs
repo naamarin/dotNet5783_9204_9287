@@ -42,6 +42,9 @@ public class ProductItem
     /// </summary>
     public bool InStock { get; set; }
 
+
+    public string? ImageRelativeName { get; set; }
+
     /// <summary>
     /// print product details for the client
     /// </summary>

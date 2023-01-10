@@ -112,7 +112,7 @@ internal class Product : BlApi.IProduct
     {
         try
         {
-            DO.OrderItem? orderItem = dal?.OrderItem.getOrderItems(order.ID, id);
+            DO.OrderItem? orderItem = dal?.OrderItem.getOrderItems(order.ID, id) ?? throw new NullReferenceException("id does not exist");
         }
         catch(DO.DalDoesNotExistException ex)
         {
@@ -177,6 +177,29 @@ internal class Product : BlApi.IProduct
         }
     }
 
+
+    /// <summary>
+    /// function for get list of all the products with selected category
+    /// </summary>
+    /// <param name="c"></param>
+    /// <returns></returns>
+    /// <exception cref="NullReferenceException"></exception>
+    public IEnumerable<BO.ProductItem> GetProductItemsByCategory(BO.Category c)
+    {
+        return from DO.Product? doProduct in dal?.Product.GetAll(dp => dp?.Category == (DO.Category)(c)) ?? throw new NullReferenceException("Empty list")
+               select new BO.ProductItem
+               {
+                   ID = doProduct?.ID ?? throw new NullReferenceException("Missing ID"),
+                   Name = doProduct?.Name ?? throw new NullReferenceException("Missing name"),
+                   Category = (BO.Category?)doProduct?.Category ?? throw new NullReferenceException("Missing category"),
+                   Price = doProduct?.Price ?? 0,
+                   InStock = doProduct?.InStock > 0,
+                   ImageRelativeName = @"\Images\" + doProduct?.Name + ".png"
+               };
+
+    }
+
+
     /// <summary>
     /// function for get catalog of all the products (for the client)
     /// </summary>
@@ -193,7 +216,8 @@ internal class Product : BlApi.IProduct
                 Category = (BO.Category?)doProduct.Category ?? throw new NullReferenceException("Missing category"),
                 Amount = doProduct.InStock,
                 InStock = doProduct.InStock > 0,
-            };
+                ImageRelativeName = @"\Images\" + doProduct.Name + ".png"
+               };
     }
 
     /// <summary>
@@ -222,6 +246,7 @@ internal class Product : BlApi.IProduct
             Amount = product.InStock,
             Category = (BO.Category?)product.Category ?? throw new NullReferenceException("Missing category"),
             InStock = product.InStock > 0,
+            ImageRelativeName = @"\Images\" + product.Name + ".png"
         };
     }
 }

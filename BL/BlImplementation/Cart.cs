@@ -43,6 +43,8 @@ internal class Cart : BlApi.ICart
                 });
                 cart.TotalPrice += product.Price;
             }
+            else
+                throw new BO.BlIdAlreadyExistException("The product amount in stock is 0");
         }
         else
         {
