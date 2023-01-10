@@ -1,0 +1,38 @@
+﻿<Window x:Class="PL.ProductItemView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        DataContext="{Binding currentProduct, RelativeSource={RelativeSource self}}"
+        Title="ProductItemView" Height="450" Width="350">
+    <Window.Resources>
+        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Text" Value="">
+                    <Setter Property="BorderBrush" Value="Red" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+
+    <Grid>
+        <TextBox Name="txbProductID" IsReadOnly="True" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,70,0,0" TextWrapping="Wrap" Text="{Binding ID, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txbProductName" IsReadOnly="True" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,110,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txbProductPrice" IsReadOnly="True" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,190,0,0" TextWrapping="Wrap" Text="{Binding Price, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txbProductStockCount" IsReadOnly="True" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,230,0,0" TextWrapping="Wrap" Text="{Binding InStock, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txbCategory" IsReadOnly="True"  Style="{StaticResource TextBoxStyle}" Text="{Binding Category, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Margin="160,150,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Name="lID" Content="Product ID:" HorizontalAlignment="Left" Margin="45,65,0,0" VerticalAlignment="Top"/>
+        <Label Name="lName" Content="Product Name:" HorizontalAlignment="Left" Margin="45,105,0,0" VerticalAlignment="Top"/>
+        <Label Name="lCategory" Content="Product category:" HorizontalAlignment="Left" Margin="45,145,0,0" VerticalAlignment="Top"/>
+        <Label Name="lPrice" Content="Product price:" HorizontalAlignment="Left" Margin="45,185,0,0" VerticalAlignment="Top"/>
+        <Label Name="lAmount" Content="In stock:" HorizontalAlignment="Left" Margin="45,225,0,0" VerticalAlignment="Top"/>
+        <Grid Margin="0,10,0,-10">
+            <Image Name="NewImage" Source="{Binding Path=ImageRelativeName, Converter= {StaticResource ImagePathToBitmap}}" HorizontalAlignment="Left" Height="123" VerticalAlignment="Top" Width="140" Margin="32,269,0,0"/>
+            <Button Name="btnAddToCart" Content="Add to cart" HorizontalAlignment="Left" Click="btnAddToCart_Click" Margin="255,334,0,0" VerticalAlignment="Top"/>
+        </Grid>
+
+    </Grid>
+</Window>
