@@ -1,0 +1,28 @@
+﻿<Window x:Class="PL.OrderTrackingView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        DataContext="{Binding currentOrderTracking, RelativeSource={RelativeSource self}}"
+        Title="OrderTrackingView" Height="450" Width="800">
+    <Grid>
+
+        <Label Name="lbOrderId" Content="Enter order ID:" HorizontalAlignment="Left" Margin="75,66,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.004,0.729"/>
+        <TextBox Name="txbOrderID" HorizontalAlignment="Left" Margin="184,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Name="btOrderTracking" Content="Display order tracking" HorizontalAlignment="Left" Margin="75,116,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.189,-0.049" Height="33" Width="124" Click="btOrderTracking_Click"/>
+        <Label Name="lbOrderStatus" Content="Status" HorizontalAlignment="Left" Margin="75,0,0,0" VerticalAlignment="Center"/>
+        <Label Name="lbTracking" Content="Tracking" HorizontalAlignment="Left" Margin="69,264,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="txbStatus" Text="" HorizontalAlignment="Left" Margin="184,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <ListView ItemsSource="{Binding Tracking}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="170,264,216,28">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Name="btViewOrder" Content="View order" HorizontalAlignment="Left" Margin="490,70,0,0" VerticalAlignment="Top" Height="37" Width="94" Click="btViewOrder_Click"/>
+
+    </Grid>
+</Window>

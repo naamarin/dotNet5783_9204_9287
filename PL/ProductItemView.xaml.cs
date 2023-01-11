@@ -21,7 +21,7 @@ namespace PL
     public partial class ProductItemView : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        BO.Cart cart = new BO.Cart();
+        BO.Cart cart1 = new BO.Cart();
         public BO.ProductItem? currentProduct
         {
             get { return (BO.ProductItem?)GetValue(currentProductProperty); }
@@ -29,18 +29,24 @@ namespace PL
         }
         public static readonly DependencyProperty currentProductProperty =
             DependencyProperty.Register("currentProduct", typeof(BO.ProductItem), typeof(Window), new PropertyMetadata(null));
-        public ProductItemView(int id, BO.Cart c)
+        public ProductItemView(int id, BO.Cart cart)
         {
             InitializeComponent();
             currentProduct = bl.Product.ProductDeatails(id);
             if (!currentProduct.InStock)
                 btnAddToCart.Visibility = Visibility.Hidden;
-            cart = c;
+            cart1 = cart;
         }
 
         private void btnAddToCart_Click(object sender, RoutedEventArgs e)
         {
-            cart = bl.Cart.AddItemToCart(cart, currentProduct.ID);
+            int amount = int.Parse(txbAmount.Text.ToString());
+            if (amount <= 0)
+            {
+                MessageBox.Show("Amount must be possitive!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            bl.Cart.AddItemToCart(cart1, currentProduct.ID, amount);
             this.Close();
         }
     }

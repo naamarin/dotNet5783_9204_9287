@@ -14,7 +14,7 @@ public interface ICart
     /// <param name="cart"></param>
     /// <param name="productID"></param>
     /// <returns></returns>
-    public BO.Cart AddItemToCart(BO.Cart cart, int productID);
+    public void AddItemToCart(BO.Cart cart, int productID, int amnt);
 
     /// <summary>
     /// function for update the amount of the items in cart
@@ -25,9 +25,12 @@ public interface ICart
     /// <returns></returns>
     public BO.Cart UpdateCart(BO.Cart cart, int productID, int amount);
 
+    public void RemoveOrderItem(BO.Cart cart, int productID);
+
+
     /// <summary>
     /// function for paid and make order
     /// </summary>
     /// <param name="cart"></param>
-    public void MakeOrder(BO.Cart cart);
+    public int MakeOrder(BO.Cart cart);
 }

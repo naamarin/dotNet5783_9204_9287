@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,16 +22,16 @@ namespace PL
     public partial class NewOrder : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        BO.Cart cart = new BO.Cart();
+        BO.Cart cart  { get; set; }
 
-        public NewOrder()
+        public NewOrder(BO.Cart c)
         {
             InitializeComponent();
             //var v = bl.Product.GetListProducts(); 
             ProductView.ItemsSource = bl.Product.Catalog();
             CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.CategoryForWPF));
             CategorySelector.SelectedItem = BO.CategoryForWPF.All;
-            //BO.Cart cart;
+            cart = c;
         }
 
         private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -45,10 +46,17 @@ namespace PL
         private void ProductView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             int productID = ((BO.ProductItem)ProductView.SelectedItem).ID;
+            //ProductItemView productItemView = new ProductItemView(productID);
+            //productItemView.DataContext = cart;
             new ProductItemView(productID, cart).ShowDialog();
             ProductView.ItemsSource = bl?.Product.Catalog();
             CategorySelector.SelectedItem = BO.CategoryForWPF.All;
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new CartView(cart).ShowDialog();
         }
     }
 }

@@ -14,15 +14,20 @@
             <RowDefinition Height="Auto"/>
 
         </Grid.RowDefinitions>
+
         <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto">
+
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="297*"/>
+                <ColumnDefinition Width="103*"/>
+                <ColumnDefinition Width="400*"/>
             </Grid.ColumnDefinitions >
+
             <ComboBox Name="CategorySelector"
-HorizontalAlignment= "Stretch"
-VerticalAlignment="Stretch"
-Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged"/>
+Grid.Column="2" SelectionChanged="CategorySelector_SelectionChanged"/>
+            <Button Content="Go to cart" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="97" Margin="0,1,0,0" Click="Button_Click"/>
+
+
         </Grid>
 
         <ListView x:Name="ProductView" MouseDoubleClick="ProductView_MouseDoubleClick" Margin="0,46,0,0" Grid.RowSpan="2">
@@ -46,5 +51,6 @@ Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged"/>
             </ListView.View>
 
         </ListView>
+
     </Grid>
 </Window>

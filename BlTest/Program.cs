@@ -232,7 +232,9 @@ press f for return to the menu");
 
                             Console.WriteLine("enter id of product to add to cart:");
                             if (!int.TryParse(Console.ReadLine(), out id)) throw new Exception("wrong input type ");
-                            Console.WriteLine(bl.Cart.AddItemToCart(newCart, id));
+                            Console.WriteLine("enter amount of product to add to cart:");
+                            if (!int.TryParse(Console.ReadLine(), out amount)) throw new Exception("wrong input type ");
+                            bl.Cart.AddItemToCart(newCart, id, amount);
 
                             break;
                         case 'b':
@@ -245,14 +247,14 @@ press f for return to the menu");
                             break;
 
                         case 'c':
-                            Console.WriteLine("please insert name:");
-                            newCart.CustomerName = Console.ReadLine();
-                            Console.WriteLine("please insert address:");
-                            newCart.CustomerAddress = Console.ReadLine();
-                            Console.WriteLine("please insert email address:");
-                            newCart.CustomerEmail = Console.ReadLine();
+                            //Console.WriteLine("please insert name:");
+                            //newCart.CustomerName = Console.ReadLine();
+                            //Console.WriteLine("please insert address:");
+                            //newCart.CustomerAddress = Console.ReadLine();
+                            //Console.WriteLine("please insert email address:");
+                            //newCart.CustomerEmail = Console.ReadLine();
                             bl.Cart.MakeOrder(newCart);
-                            newCart = new Cart() { Items = new List<OrderItem>(), TotalPrice = 0 };
+                            //newCart = new Cart() { Items = new List<OrderItem>(), TotalPrice = 0 };
                             break;
 
                     }

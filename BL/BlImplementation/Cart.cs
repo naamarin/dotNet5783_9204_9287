@@ -9,6 +9,7 @@ namespace BlImplementation;
 internal class Cart : BlApi.ICart
 {
     DalApi.IDal? dal = DalApi.Factory.Get();
+    //int orderItemIDs = 0;
     /// <summary>
     /// function for adding an item to the cart
     /// </summary>
@@ -16,7 +17,7 @@ internal class Cart : BlApi.ICart
     /// <param name="productID"></param>
     /// <returns></returns>
     /// <exception cref="BO.BlProductDoesNotExsist"></exception>
-    public BO.Cart AddItemToCart(BO.Cart cart, int productID)
+    public void AddItemToCart(BO.Cart cart, int productID, int amnt)
     {
         DO.Product product;
         try
@@ -27,6 +28,8 @@ internal class Cart : BlApi.ICart
         {
             throw new BO.BlProductDoesNotExsist("Product not Exist", ex);
         }
+        if (cart == null)
+            cart = new BO.Cart() { Items = new List<BO.OrderItem>()};
         IEnumerable<BO.OrderItem?> oi = from BO.OrderItem? o in cart.Items where o.ProductID == productID select o;
         if (!oi.Any())
         {
@@ -35,11 +38,11 @@ internal class Cart : BlApi.ICart
                 cart.Items = cart.Items.Append(new BO.OrderItem
                 {
                     Name = product.Name,
-                    Amount = 1,
+                    Amount = amnt,
                     ProductID = productID,
                     ID = 0,
                     Price = product.Price,
-                    TotalPrice = product.Price,
+                    TotalPrice = product.Price * amnt,
                 });
                 cart.TotalPrice += product.Price;
             }
@@ -50,7 +53,13 @@ internal class Cart : BlApi.ICart
         {
             cart = UpdateCart(cart, productID, oi.First().Amount+1 );
         }
-        return cart;
+    }
+
+    public void RemoveOrderItem(BO.Cart cart, int productID)
+    {
+        cart.Items = from BO.OrderItem boOrderItem in cart.Items
+                     where boOrderItem.ProductID != productID
+                     select boOrderItem;
     }
 
     /// <summary>
@@ -123,7 +132,7 @@ internal class Cart : BlApi.ICart
     /// <param name="cart"></param>
     /// <exception cref="BO.BlClientDeatalesNotValid"></exception>
     /// <exception cref="BO.BlNullPropertyException"></exception>
-    public void MakeOrder(BO.Cart cart)
+    public int MakeOrder(BO.Cart cart)
     {
         if (cart.CustomerName == "" || cart.CustomerAddress == "" || cart.CustomerEmail == "")
             throw new BO.BlClientDeatalesNotValid("Invalid client details");
@@ -133,13 +142,14 @@ internal class Cart : BlApi.ICart
         DO.Product p = new DO.Product();
         foreach (BO.OrderItem oi in cart.Items)
         {
+            p = dal.Product.GetById(oi.ProductID);
             if (p.InStock == 0)
                 throw new BO.BlNullPropertyException("the item is not in stock");
-            dal.OrderItem.Add(new DO.OrderItem() { OrderID = oID, ProductID = oi.ProductID, Amount = oi.Amount });
-            p=dal.Product.GetById(oi.ProductID);
-            p.InStock = oi.Amount;
+            dal.OrderItem.Add(new DO.OrderItem() { OrderID = oID, ProductID = oi.ProductID, Amount = oi.Amount, Price = oi.Price });
+            //p=dal.Product.GetById(oi.ProductID);
+            p.InStock -= oi.Amount;
             dal.Product.Update(p);
         }
-
+        return oID;
     }
 }
