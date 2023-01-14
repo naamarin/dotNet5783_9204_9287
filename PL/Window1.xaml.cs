@@ -1,4 +1,5 @@
-﻿using BO;
+﻿using BlApi;
+using BO;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,6 @@ using System.Windows.Shapes;
 
 namespace PL
 {
-    /// <summary>
-    /// Interaction logic for Window1.xaml
-    /// </summary>
     public partial class Window1 : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
@@ -40,12 +38,6 @@ namespace PL
             if (id != 0)
             {
                 currentProduct = bl.Product.GetById(productID);
-                //txbProductID.Text = product.ID.ToString();
-                //CategoryOptions.SelectedItem = product.Category;
-                //txbProductName.Text = product.Name;
-                //txbProductPrice.Text = product.Price.ToString();
-                //txbProductStockCount.Text = product.StockCount.ToString();
-                //NewImage.Source = new BitmapImage(new Uri(currentProduct.ImageRelativeName!));
                 btAddProduct.Visibility = Visibility.Hidden;
                 btUpdateProduct.Visibility = Visibility.Visible;
                 txbProductID.IsReadOnly = true;
@@ -75,14 +67,6 @@ namespace PL
             {
 
                 bl?.Product.AddProduct(currentProduct);
-                //bl?.Product.AddProduct(new BO.Product
-                //{
-                //    ID = int.Parse(txbProductID.Text),
-                //    Category = (BO.Category)CategoryOptions.SelectedItem,
-                //    Name = txbProductName.Text,
-                //    Price = int.Parse(txbProductPrice.Text),
-                //    StockCount = int.Parse(txbProductStockCount.Text),
-                //});
                 this.Close();
             }
             catch (ArgumentException boEx)
@@ -105,14 +89,6 @@ namespace PL
             try
             {
                 bl?.Product.UpdateProduct(currentProduct!);
-                //bl?.Product.UpdateProduct(new BO.Product
-                //{
-                //    ID = int.Parse(txbProductID.Text),
-                //    Category = (BO.Category)CategoryOptions.SelectedItem,
-                //    Name = txbProductName.Text,
-                //    Price = int.Parse(txbProductPrice.Text),
-                //    StockCount = int.Parse(txbProductStockCount.Text),
-                //});
                 this.Close();
             }
             catch (ArgumentException boEx)
@@ -128,24 +104,40 @@ namespace PL
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
+            BO.Product product = bl.Product.GetById(int.Parse(txbProductID.Text));
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog()==true)
             {
                 NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-                openFileDialog.FileName = lName.Content.ToString() + "pnj";
-               
+                openFileDialog.FileName = txbProductName.Text.ToString() + ".png";
+                string imageName = product.ImageRelativeName.Substring(product.ImageRelativeName.LastIndexOf("\\"));
+                if (!File.Exists(Environment.CurrentDirectory[..^4] + @"\Images\" + imageName))
+                {
+                    File.Copy(product.ImageRelativeName, Environment.CurrentDirectory[..^4] + @"\Images\" + imageName);
+                    product.ImageRelativeName = @"\Images\" + imageName;
+                }
+                bl.Product.AddProduct(product!);
+                MessageBox.Show("New Product was added succesfully","Success",MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
+            BO.Product product = bl.Product.GetById(int.Parse(txbProductID.Text));
             OpenFileDialog openFileDialog = new OpenFileDialog();
-                if (openFileDialog.ShowDialog() == true)
-                {
+            if (openFileDialog.ShowDialog() == true)
+            {
                 NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-                openFileDialog.FileName = lName.Content.ToString() + "pnj";
-                
+                openFileDialog.FileName = txbProductName.Text.ToString() + ".png";
+                string imageName = product.ImageRelativeName.Substring(product.ImageRelativeName.LastIndexOf("\\"));
+                if (!File.Exists(Environment.CurrentDirectory[..^4] + @"\Images\" + imageName))
+                {
+                    File.Copy(product.ImageRelativeName, Environment.CurrentDirectory[..^4] + @"\Images\" + imageName);
+                    product.ImageRelativeName = @"\Images\" + imageName;
                 }
+                bl.Product.UpdateProduct(product!);
+                MessageBox.Show("New Product was added succesfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }

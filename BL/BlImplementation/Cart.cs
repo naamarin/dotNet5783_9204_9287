@@ -57,9 +57,14 @@ internal class Cart : BlApi.ICart
 
     public void RemoveOrderItem(BO.Cart cart, int productID)
     {
+        IEnumerable<BO.OrderItem?> oi = from BO.OrderItem? o in cart.Items
+                                        where o.ProductID == productID
+                                        select o;
+        cart.TotalPrice -= oi.First().TotalPrice;
         cart.Items = from BO.OrderItem boOrderItem in cart.Items
                      where boOrderItem.ProductID != productID
                      select boOrderItem;
+
     }
 
     /// <summary>
@@ -150,6 +155,11 @@ internal class Cart : BlApi.ICart
             p.InStock -= oi.Amount;
             dal.Product.Update(p);
         }
+        //((List<BO.OrderItem?>)(cart.Items)).Clear();
+        cart.TotalPrice = 0;
+        cart.CustomerAddress = "";
+        cart.CustomerEmail = "";
+        cart.CustomerName = "";
         return oID;
     }
 }

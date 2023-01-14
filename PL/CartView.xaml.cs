@@ -45,13 +45,18 @@ namespace PL
         {
             int orderID = bl.Cart.MakeOrder(cart);
             MessageBox.Show("Your order ID is: " + orderID, "succuss");
-            //cart = new BO.Cart() { Items = new List<BO.OrderItem?>(), TotalPrice = 0, CustomerAddress = "", CustomerEmail = "", CustomerName = "" };
+            
             this.Close();
         }
 
         private void btRemove_Click(object sender, RoutedEventArgs e)
         {
 
+            var button = (Button)sender;
+            var orderItem = (BO.OrderItem)button.DataContext;
+            bl.Cart.RemoveOrderItem(cart, orderItem.ProductID);
+            orderItemListView.Items.Refresh();
         }
+
     }
 }
