@@ -19,14 +19,10 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox Name="CategorySelector"
-HorizontalAlignment= "Stretch"
-VerticalAlignment="Stretch"
-Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged"/>
+            <ComboBox Name="CategorySelector" Foreground="#FF908989" SelectionChanged="CategorySelector_SelectionChanged"  FontFamily="Tekton Pro" Margin="0,-2,0,2" Grid.Column="1"/>
         </Grid>
 
-        <ListView x:Name="ProductView" MouseDoubleClick="ProductView_MouseDoubleClick" Margin="0,46,0,0" Grid.RowSpan="2">
-    
+        <ListView x:Name="ProductView" Margin="0,46,0,0" Grid.RowSpan="2" FontFamily="Tekton Pro" Foreground="#FF908989" HorizontalAlignment="Center" Width="800">
             <ListView.View >
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>
@@ -43,9 +39,9 @@ Grid.Column="1" SelectionChanged="CategorySelector_SelectionChanged"/>
                 </GridView>
             </ListView.View>
 
+
         </ListView>
-        
-        <Button Name="btnAddProduct" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Margin="676,0,0,0" Padding="5" Height="28" VerticalAlignment="Center" Click="btnAddProduct_Click" Width="104"/>
-      
+        <Button Name="btnAddProduct" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Padding="5" Height="28" VerticalAlignment="Center" Click="btnAddProduct_Click" Width="104" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Tekton Pro" Margin="674,0,0,0"/>
+
     </Grid>
 </Window>
