@@ -22,7 +22,7 @@
             <ComboBox Name="CategorySelector" Foreground="#FF908989" SelectionChanged="CategorySelector_SelectionChanged"  FontFamily="Tekton Pro" Margin="0,-2,0,2" Grid.Column="1"/>
         </Grid>
 
-        <ListView x:Name="ProductView" Margin="0,46,0,0" Grid.RowSpan="2" FontFamily="Tekton Pro" Foreground="#FF908989" HorizontalAlignment="Center" Width="800">
+        <ListView x:Name="ProductView" Margin="0,46,0,0" Grid.RowSpan="2" FontFamily="Tekton Pro" Foreground="#FF908989" HorizontalAlignment="Center" Width="800" MouseDoubleClick="ProductView_MouseDoubleClick">
             <ListView.View >
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>
