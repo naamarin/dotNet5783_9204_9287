@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ProductsView" Height="640" Width="800">
+        DataContext="{Binding currentProductForList, RelativeSource={RelativeSource self}}"
+        Title="ProductsView" Height="640" Width="800" Activated="Window_Activated">
     
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
@@ -42,7 +43,7 @@
             </ListView>
         </ScrollViewer>-->
 
-        <ListView x:Name="ProductView" Margin="0,46,0,0" Grid.RowSpan="2" FontFamily="Tekton Pro" Foreground="#FF893E42" HorizontalAlignment="Center" Width="800" MouseDoubleClick="ProductView_MouseDoubleClick">
+        <ListView x:Name="ProductView" ItemsSource="{Binding}" Margin="0,46,0,0" Grid.RowSpan="2" FontFamily="Tekton Pro" Foreground="#FF893E42" HorizontalAlignment="Center" Width="800" MouseDoubleClick="ProductView_MouseDoubleClick">
             <ListView.View >
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>

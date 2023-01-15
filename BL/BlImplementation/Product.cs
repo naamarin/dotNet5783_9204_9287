@@ -55,6 +55,19 @@ internal class Product : BlApi.IProduct
         
     }
 
+    //public void AddImage(int id)
+    //{
+    //    try
+    //    {
+    //        DO.Product? doProduct = dal?.Product.GetById(id) ?? throw new NullReferenceException("id does not exists");
+    //        doProduct?.Image = 
+    //    }
+    //    catch (DO.DalDoesNotExistException ex)
+    //    {
+    //        throw new BO.BlProductDoesNotExsist("Product not Exist", ex);
+    //    }
+    //}
+
     /// <summary>
     /// function for get product by id
     /// </summary>
@@ -97,7 +110,8 @@ internal class Product : BlApi.IProduct
             Name = boProduct?.Name ?? throw new ArgumentException("Invalid name"),
             Price = boProduct?.Price ?? throw new ArgumentException("Invalid price"),
             InStock = boProduct?.StockCount ?? throw new ArgumentException("Invalid stock amount"),
-            Category=(DO.Category)boProduct?.Category,//?? throw new ArgumentException("Invalid category"),
+            Category = (DO.Category)boProduct?.Category,//?? throw new ArgumentException("Invalid category"),
+            Image = @"\Images\" + boProduct?.Name + ".png"
         };
         dal?.Product.Add(doProduct);
     }
@@ -166,6 +180,7 @@ internal class Product : BlApi.IProduct
             Price = boProduct.Price,// ?? throw new ArgumentException("Invalid price"),
             InStock = boProduct.StockCount,// ?? throw new ArgumentException("Invalid stock amount"),
             Category = (DO.Category)boProduct?.Category,//?? throw new ArgumentException("Invalid category"),
+            Image = boProduct.ImageRelativeName
         };
         try
         {

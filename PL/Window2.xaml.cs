@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,13 +22,25 @@ namespace PL
     public partial class Window2 : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
+        public ObservableCollection<BO.ProductForList?> currentProductForList
+        {
+            get { return (ObservableCollection<BO.ProductForList?>)GetValue(currentProductForListProperty); }
+            set { SetValue(currentProductForListProperty, value); }
+        }
+        public static readonly DependencyProperty currentProductForListProperty =
+            DependencyProperty.Register("currentProductForList", typeof(ObservableCollection<BO.ProductForList?>), typeof(Window), new PropertyMetadata(null));
+
         public Window2()
         {
             InitializeComponent();
             //var v = bl.Product.GetListProducts(); 
-            ProductView.ItemsSource = bl.Product.GetListProducts();
+            //currentProductForList = bl.Product.GetListProducts();
             CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.CategoryForWPF));
             CategorySelector.SelectedItem = BO.CategoryForWPF.All;
+        }
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            currentProductForList = new ObservableCollection<BO.ProductForList?>(bl!.Product.GetListProducts());
         }
 
         private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -50,7 +63,7 @@ namespace PL
         {
             int productID = ((BO.ProductForList)ProductView.SelectedItem).ID;
             new Window1(productID).ShowDialog();
-            ProductView.ItemsSource = bl?.Product.GetListProducts();
+            //ProductView.ItemsSource = bl?.Product.GetListProducts();
             CategorySelector.SelectedItem = BO.CategoryForWPF.All;
 
         }
