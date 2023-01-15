@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         DataContext="{Binding currentOrder, RelativeSource={RelativeSource self}}"
-        Title="Order" Height="450" Width="500">
+        Title="Order" Height="450" Width="500" Activated="Window_Activated">
 
 
     <Grid Name="MainGrid">
@@ -24,7 +24,7 @@
             </Grid.ColumnDefinitions >
         </Grid>
 
-        <ListView x:Name="lvOrderForList" DisplayMemberPath="{Binding currentOrder}" Margin="0,46,0,0" Grid.RowSpan="2"  FontFamily="Tekton Pro" Foreground="#FF893E42" HorizontalAlignment="Center" Width="500" MouseDoubleClick="lvOrderForList_MouseDoubleClick">
+        <ListView x:Name="lvOrderForList"   ItemsSource="{Binding}" Margin="0,46,0,0" Grid.RowSpan="2"  FontFamily="Tekton Pro" Foreground="#FF893E42" HorizontalAlignment="Center" Width="500" MouseDoubleClick="lvOrderForList_MouseDoubleClick">
             <ListView.View >
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>

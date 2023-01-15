@@ -33,14 +33,20 @@ namespace PL
         {
             InitializeComponent();
             btViewOrder.Visibility = Visibility.Hidden;
-            
+            lbOrderStatus.Visibility= Visibility.Hidden;
+            txbStatus.Visibility = Visibility.Hidden;
+            lbTracking.Visibility = Visibility.Hidden;
+            //itemSource.Visibility = Visibility.Hidden;
+            //ImDelivered.Visibility = Visibility.Hidden;
+            //ImOrdered.Visibility = Visibility.Hidden;
+            //ImSipped.Visibility = Visibility.Hidden;
         }
 
         private void btOrderTracking_Click(object sender, RoutedEventArgs e)
         {
             int orderID;
             if (!int.TryParse(txbOrderID.Text, out orderID))
-                MessageBox.Show("Enter numbers only!", "ERROR");
+                MessageBox.Show("Enter numbers only!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
                 try
@@ -48,10 +54,20 @@ namespace PL
                     currentOrderTracking = bl.Order.TrackingOrder(orderID);
                     txbStatus.Text = currentOrderTracking.Status.ToString();
                     btViewOrder.Visibility = Visibility.Visible;
+                    lbOrderStatus.Visibility = Visibility.Visible;
+                    txbStatus.Visibility = Visibility.Visible;
+                    lbTracking.Visibility = Visibility.Visible;
+                    //itemSource.Visibility = Visibility.Visible;
+                   if (txbStatus.Text== "Delivered")
+                        ImDelivered.Visibility = Visibility.Visible;
+                    if (txbStatus.Text == "Ordered")
+                        ImOrdered.Visibility = Visibility.Visible;
+                    if (txbStatus.Text == "Sipped")
+                        ImSipped.Visibility = Visibility.Visible;
                 }
                 catch(BO.BlOrderDoesNotExsist ex)
                 {
-                    MessageBox.Show(ex.Message, "ERROR");
+                    MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 
             }

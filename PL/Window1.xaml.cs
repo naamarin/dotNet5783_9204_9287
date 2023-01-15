@@ -127,12 +127,17 @@ namespace PL
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
-                NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-                openFileDialog.FileName = txbProductName.Text.ToString() + ".png";
-                string imageName = product.ImageRelativeName.Substring(product.ImageRelativeName.LastIndexOf("\\"));
+                string imageName = openFileDialog.FileName.
+                string newN = Environment.CurrentDirectory[..^4] + @"\Images\" + openFileDialog.FileName;
+                
+
+                //NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                //openFileDialog.FileName = txbProductName.Text.ToString() + ".png";
+                //string imageName = product.ImageRelativeName.Substring(product.ImageRelativeName.LastIndexOf("\\"));
                 if (!File.Exists(Environment.CurrentDirectory[..^4] + @"\Images\" + imageName))
                 {
-                    File.Copy(product.ImageRelativeName, Environment.CurrentDirectory[..^4] + @"\Images\" + imageName);
+                    File.Copy(openFileDialog.FileName, newN);
+                    //File.Copy(product.ImageRelativeName, Environment.CurrentDirectory[..^4] + @"\Images\" + imageName);
                     product.ImageRelativeName = @"\Images\" + imageName;
                 }
                 bl.Product.UpdateProduct(product!);

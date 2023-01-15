@@ -8,36 +8,38 @@
         mc:Ignorable="d"
         Title="OrderDetals" Height="450" Width="800">
     <Grid Margin="0,-7,0,7">
-        <Label Name="lID" Content="ID" HorizontalAlignment="Left" Margin="58,20,0,0" VerticalAlignment="Top"/>
-        <Label Name="lCustomerName" Content="Customer name" HorizontalAlignment="Left" Margin="58,60,0,0" VerticalAlignment="Top"/>
-        <Label Name="lCustomerEmail" Content="Customer email" HorizontalAlignment="Left" Margin="58,100,0,0" VerticalAlignment="Top"/>
-        <Label Name="lCustomerAddress" Content="Customer address" HorizontalAlignment="Left" Margin="58,140,0,0" VerticalAlignment="Top"/>
-        <Label Name="lOrderDate" Content="Order date" HorizontalAlignment="Left" Margin="58,180,0,0" VerticalAlignment="Top"/>
-        <Label Name="lStatus" Content="Status" HorizontalAlignment="Left" Margin="58,220,0,0" VerticalAlignment="Top" RenderTransformOrigin="-11.292,-0.607"/>
-        <Label Name="lPaymentDate" Content="Payment date" HorizontalAlignment="Left" Margin="58,260,0,0" VerticalAlignment="Top"/>
-        <Label Name="lShipDate" Content="Ship date" HorizontalAlignment="Left" Margin="58,300,0,0" VerticalAlignment="Top"/>
-        <Label Name="lDeliveryDate" Content="Delivery date" HorizontalAlignment="Left" Margin="58,340,0,0" VerticalAlignment="Top"/>
-        <Label Name="lTotalPrice" Content="Total price" HorizontalAlignment="Left" Margin="58,380,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="txbID" IsReadOnly="True" Foreground ="Gray"  HorizontalAlignment="Left" Margin="230,33,0,0" TextWrapping="Wrap" Text="{Binding ID, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
-        <TextBox Name="txbCustomerName" IsReadOnly="True" Foreground ="Gray" HorizontalAlignment="Left" Margin="230,73,0,0" TextWrapping="Wrap" Text="{Binding CustomerName, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
-        <TextBox Name="txbCustomerEmail" IsReadOnly="True" Foreground ="Gray" HorizontalAlignment="Left" Margin="230,108,0,0" TextWrapping="Wrap" Text="{Binding CustomerEmail, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
-        <TextBox Name="txbCustomerAddress" IsReadOnly="True" Foreground ="Gray" HorizontalAlignment="Left" Margin="230,140,0,0" TextWrapping="Wrap" Text="{Binding CustomerAddress, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
-        <TextBox Name="txbOrderDate" IsReadOnly="True" Foreground ="Gray" HorizontalAlignment="Left" Margin="230,180,0,0" TextWrapping="Wrap" Text="{Binding OrderDate, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
-        <TextBox Name="txbPaymentDate" IsReadOnly="True" Foreground ="Gray" HorizontalAlignment="Left" Margin="230,260,0,0" TextWrapping="Wrap" Text="{Binding PaymentDate, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
-        <TextBox Name="txbShipDate" IsReadOnly="True" Foreground ="Gray" HorizontalAlignment="Left" Margin="230,308,0,0" TextWrapping="Wrap" Text="{Binding ShipDate, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
-        <TextBox Name="txbDeliveryDate" IsReadOnly="True" Foreground ="Gray" HorizontalAlignment="Left" Margin="230,353,0,0" TextWrapping="Wrap" Text="{Binding DeliveryDate, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
-        <TextBox Name="txbToatalPrice" IsReadOnly="True" Foreground ="Gray" HorizontalAlignment="Left" Margin="230,393,0,0" TextWrapping="Wrap" Text="{Binding TotalPrice, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
-        <ComboBox Name="cbxStatus" HorizontalAlignment="Left" Margin="230,220,0,0" VerticalAlignment="Top" Width="170"/>
-        <ListView Name="lvOrderItem" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="452,0,10,94">
+        <Image HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="434" Source="/pattern.jpg" Opacity="0.3" Margin="433,0,0,0"/>
+        <Image HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="434" Source="/pattern.jpg" Opacity="0.3"/>
+        <Label Name="lID" Content="ID" Foreground="#FF893E42" FontFamily="Tekton Pro" FontSize="16" HorizontalAlignment="Left" Margin="58,20,0,0" VerticalAlignment="Top"/>
+        <Label Name="lCustomerName" Foreground="#FF893E42" FontFamily="Tekton Pro" Content="Customer name" HorizontalAlignment="Left" Margin="58,60,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <Label Name="lCustomerEmail" Foreground="#FF893E42" FontFamily="Tekton Pro" FontSize="16" Content="Customer email" HorizontalAlignment="Left" Margin="58,100,0,0" VerticalAlignment="Top"/>
+        <Label Name="lCustomerAddress" Foreground="#FF893E42" FontFamily="Tekton Pro" FontSize="16" Content="Customer address" HorizontalAlignment="Left" Margin="58,140,0,0" VerticalAlignment="Top"/>
+        <Label Name="lOrderDate" Foreground="#FF893E42" FontFamily="Tekton Pro" FontSize="16" Content="Order date" HorizontalAlignment="Left" Margin="58,180,0,0" VerticalAlignment="Top"/>
+        <Label Name="lStatus" Foreground="#FF893E42" FontFamily="Tekton Pro" FontSize="16" Content="Status" HorizontalAlignment="Left" Margin="58,220,0,0" VerticalAlignment="Top" RenderTransformOrigin="-11.292,-0.607"/>
+        <Label Name="lPaymentDate" Foreground="#FF893E42" FontFamily="Tekton Pro" FontSize="16" Content="Payment date" HorizontalAlignment="Left" Margin="58,260,0,0" VerticalAlignment="Top"/>
+        <Label Name="lShipDate" Foreground="#FF893E42" FontFamily="Tekton Pro" FontSize="16" Content="Ship date" HorizontalAlignment="Left" Margin="58,300,0,0" VerticalAlignment="Top"/>
+        <Label Name="lDeliveryDate" Foreground="#FF893E42" FontFamily="Tekton Pro" FontSize="16" Content="Delivery date" HorizontalAlignment="Left" Margin="58,340,0,0" VerticalAlignment="Top"/>
+        <Label Name="lTotalPrice" Foreground="#FF893E42" FontFamily="Tekton Pro" FontSize="16" Content="Total price" HorizontalAlignment="Left" Margin="58,380,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="txbID" IsReadOnly="True"  Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="230,33,0,0" TextWrapping="Wrap" Text="{Binding ID, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
+        <TextBox Name="txbCustomerName" IsReadOnly="True" Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="230,73,0,0" TextWrapping="Wrap" Text="{Binding CustomerName, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
+        <TextBox Name="txbCustomerEmail" IsReadOnly="True" Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="230,108,0,0" TextWrapping="Wrap" Text="{Binding CustomerEmail, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
+        <TextBox Name="txbCustomerAddress" IsReadOnly="True" Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="230,140,0,0" TextWrapping="Wrap" Text="{Binding CustomerAddress, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
+        <TextBox Name="txbOrderDate" IsReadOnly="True" Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="230,180,0,0" TextWrapping="Wrap" Text="{Binding OrderDate, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
+        <TextBox Name="txbPaymentDate" IsReadOnly="True" Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="230,260,0,0" TextWrapping="Wrap" Text="{Binding PaymentDate, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
+        <TextBox Name="txbShipDate" IsReadOnly="True" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="230,308,0,0" TextWrapping="Wrap" Text="{Binding ShipDate, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
+        <TextBox Name="txbDeliveryDate" IsReadOnly="True"  FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="230,353,0,0" TextWrapping="Wrap" Text="{Binding DeliveryDate, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
+        <TextBox Name="txbToatalPrice" IsReadOnly="True" Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="230,393,0,0" TextWrapping="Wrap" Text="{Binding TotalPrice, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="170"/>
+        <ComboBox Name="cbxStatus" HorizontalAlignment="Left" Foreground="#FF893E42" FontFamily="Tekton Pro" Margin="230,220,0,0" VerticalAlignment="Top" Width="170"/>
+        <ListView Name="lvOrderItem" d:ItemsSource="{d:SampleData ItemCount=5}"  Foreground="#FF893E42"  Margin="452,0,10,94">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Name="btUpdate" Content="Update" HorizontalAlignment="Left" Margin="680,364,0,0" VerticalAlignment="Top" Width="96" Height="44" Click="btUpdate_Click"/>
-        <CheckBox Name="cbShipDate" Content="Update to now" HorizontalAlignment="Left" Margin="230,310,0,0" VerticalAlignment="Top"/>
-        <CheckBox Name="cbDeliveryDate" Content="Update to now" HorizontalAlignment="Left" Margin="230,355,0,0" VerticalAlignment="Top"/>
+        <Button Name="btUpdate" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Tekton Pro" Content="Update" HorizontalAlignment="Left" Margin="680,364,0,0" VerticalAlignment="Top" Width="96" Height="44" Click="btUpdate_Click"/>
+        <CheckBox Name="cbShipDate" Content="Update to now"  Background="#FF893E42" Foreground="#FF908989"  BorderBrush="White" HorizontalAlignment="Left" Margin="230,309,0,0" VerticalAlignment="Top"/>
+        <CheckBox Name="cbDeliveryDate" Content="Update to now" Background="#FF893E42" Foreground="#FF908989"  BorderBrush="White" HorizontalAlignment="Left" Margin="230,354,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

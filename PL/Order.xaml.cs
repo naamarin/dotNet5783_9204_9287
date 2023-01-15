@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,18 +22,22 @@ namespace PL
     public partial class Order : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        public IEnumerable<BO.OrderForList?> currentOrder
+
+        public ObservableCollection<BO.OrderForList?> currentOrder
         {
-            get { return (IEnumerable<BO.OrderForList?>)GetValue(currentcurrentOrder); }
+            get { return (ObservableCollection<BO.OrderForList?>)GetValue(currentcurrentOrder); }
             set { SetValue(currentcurrentOrder, value); }
         }
+
         public static readonly DependencyProperty currentcurrentOrder =
-            DependencyProperty.Register("currentOrder", typeof(IEnumerable<BO.OrderForList?>), typeof(Window), new PropertyMetadata(null));
+            DependencyProperty.Register("currentOrder", typeof(ObservableCollection<BO.OrderForList?>), typeof(Window), new PropertyMetadata(null));
+        
+        
         public Order()
         {
             InitializeComponent();
-            currentOrder = bl.Order.OrderListForManager();
-            lvOrderForList.ItemsSource = currentOrder;
+            //currentOrder = bl.Order.OrderListForManager();
+            //lvOrderForList.ItemsSource = currentOrder;
         }
 
         private void lvOrderForList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -41,6 +46,11 @@ namespace PL
             new OrderDetals(orderID, true).ShowDialog();
             //ProductView.ItemsSource = bl?.Product.GetListProducts();
             //CategorySelector.SelectedItem = BO.CategoryForWPF.All;
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            currentOrder = new ObservableCollection<BO.OrderForList?>( bl!.Order.OrderListForManager());
         }
     }
 }

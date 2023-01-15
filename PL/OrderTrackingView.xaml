@@ -8,21 +8,28 @@
         DataContext="{Binding currentOrderTracking, RelativeSource={RelativeSource self}}"
         Title="OrderTrackingView" Height="450" Width="800">
     <Grid>
+        <Image HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="434" Source="/pattern.jpg" Opacity="0.5" Margin="433,0,0,0"/>
+        <Image HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="434" Source="/pattern.jpg" Opacity="0.5"/>
+        
+        <Image Name="ImOrdered" Height="183" Width="472" VerticalAlignment="Center" Margin="187,227,141,89" Source="/Ordered.png"/>
+        <Image Name="ImSipped" Height="183" Width="472" VerticalAlignment="Center" Margin="188,231,140,85" Source="/Sipped.png"/>
+        <Image Name="ImDelivered" Height="183" Width="472" VerticalAlignment="Center" Margin="183,232,145,83" Source="/Delivered.png"/>
+        
+        <Label Name="lbOrderId" Content="Enter order ID:" Foreground="#FF893E42" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="284,57,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.004,0.729" FontSize="16"/>
+        <TextBox Name="txbOrderID" HorizontalAlignment="Left" Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Tekton Pro" Margin="393,61,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Name="btOrderTracking" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Tekton Pro" Content="Display order tracking" HorizontalAlignment="Center" Margin="0,93,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.189,-0.049" Height="44" Width="166" Click="btOrderTracking_Click" FontSize="16"/>
+        <Label Name="lbOrderStatus" Content="Status:" Foreground="#FF893E42" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="75,0,0,0" VerticalAlignment="Center" FontSize="16"/>
+        <Label Name="lbTracking" Content="Tracking:" Foreground="#FF893E42" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="69,264,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBox Name="txbStatus" IsReadOnly="True" Text="" Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="170,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Height="26" FontSize="16"/>
 
-        <Label Name="lbOrderId" Content="Enter order ID:" HorizontalAlignment="Left" Margin="75,66,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.004,0.729"/>
-        <TextBox Name="txbOrderID" HorizontalAlignment="Left" Margin="184,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Button Name="btOrderTracking" Content="Display order tracking" HorizontalAlignment="Left" Margin="75,116,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.189,-0.049" Height="33" Width="124" Click="btOrderTracking_Click"/>
-        <Label Name="lbOrderStatus" Content="Status" HorizontalAlignment="Left" Margin="75,0,0,0" VerticalAlignment="Center"/>
-        <Label Name="lbTracking" Content="Tracking" HorizontalAlignment="Left" Margin="69,264,0,0" VerticalAlignment="Top"/>
-        <TextBox Name="txbStatus" IsReadOnly="True" Text="" HorizontalAlignment="Left" Margin="184,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ListView ItemsSource="{Binding Tracking}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="170,264,216,28">
+        <!--<ListView Name="itemSource" ItemsSource="{Binding Tracking}" Foreground="#FF893E42" FontFamily="Tekton Pro" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="170,264,216,46" FontSize="16">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
-        </ListView>
-        <Button Name="btViewOrder" Content="View order" HorizontalAlignment="Left" Margin="490,70,0,0" VerticalAlignment="Top" Height="37" Width="94" Click="btViewOrder_Click"/>
-
+        </ListView>-->
+        <Button Name="btViewOrder" Content="View order" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="650,347,0,0" VerticalAlignment="Top" Height="41" Width="104" Click="btViewOrder_Click" FontSize="16"/>
+       
     </Grid>
 </Window>
