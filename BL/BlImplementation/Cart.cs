@@ -30,6 +30,8 @@ internal class Cart : BlApi.ICart
         }
         if (cart == null)
             cart = new BO.Cart() { Items = new List<BO.OrderItem>()};
+        if (cart.Items == null)
+            cart.Items = new List<BO.OrderItem>();
         IEnumerable<BO.OrderItem?> oi = from BO.OrderItem? o in cart.Items where o.ProductID == productID select o;
         if (!oi.Any())
         {
@@ -40,18 +42,18 @@ internal class Cart : BlApi.ICart
                     Name = product.Name,
                     Amount = amnt,
                     ProductID = productID,
-                    ID = 0,
+                    ID = cart.Items.Count(),
                     Price = product.Price,
                     TotalPrice = product.Price * amnt,
                 });
-                cart.TotalPrice += product.Price;
+                cart.TotalPrice += product.Price * amnt;
             }
             else
                 throw new BO.BlIdAlreadyExistException("The product amount in stock is 0");
         }
         else
         {
-            cart = UpdateCart(cart, productID, oi.First().Amount+1 );
+            UpdateCart(cart, productID, oi.First().Amount+amnt );
         }
     }
 
@@ -75,7 +77,7 @@ internal class Cart : BlApi.ICart
     /// <param name="amount"></param>
     /// <returns></returns>
     /// <exception cref="BO.BlProductDoesNotExsist"></exception>
-    public BO.Cart UpdateCart(BO.Cart cart, int productID, int amount)
+    public void UpdateCart(BO.Cart cart, int productID, int amount)
     {
         DO.Product product;
         try
@@ -120,14 +122,14 @@ internal class Cart : BlApi.ICart
                 });
             }
             cart.TotalPrice += amount*product.Price;
-            return cart;
+            //return cart;
         }
         else
         {
             cart.Items = from BO.OrderItem boOrderItem in cart.Items
                          where boOrderItem.ProductID != productID
                          select boOrderItem;
-            return cart;
+            //return cart;
         }
     }
 
@@ -145,11 +147,13 @@ internal class Cart : BlApi.ICart
         OrderDate=DateTime.Now,DeliveryDate=null,ShipDate=null};
         int oID = dal?.Order.Add(order) ?? throw new NullReferenceException("id does not exist");
         DO.Product p = new DO.Product();
+        if (!cart.Items.Any())
+            throw new BO.BlClientDeatalesNotValid("There is no items");
         foreach (BO.OrderItem oi in cart.Items)
         {
             p = dal.Product.GetById(oi.ProductID);
             if (p.InStock == 0)
-                throw new BO.BlNullPropertyException("the item is not in stock");
+                throw new BO.BlClientDeatalesNotValid("the item is not in stock");
             dal.OrderItem.Add(new DO.OrderItem() { OrderID = oID, ProductID = oi.ProductID, Amount = oi.Amount, Price = oi.Price });
             //p=dal.Product.GetById(oi.ProductID);
             p.InStock -= oi.Amount;

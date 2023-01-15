@@ -46,8 +46,6 @@ namespace PL
         private void ProductView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             int productID = ((BO.ProductItem)ProductView.SelectedItem).ID;
-            //ProductItemView productItemView = new ProductItemView(productID);
-            //productItemView.DataContext = cart;
             new ProductItemView(productID, cart).ShowDialog();
             ProductView.ItemsSource = bl?.Product.Catalog();
             CategorySelector.SelectedItem = BO.CategoryForWPF.All;

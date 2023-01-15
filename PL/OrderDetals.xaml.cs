@@ -21,22 +21,24 @@ namespace PL
     public partial class OrderDetals : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
+        public BO.Order? currentOrderr
+        {
+            get { return (BO.Order?)GetValue(currentOrderProperty); }
+            set { SetValue(currentOrderProperty, value); }
+        }
+        public static readonly DependencyProperty currentOrderProperty =
+            DependencyProperty.Register("currentOrderr", typeof(BO.Order), typeof(Window), new PropertyMetadata(null));
+
         public OrderDetals(int orderID, bool flag)
         {
             InitializeComponent();
             cbxStatus.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));
-            BO.Order order = bl.Order.GetById(orderID);
-            txbID.Text = orderID.ToString();
-            txbCustomerName.Text = order.CustomerName;
-            txbCustomerEmail.Text = order.CustomerEmail;
-            txbCustomerAddress.Text = order.CustomerAddress;
-            txbDeliveryDate.Text = order.DeliveryDate.ToString();
-            txbToatalPrice.Text = order.TotalPrice.ToString();
-            txbOrderDate.Text = order.OrderDate.ToString();
-            txbPaymentDate.Text = order.PaymentDate.ToString();
-            txbShipDate.Text = order.ShipDate.ToString();
-            lvOrderItem.ItemsSource = order.Items;
-            cbxStatus.SelectedItem = order.Status;
+            currentOrderr = bl.Order.GetById(orderID);
+            txbDeliveryDate.Text = currentOrderr.DeliveryDate.ToString();
+            txbOrderDate.Text = currentOrderr.OrderDate.ToString(); 
+            txbShipDate.Text = currentOrderr.ShipDate.ToString();   
+            txbPaymentDate.Text = currentOrderr.PaymentDate.ToString();
+            cbxStatus.SelectedItem = currentOrderr.Status;
             if (flag == true)
             {
                 
@@ -76,12 +78,19 @@ namespace PL
         }
 
         private void btUpdate_Click(object sender, RoutedEventArgs e)
-        {
+        { 
             int id = int.Parse(txbID.Text);
+            BO.Order order = bl.Order.GetById(id);
             if (cbShipDate.IsChecked == true)
+            {
                 bl?.Order.OrderShipUpdate(id);
+                order.Status = BO.OrderStatus.Shipped;
+            }
             if (cbDeliveryDate.IsChecked == true)
+            {
                 bl?.Order.OrderDeliveryUpdate(id);
+                order.Status = BO.OrderStatus.Delivered;
+            }
             this.Close();
         }
     }

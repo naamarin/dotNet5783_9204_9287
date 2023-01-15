@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ProductsView" Height="640" Width="800">
+    
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="23*"/>
@@ -19,10 +20,29 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox Name="CategorySelector" Foreground="#FF908989" SelectionChanged="CategorySelector_SelectionChanged"  FontFamily="Tekton Pro" Margin="0,-2,0,2" Grid.Column="1"/>
+            <ComboBox Name="CategorySelector" Background="#FF893E42" Foreground="#FF893E42" BorderBrush="White" SelectionChanged="CategorySelector_SelectionChanged"  FontFamily="Tekton Pro" Margin="398,6,2,6" Grid.ColumnSpan="2"/>
         </Grid>
 
-        <ListView x:Name="ProductView" Margin="0,46,0,0" Grid.RowSpan="2" FontFamily="Tekton Pro" Foreground="#FF908989" HorizontalAlignment="Center" Width="800" MouseDoubleClick="ProductView_MouseDoubleClick">
+
+
+
+
+        <Button Name="btnAddProduct" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Padding="5" Height="28" VerticalAlignment="Center" Click="btnAddProduct_Click" Width="104" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Tekton Pro" Margin="674,0,0,0"/>
+        
+        <!--<ScrollViewer Grid.Row="1">
+            <ListView x:Name="ProductView" FontFamily="Tekton Pro" ScrollViewer.HorizontalScrollBarVisibility= "Disabled"
+                      Foreground="#FF908989" BorderBrush="White"
+                      ScrollViewer.CanContentScroll="True" HorizontalAlignment="Stretch" ItemsSource="{Binding}"
+                      ItemTemplate="{Binding product}" PreviewMouseDoubleClick="ProductView_MouseDoubleClick">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ListView>
+        </ScrollViewer>-->
+
+        <ListView x:Name="ProductView" Margin="0,46,0,0" Grid.RowSpan="2" FontFamily="Tekton Pro" Foreground="#FF893E42" HorizontalAlignment="Center" Width="800" MouseDoubleClick="ProductView_MouseDoubleClick">
             <ListView.View >
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>
@@ -38,10 +58,8 @@
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
-
-
         </ListView>
-        <Button Name="btnAddProduct" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Padding="5" Height="28" VerticalAlignment="Center" Click="btnAddProduct_Click" Width="104" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Tekton Pro" Margin="674,0,0,0"/>
+
 
     </Grid>
 </Window>

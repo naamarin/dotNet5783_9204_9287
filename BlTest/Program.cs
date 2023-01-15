@@ -243,7 +243,7 @@ press f for return to the menu");
                             if (!int.TryParse(Console.ReadLine(), out id)) throw new Exception("wrong input type ");
                             Console.WriteLine("enter new amount of product:");
                             if (!int.TryParse(Console.ReadLine(), out amount)) throw new Exception("wrong input type ");
-                            Console.WriteLine(bl.Cart.UpdateCart(newCart, id, amount));
+                            bl.Cart.UpdateCart(newCart, id, amount);
                             break;
 
                         case 'c':

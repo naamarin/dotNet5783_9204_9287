@@ -23,7 +23,7 @@ public interface ICart
     /// <param name="productID"></param>
     /// <param name="amount"></param>
     /// <returns></returns>
-    public BO.Cart UpdateCart(BO.Cart cart, int productID, int amount);
+    public void UpdateCart(BO.Cart cart, int productID, int amount);
 
     public void RemoveOrderItem(BO.Cart cart, int productID);
 

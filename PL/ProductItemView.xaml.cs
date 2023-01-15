@@ -46,6 +46,15 @@ namespace PL
                 MessageBox.Show("Amount must be possitive!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+
+            if (amount > currentProduct.Amount)
+            {
+                MessageBox.Show(@"We are sorry, the requested quantity is not in stock.
+You can only " + currentProduct.Amount + " items" 
+                , "ERROR", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             bl.Cart.AddItemToCart(cart1, currentProduct.ID, amount);
             this.Close();
         }

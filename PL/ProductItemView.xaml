@@ -19,22 +19,23 @@
 
 
     <Grid>
-        <TextBox Name="txbProductID" IsReadOnly="True" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,70,0,0" TextWrapping="Wrap" Text="{Binding ID, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="txbProductName" IsReadOnly="True" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,110,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="txbProductPrice" IsReadOnly="True" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,190,0,0" TextWrapping="Wrap" Text="{Binding Price, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="txbProductStockCount" IsReadOnly="True" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,230,0,0" TextWrapping="Wrap" Text="{Binding InStock, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="txbCategory" IsReadOnly="True"  Style="{StaticResource TextBoxStyle}" Text="{Binding Category, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Margin="160,150,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Name="lID" Content="Product ID:" HorizontalAlignment="Left" Margin="45,65,0,0" VerticalAlignment="Top"/>
-        <Label Name="lName" Content="Product Name:" HorizontalAlignment="Left" Margin="45,105,0,0" VerticalAlignment="Top"/>
-        <Label Name="lCategory" Content="Product category:" HorizontalAlignment="Left" Margin="45,145,0,0" VerticalAlignment="Top"/>
-        <Label Name="lPrice" Content="Product price:" HorizontalAlignment="Left" Margin="45,185,0,0" VerticalAlignment="Top"/>
-        <Label Name="lAmount" Content="In stock:" HorizontalAlignment="Left" Margin="45,225,0,0" VerticalAlignment="Top"/>
+        <Grid Margin="0,10,0,-10"  Background="#FF893E42" >
+            <TextBox Name="txbProductID" Background="#FF893E42" Foreground="White" FontFamily="Tekton Pro" BorderBrush="White" IsReadOnly="True" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,70,0,0" TextWrapping="Wrap" Text="{Binding ID, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120"/>
+            <TextBox Name="txbProductName" Background="#FF893E42" Foreground="White" FontFamily="Tekton Pro" BorderBrush="White" IsReadOnly="True" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,110,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120"/>
+            <TextBox Name="txbProductPrice" Background="#FF893E42" Foreground="White" FontFamily="Tekton Pro" BorderBrush="White" IsReadOnly="True" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,190,0,0" TextWrapping="Wrap" Text="{Binding Price, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120"/>
+            <TextBox Name="txbProductStockCount" Background="#FF893E42" Foreground="White" FontFamily="Tekton Pro" BorderBrush="White" IsReadOnly="True" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,230,0,0" TextWrapping="Wrap" Text="{Binding InStock, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="120"/>
+            <TextBox Name="txbCategory" Background="#FF893E42" Foreground="White" BorderBrush="White" FontFamily="Tekton Pro" IsReadOnly="True"  Style="{StaticResource TextBoxStyle}" Text="{Binding Category, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Margin="160,150,0,0" VerticalAlignment="Top" Width="120"/>
+            <Label Name="lID" Content="Product ID:" Foreground="#FF908989" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="45,65,0,0" VerticalAlignment="Top"/>
+            <Label Name="lName" Content="Product Name:" Foreground="#FF908989" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="45,105,0,0" VerticalAlignment="Top"/>
+            <Label Name="lCategory" Content="Product category:" FontFamily="Tekton Pro" Foreground="#FF908989" HorizontalAlignment="Left" Margin="45,145,0,0" VerticalAlignment="Top"/>
+            <Label Name="lPrice" Content="Product price:" FontFamily="Tekton Pro" Foreground="#FF908989"  HorizontalAlignment="Left" Margin="45,185,0,0" VerticalAlignment="Top"/>
+            <Label Name="lAmount" Content="In stock:" FontFamily="Tekton Pro" Foreground="#FF908989" HorizontalAlignment="Left" Margin="45,225,0,0" VerticalAlignment="Top"/>
         <Grid Margin="0,10,0,-10">
             <Image Name="NewImage" Source="{Binding Path=ImageRelativeName, Converter= {StaticResource ImagePathToBitmap}}" HorizontalAlignment="Left" Height="123" VerticalAlignment="Top" Width="140" Margin="32,269,0,0"/>
-            <Button Name="btnAddToCart" Content="Add to cart" HorizontalAlignment="Left" Click="btnAddToCart_Click" Margin="196,324,0,0" VerticalAlignment="Top" Height="38" Width="88"/>
-            <Label Name="lbAmount" Content="Amount:" HorizontalAlignment="Left" Margin="196,262,0,0" VerticalAlignment="Top"/>
-            <TextBox Name="txbAmount" HorizontalAlignment="Left" Margin="256,266,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="19" RenderTransformOrigin="3.747,-0.755"/>
+                <Button Name="btnAddToCart" Content="Add to cart" FontFamily="Tekton Pro" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" HorizontalAlignment="Left" Click="btnAddToCart_Click" Margin="196,324,0,0" VerticalAlignment="Top" Height="38" Width="88"/>
+                <Label Name="lbAmount" Content="Amount:" FontFamily="Tekton Pro" Foreground="#FF908989" HorizontalAlignment="Left" Margin="196,262,0,0" VerticalAlignment="Top"/>
+                <TextBox Name="txbAmount" FontFamily="Tekton Pro" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" HorizontalAlignment="Left" Margin="256,266,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="28" RenderTransformOrigin="3.747,-0.755"/>
         </Grid>
-
+        </Grid>
     </Grid>
 </Window>

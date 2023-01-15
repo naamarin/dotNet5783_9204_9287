@@ -32,14 +32,29 @@ namespace PL
         public OrderTrackingView()
         {
             InitializeComponent();
+            btViewOrder.Visibility = Visibility.Hidden;
             
         }
 
         private void btOrderTracking_Click(object sender, RoutedEventArgs e)
         {
-            int orderID = int.Parse(txbOrderID.Text);
-            currentOrderTracking = bl.Order.TrackingOrder(orderID);
-            txbStatus.Text = currentOrderTracking.Status.ToString();
+            int orderID;
+            if (!int.TryParse(txbOrderID.Text, out orderID))
+                MessageBox.Show("Enter numbers only!", "ERROR");
+            else
+            {
+                try
+                {
+                    currentOrderTracking = bl.Order.TrackingOrder(orderID);
+                    txbStatus.Text = currentOrderTracking.Status.ToString();
+                    btViewOrder.Visibility = Visibility.Visible;
+                }
+                catch(BO.BlOrderDoesNotExsist ex)
+                {
+                    MessageBox.Show(ex.Message, "ERROR");
+                }
+                
+            }
         }
 
         private void btViewOrder_Click(object sender, RoutedEventArgs e)

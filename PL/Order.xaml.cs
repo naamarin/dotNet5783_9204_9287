@@ -21,10 +21,18 @@ namespace PL
     public partial class Order : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
+        public IEnumerable<BO.OrderForList?> currentOrder
+        {
+            get { return (IEnumerable<BO.OrderForList?>)GetValue(currentcurrentOrder); }
+            set { SetValue(currentcurrentOrder, value); }
+        }
+        public static readonly DependencyProperty currentcurrentOrder =
+            DependencyProperty.Register("currentOrder", typeof(IEnumerable<BO.OrderForList?>), typeof(Window), new PropertyMetadata(null));
         public Order()
         {
             InitializeComponent();
-            lvOrderForList.ItemsSource = bl.Order.OrderListForManager();
+            currentOrder = bl.Order.OrderListForManager();
+            lvOrderForList.ItemsSource = currentOrder;
         }
 
         private void lvOrderForList_MouseDoubleClick(object sender, MouseButtonEventArgs e)

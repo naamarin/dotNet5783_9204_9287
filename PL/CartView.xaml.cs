@@ -43,10 +43,21 @@ namespace PL
 
         private void btMakeOrder_Click(object sender, RoutedEventArgs e)
         {
-            int orderID = bl.Cart.MakeOrder(cart);
-            MessageBox.Show("Your order ID is: " + orderID, "succuss");
-            
-            this.Close();
+            try
+            {
+                int orderID = bl.Cart.MakeOrder(cart);
+                MessageBox.Show("Your order ID is: " + orderID, "succuss");
+                customerAddressTextBox.Text = "";
+                customerEmailTextBox.Text = "";
+                customerNameTextBox.Text = "";
+                cart.Items = null;
+                this.Close();
+            }
+            catch(BO.BlClientDeatalesNotValid ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR");
+            }
+           
         }
 
         private void btRemove_Click(object sender, RoutedEventArgs e)
@@ -58,5 +69,12 @@ namespace PL
             orderItemListView.Items.Refresh();
         }
 
+
+        private void txAmount_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            var orderItem = (BO.OrderItem)textBox.DataContext;
+            bl.Cart.UpdateCart(cart, orderItem.ProductID, int.Parse(textBox.Text));
+        }
     }
 }

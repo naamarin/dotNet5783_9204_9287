@@ -8,7 +8,12 @@
         DataContext="{Binding currentCart, RelativeSource={RelativeSource self}}"
         Title="CartView" Height="450" Width="550">
     <Grid>
-        <ListView x:Name="orderItemListView" ItemsSource="{Binding Items}" SelectionMode="Single" Margin="36,217,33,17">
+        <Image HorizontalAlignment="Left" Height="315" VerticalAlignment="Top" Width="315" Source="/pattern.jpg" Opacity="0.5"/>
+        <Image HorizontalAlignment="Left" Height="315" VerticalAlignment="Top" Width="315" Source="/pattern.jpg" Margin="314,0,0,0" Opacity="0.5"/>
+        <Image HorizontalAlignment="Left" Height="315" VerticalAlignment="Top" Width="315" Source="/pattern.jpg" Margin="314,314,0,0" Opacity="0.5"/>
+        <Image HorizontalAlignment="Left" Height="315" VerticalAlignment="Top" Width="315" Source="/pattern.jpg" Margin="-1,314,0,0" Opacity="0.5"/>
+
+        <ListView x:Name="orderItemListView" ItemsSource="{Binding Items}" FontFamily="Tekton Pro" SelectionMode="Single" Margin="36,217,33,17">
             <ListView.ItemContainerStyle>
                 <Style>
                     <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
@@ -17,13 +22,6 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn x:Name="amountColumn" Header="Amount" Width="80">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Margin="6,-1,-6,-1" Text="{Binding Amount, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
                     <GridViewColumn x:Name="iDColumn" Header="ID" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -52,6 +50,13 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+                    <GridViewColumn x:Name="amountColumn" Header="Amount" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Name="txAmount" Margin="6,-1,-6,-1" Text="{Binding Amount, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" LostFocus="txAmount_LostFocus"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn x:Name="totalPriceColumn" Header="Total Price" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -69,6 +74,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        
+        
         <Grid x:Name="grid1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="36,31,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -80,17 +87,18 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Content="Customer Address:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="customerAddressTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="0" Text="{Binding CustomerAddress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="Customer Email:" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-            <TextBox x:Name="customerEmailTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding CustomerEmail, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="Customer Name:" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <TextBox x:Name="customerNameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding CustomerName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="Total Price:" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-            <TextBox x:Name="totalPriceTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="3" Text="{Binding TotalPrice, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0"  Foreground="#FF893E42" FontFamily="Tekton Pro" Content="Customer Address:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" FontSize="16"/>
+            <TextBox x:Name="customerAddressTextBox" Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Tekton Pro"  Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="0" Text="{Binding CustomerAddress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="Customer Email:" Foreground="#FF893E42" FontFamily="Tekton Pro"  HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" FontSize="16"/>
+            <TextBox x:Name="customerEmailTextBox" Background="#FF893E42" Foreground="White"  BorderBrush="White" Grid.Column="1" FontFamily="Tekton Pro" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding CustomerEmail, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="Customer Name:" Foreground="#FF893E42" FontFamily="Tekton Pro"  HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" FontSize="16"/>
+            <TextBox x:Name="customerNameTextBox" Background="#FF893E42" Foreground="White"  BorderBrush="White" Grid.Column="1" FontFamily="Tekton Pro"  HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding CustomerName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="Total Price:" Foreground="#FF893E42" FontFamily="Tekton Pro"  HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" FontSize="16"/>
+            <TextBox x:Name="totalPriceTextBox" Background="#FF893E42" Foreground="White"  BorderBrush="White" Grid.Column="1" FontFamily="Tekton Pro" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="3" Text="{Binding TotalPrice, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
-        <Label Content="Items:" HorizontalAlignment="Left" Margin="36,186,0,0" VerticalAlignment="Top"/>
-        <Button Name="btMakeOrder" Content="Make order" HorizontalAlignment="Left" Margin="410,31,0,0" VerticalAlignment="Top" Height="48" Width="107" Click="btMakeOrder_Click"/>
+        <Label Content="Items:" Foreground="#FF893E42" FontSize="16" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="36,185,0,0" VerticalAlignment="Top"/>
+        <Button Name="btMakeOrder" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Tekton Pro" Content="Make order" HorizontalAlignment="Left" Margin="410,31,0,0" VerticalAlignment="Top" Height="48" Width="107" Click="btMakeOrder_Click"/>
+
 
 
 
