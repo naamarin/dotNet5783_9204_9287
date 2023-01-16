@@ -39,6 +39,9 @@ internal static class DataSource
         createAndInitProducts();
         createAndInitOrders();
         createAndInitOrderItems();
+        //XMLTools.SaveListToXMLSerializer(ProductList, "products");
+        //XMLTools.SaveListToXMLSerializer(OrderList, "orders");
+        //XMLTools.SaveListToXMLSerializer(OrderItemsList, "orderItems");
     }
     /// <summary>
     /// A function to create new objects of product type

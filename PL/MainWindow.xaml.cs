@@ -40,6 +40,7 @@ namespace PL
         private void btManagerView_Click(object sender, RoutedEventArgs e)
         {
             new ManagerView().Show();
+            cart = new BO.Cart() { Items = new List<BO.OrderItem?>(), TotalPrice = 0, CustomerAddress = "", CustomerEmail = "", CustomerName = "" };
         }
 
         private void btNewOrderDisplay_Click(object sender, RoutedEventArgs e)
