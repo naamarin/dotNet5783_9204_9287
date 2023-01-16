@@ -47,15 +47,15 @@ namespace PL
         {
             BO.CategoryForWPF category = (BO.CategoryForWPF)CategorySelector.SelectedItem;
             if (category == BO.CategoryForWPF.All)
-                ProductView.ItemsSource = bl?.Product.GetListProducts();
+                currentProductForList =  new ObservableCollection<BO.ProductForList?> (bl!.Product.GetListProducts());
             else
-                ProductView.ItemsSource = bl?.Product.GetListProductsByCategory((BO.Category)category);
+                currentProductForList = new ObservableCollection<BO.ProductForList?> (bl!.Product.GetListProductsByCategory((BO.Category)category));
         }
 
         private void btnAddProduct_Click(object sender, RoutedEventArgs e)
         {
             new Window1().ShowDialog();
-            ProductView.ItemsSource = bl?.Product.GetListProducts();
+            currentProductForList = new ObservableCollection<BO.ProductForList?>(bl!.Product.GetListProducts());
             CategorySelector.SelectedItem = BO.CategoryForWPF.All;
         }
 

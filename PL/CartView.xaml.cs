@@ -81,7 +81,6 @@ namespace PL
             TextBox textBox = (TextBox)sender;
             var orderItem = (BO.OrderItem)textBox.DataContext;
             bl.Cart.UpdateCart(cart, orderItem.ProductID, int.Parse(textBox.Text));
-            currentCart = cart;
         }
     }
 }
