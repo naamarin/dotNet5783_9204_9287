@@ -65,7 +65,6 @@ namespace PL
             }
             try
             {
-
                 bl?.Product.AddProduct(currentProduct);
                 this.Close();
             }
@@ -135,7 +134,7 @@ namespace PL
             
             //BO.Product product = bl.Product.GetById(int.Parse(txbProductID.Text));
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == true)
+                if (openFileDialog.ShowDialog() == true)
             {
                 //NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
                 string imageName = openFileDialog.FileName.Substring(openFileDialog.FileName.LastIndexOf("\\"));

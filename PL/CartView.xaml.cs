@@ -1,6 +1,7 @@
 ﻿using BO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Printing;
 using System.Text;
@@ -41,12 +42,17 @@ namespace PL
             cart = c;
         }
 
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            currentCart = cart;
+        }
+
         private void btMakeOrder_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 int orderID = bl.Cart.MakeOrder(cart);
-                MessageBox.Show("Your order ID is: " + orderID, "succuss");
+                MessageBox.Show("Your order ID is: " + orderID, "succuss", MessageBoxButton.OK, MessageBoxImage.Information);
                 customerAddressTextBox.Text = "";
                 customerEmailTextBox.Text = "";
                 customerNameTextBox.Text = "";
@@ -55,7 +61,7 @@ namespace PL
             }
             catch(BO.BlClientDeatalesNotValid ex)
             {
-                MessageBox.Show(ex.Message, "ERROR");
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             }
            
         }
@@ -75,6 +81,7 @@ namespace PL
             TextBox textBox = (TextBox)sender;
             var orderItem = (BO.OrderItem)textBox.DataContext;
             bl.Cart.UpdateCart(cart, orderItem.ProductID, int.Parse(textBox.Text));
+            currentCart = cart;
         }
     }
 }

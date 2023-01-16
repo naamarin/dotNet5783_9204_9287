@@ -36,10 +36,10 @@ namespace PL
             lbOrderStatus.Visibility= Visibility.Hidden;
             txbStatus.Visibility = Visibility.Hidden;
             lbTracking.Visibility = Visibility.Hidden;
-            //itemSource.Visibility = Visibility.Hidden;
-            //ImDelivered.Visibility = Visibility.Hidden;
-            //ImOrdered.Visibility = Visibility.Hidden;
-            //ImSipped.Visibility = Visibility.Hidden;
+            itemSource.Visibility = Visibility.Hidden;
+            ImOrdered.Visibility = Visibility.Hidden;
+            ImShipped.Visibility = Visibility.Hidden;
+            ImDelivered.Visibility = Visibility.Hidden;
         }
 
         private void btOrderTracking_Click(object sender, RoutedEventArgs e)
@@ -57,13 +57,38 @@ namespace PL
                     lbOrderStatus.Visibility = Visibility.Visible;
                     txbStatus.Visibility = Visibility.Visible;
                     lbTracking.Visibility = Visibility.Visible;
-                    //itemSource.Visibility = Visibility.Visible;
-                   if (txbStatus.Text== "Delivered")
-                        ImDelivered.Visibility = Visibility.Visible;
+                    itemSource.Visibility = Visibility.Visible;
                     if (txbStatus.Text == "Ordered")
+                    {
+                        ImDelivered.Visibility = Visibility.Hidden;
+                        ImShipped.Visibility = Visibility.Hidden;
                         ImOrdered.Visibility = Visibility.Visible;
-                    if (txbStatus.Text == "Sipped")
-                        ImSipped.Visibility = Visibility.Visible;
+                    }
+                    else if(txbStatus.Text == "Delivered")
+                    {
+                        ImShipped.Visibility = Visibility.Hidden;
+                        ImOrdered.Visibility = Visibility.Hidden;
+                        ImDelivered.Visibility = Visibility.Visible;
+                    }
+                    else if (txbStatus.Text == "Shipped")
+                    {
+                        ImDelivered.Visibility = Visibility.Hidden;
+                        ImOrdered.Visibility = Visibility.Hidden;
+                        ImShipped.Visibility = Visibility.Visible;
+                    }
+                    //else if (txbStatus.Text == "Ordered")
+                    //{
+                    //    ImDelivered.Visibility = Visibility.Hidden;
+                    //    ImShipped.Visibility = Visibility.Hidden;
+                    //    ImOrdered.Visibility = Visibility.Visible;
+                    //}
+                    //if (txbStatus.Text== "Delivered")
+                    //    ImDelivered.Visibility = Visibility.Visible;
+                    //else if (txbStatus.Text == "Shipped")
+                    //    ImSipped.Visibility = Visibility.Visible;
+                    //else if (txbStatus.Text == "Ordered")
+                    //    ImOrdered.Visibility = Visibility.Visible;
+
                 }
                 catch(BO.BlOrderDoesNotExsist ex)
                 {
