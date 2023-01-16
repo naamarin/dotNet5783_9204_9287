@@ -43,7 +43,7 @@ namespace PL
                 txbProductID.IsReadOnly = true;
                 txbProductID.Foreground =Brushes.White;
                 //AddImage.Visibility = Visibility.Hidden;
-                UpdateImage.Visibility = Visibility.Visible;
+                //UpdateImage.Visibility = Visibility.Visible;
             }
             else
             {
@@ -51,7 +51,7 @@ namespace PL
                 txbProductID.Visibility = Visibility.Visible;
                 btAddProduct.Visibility = Visibility.Visible;
                 btUpdateProduct.Visibility = Visibility.Hidden;
-                UpdateImage.Visibility = Visibility.Hidden;
+                //UpdateImage.Visibility = Visibility.Hidden;
                 //AddImage.Visibility = Visibility.Visible;
             }
         }
