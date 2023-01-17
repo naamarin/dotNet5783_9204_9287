@@ -67,6 +67,7 @@ internal class DalProduct : IProduct
         }
         products.Remove(products.Find(x => x?.ID == product.ID));
         products.Add(product);
-        //XMLTools.SaveListToXMLSerializer(products, s_producs);
+        products.Sort((x, y) => x.Value.Category.Value.CompareTo(y.Value.Category.Value));
+        XMLTools.SaveListToXMLSerializer(products, s_producs);
     }
 }

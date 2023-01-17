@@ -1,4 +1,5 @@
-﻿using Dal;
+﻿using DalApi;
+using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,16 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace DalXml;
+namespace Dal;
 
 internal static class Config
 {
-    static string s_config = "configuration";
+    static readonly string s_config = "configuration";
     public static int NextOrderNumber()
     {
-        return XMLTools.ToIntNullable(XMLTools.LoadListFromXMLElement(s_config),"NextOrderID") ?? 0;
-        //XElement configRoot =XElement.Load(s_config);
-        //int.TryParse(configRoot.Element("NextOrderID").Value, out int id);
+        return XMLTools.LoadListFromXMLElement(s_config).ToIntNullable("NextOrderID") ?? 0;
         //return id;
     }
     public static void premotOrderNumber(int id)
@@ -28,7 +27,7 @@ internal static class Config
 
     public static int NextOrderItemNumber()
     {
-        return XMLTools.ToIntNullable(XMLTools.LoadListFromXMLElement(s_config),"NextOrderItemID") ?? 0;
+        return XMLTools.LoadListFromXMLElement(s_config).ToIntNullable("NextOrderItemID") ?? 0;
     }
     public static void premotOrderItemNumber(int id)
     {

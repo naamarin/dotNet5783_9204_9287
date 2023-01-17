@@ -72,7 +72,10 @@ namespace PL
             var button = (Button)sender;
             var orderItem = (BO.OrderItem)button.DataContext;
             bl.Cart.RemoveOrderItem(cart, orderItem.ProductID);
-            orderItemListView.Items.Refresh();
+            
+            MessageBox.Show("Order item romoved" , "succuss", MessageBoxButton.OK, MessageBoxImage.Information);
+            //currentCart.Items = cart.Items;
+            //orderItemListView.Items.Refresh();
         }
 
 

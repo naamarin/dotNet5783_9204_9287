@@ -1,5 +1,5 @@
 ﻿using DalApi;
-using DalXml;
+//using DalXml;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -96,5 +96,7 @@ internal class DalOrderItem : IOrderItem
         }
         orderItemList.Remove(orderItemList.Find(x => x?.ID == orderItem.ID));
         orderItemList.Add(orderItem);
+        orderItemList.Sort((x, y) => x.Value.ID.CompareTo(y.Value.ID));
+        XMLTools.SaveListToXMLSerializer(orderItemList, s_orderItems);
     }
 }

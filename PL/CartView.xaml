@@ -53,7 +53,7 @@
                     <GridViewColumn x:Name="amountColumn" Header="Amount" Width="80">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Name="txAmount" Margin="6,-1,-6,-1" Text="{Binding Amount, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" LostFocus="txAmount_LostFocus"/>
+                                <TextBox Name="txAmount" Margin="-6,-1,-6,-1" Text="{Binding Amount, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" LostFocus="txAmount_LostFocus"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

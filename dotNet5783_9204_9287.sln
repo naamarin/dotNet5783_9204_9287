@@ -31,8 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{06FE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{6106D3E4-70A2-435C-ACD4-E74600679259}"
 	ProjectSection(SolutionItems) = preProject
+		xml\configuration.xml = xml\configuration.xml
 		xml\dal-config.xml = xml\dal-config.xml
-		configuration.xml = configuration.xml
 		xml\orderItems.xml = xml\orderItems.xml
 		xml\orders.xml = xml\orders.xml
 		xml\products.xml = xml\products.xml

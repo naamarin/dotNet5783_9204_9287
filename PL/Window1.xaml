@@ -35,7 +35,7 @@
         <Label Name="lAmount" Content="Product amount:" Foreground="#FF908989" HorizontalAlignment="Left" Margin="45,225,0,0" VerticalAlignment="Top" FontFamily="Tekton Pro"/>
         <Button Name="btAddProduct" Content="Add" Background="#FF893E42" Foreground="#FF908989" HorizontalAlignment="Left" Margin="290,375,0,0" VerticalAlignment="Top" Height="28" Width="88" Click="btAddProduct_Click" FontFamily="Tekton Pro"/>
         <Button Name="btUpdateProduct" Content="Update" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" HorizontalAlignment="Left" Margin="290,375,0,0" VerticalAlignment="Top" Height="28" Width="88" Click="btUpdateProduct_Click" FontFamily="Tekton Pro"/>
-        <Button Name= "UpdateImage" Content="update Image" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" HorizontalAlignment="Left" Margin="190,375,0,0" VerticalAlignment="Top" Click="UpdateButton_Click" Height="28" Width="88" FontFamily="Tekton Pro"/>
+        <!--<Button Name= "UpdateImage" Content="update Image" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" HorizontalAlignment="Left" Margin="190,375,0,0" VerticalAlignment="Top" Click="UpdateButton_Click" Height="28" Width="88" FontFamily="Tekton Pro"/>-->
 
 
     </Grid>
