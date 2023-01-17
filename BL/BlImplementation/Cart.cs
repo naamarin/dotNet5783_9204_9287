@@ -57,7 +57,7 @@ internal class Cart : BlApi.ICart
         }
     }
 
-    public void RemoveOrderItem(BO.Cart cart, int productID)
+    public IEnumerable<BO.OrderItem> RemoveOrderItem(BO.Cart cart, int productID)
     {
         IEnumerable<BO.OrderItem?> oi = from BO.OrderItem? o in cart.Items
                                         where o.ProductID == productID
@@ -66,6 +66,9 @@ internal class Cart : BlApi.ICart
         cart.Items = from BO.OrderItem boOrderItem in cart.Items
                      where boOrderItem.ProductID != productID
                      select boOrderItem;
+        return from BO.OrderItem boOrderItem in cart.Items
+               where boOrderItem.ProductID != productID
+               select boOrderItem;
 
     }
 

@@ -75,9 +75,9 @@ namespace PL
 
         private void cbGroupByCategory_Checked(object sender, RoutedEventArgs e)
         {
-            //var GroupingByCategory = from productItem in bl?.Product.Catalog()
-            //                         group productItem by productItem.Category into g
-            //                         select g;
+            var GroupingByCategory = from productItem in bl?.Product.Catalog()
+                                     group productItem by productItem.Category into g
+                                     select g;
             //List<BO.ProductItem?> productItems = new List<BO.ProductItem?>();
             //foreach(var group in GroupingByCategory)
             //{

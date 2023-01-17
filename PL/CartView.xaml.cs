@@ -1,4 +1,5 @@
-﻿using BO;
+﻿using BlApi;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,7 +25,7 @@ namespace PL
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
 
-        BO.Cart cart { get; set; }
+        //BO.Cart cart { get; set; }
 
         public BO.Cart? currentCart
         {
@@ -39,24 +40,25 @@ namespace PL
         {
             InitializeComponent();
             currentCart = c;
-            cart = c;
+            //cart = c;
         }
 
-        private void Window_Activated(object sender, EventArgs e)
-        {
-            currentCart = cart;
-        }
+        //private void Window_Activated(object sender, EventArgs e)
+        //{
+        //    currentCart = cart;
+        //}
 
         private void btMakeOrder_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                int orderID = bl.Cart.MakeOrder(cart);
+                int orderID = bl.Cart.MakeOrder(currentCart);
+                
                 MessageBox.Show("Your order ID is: " + orderID, "succuss", MessageBoxButton.OK, MessageBoxImage.Information);
                 customerAddressTextBox.Text = "";
                 customerEmailTextBox.Text = "";
                 customerNameTextBox.Text = "";
-                cart.Items = null;
+                currentCart.Items = null;
                 this.Close();
             }
             catch(BO.BlClientDeatalesNotValid ex)
@@ -71,11 +73,13 @@ namespace PL
 
             var button = (Button)sender;
             var orderItem = (BO.OrderItem)button.DataContext;
-            bl.Cart.RemoveOrderItem(cart, orderItem.ProductID);
-            
+            orderItemListView.ItemsSource = bl.Cart.RemoveOrderItem(currentCart!, orderItem.ProductID);
+            totalPriceTextBox.Text = currentCart!.TotalPrice.ToString();
             MessageBox.Show("Order item romoved" , "succuss", MessageBoxButton.OK, MessageBoxImage.Information);
             //currentCart.Items = cart.Items;
             //orderItemListView.Items.Refresh();
+            // currentCart = cart;
+            //currentCart = new Cart(currentCart);
         }
 
 
@@ -83,7 +87,7 @@ namespace PL
         {
             TextBox textBox = (TextBox)sender;
             var orderItem = (BO.OrderItem)textBox.DataContext;
-            bl.Cart.UpdateCart(cart, orderItem.ProductID, int.Parse(textBox.Text));
+            bl.Cart.UpdateCart(currentCart!, orderItem.ProductID, int.Parse(textBox.Text));
         }
     }
 }

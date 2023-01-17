@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         DataContext="{Binding currentCart, RelativeSource={RelativeSource self}}"
-        Title="CartView" Height="450" Width="550" Activated="Window_Activated">
+        Title="CartView" Height="450" Width="550" >
     <Grid>
         <Image HorizontalAlignment="Left" Height="315" VerticalAlignment="Top" Width="315" Source="/pattern.jpg" Opacity="0.5"/>
         <Image HorizontalAlignment="Left" Height="315" VerticalAlignment="Top" Width="315" Source="/pattern.jpg" Margin="314,0,0,0" Opacity="0.5"/>
