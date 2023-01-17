@@ -80,7 +80,7 @@ internal class Cart : BlApi.ICart
     /// <param name="amount"></param>
     /// <returns></returns>
     /// <exception cref="BO.BlProductDoesNotExsist"></exception>
-    public void UpdateCart(BO.Cart cart, int productID, int amount)
+    public IEnumerable<BO.OrderItem> UpdateCart(BO.Cart cart, int productID, int amount)
     {
         DO.Product product;
         try
@@ -134,6 +134,7 @@ internal class Cart : BlApi.ICart
                          select boOrderItem;
             //return cart;
         }
+        return cart.Items;
     }
 
     /// <summary>

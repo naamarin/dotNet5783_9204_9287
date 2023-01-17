@@ -87,7 +87,8 @@ namespace PL
         {
             TextBox textBox = (TextBox)sender;
             var orderItem = (BO.OrderItem)textBox.DataContext;
-            bl.Cart.UpdateCart(currentCart!, orderItem.ProductID, int.Parse(textBox.Text));
+            orderItemListView.ItemsSource = bl.Cart.UpdateCart(currentCart!, orderItem.ProductID, int.Parse(textBox.Text));
+            totalPriceTextBox.Text = currentCart!.TotalPrice.ToString();
         }
     }
 }
