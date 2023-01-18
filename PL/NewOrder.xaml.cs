@@ -78,23 +78,26 @@ namespace PL
             var GroupingByCategory = from productItem in bl?.Product.Catalog()
                                      group productItem by productItem.Category into g
                                      select g;
-            //List<BO.ProductItem?> productItems = new List<BO.ProductItem?>();
-            //foreach(var group in GroupingByCategory)
-            //{
-            //    foreach(var item in group)
-            //    {
-            //        productItems.Add(item);
-            //    }
-            //}
-            //ProductView.ItemsSource = productItems;
-            //CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ProductView.ItemsSource);
-            //if (view.GroupDescriptions.Count < 1)
-            //{
-            //    PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
-            //    view.GroupDescriptions.Add(groupDescription);
-            //}
+            List<BO.ProductItem?> productItems = new List<BO.ProductItem?>();
+            foreach (var group in GroupingByCategory)
+            {
+                foreach (var item in group)
+                {
+                    productItems.Add(item);
+                }
+            }
+            ProductView.ItemsSource = productItems;
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ProductView.ItemsSource);
+            if (view.GroupDescriptions.Count < 1)
+            {
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("Category");
+                view.GroupDescriptions.Add(groupDescription);
+            }
+        }
 
-
+        private void cbGroupByCategory_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ProductView.ItemsSource = currentProductItems;
         }
     }
 }

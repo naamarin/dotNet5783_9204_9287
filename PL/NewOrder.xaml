@@ -26,7 +26,7 @@
 
             <ComboBox Name="CategorySelector"  FontFamily="Tekton Pro" Background="#FF893E42" Foreground="#FF893E42" BorderBrush="White" Grid.Column="2" SelectionChanged="CategorySelector_SelectionChanged"/>
             <Button Content="Go to cart" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Tekton Pro" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="97" Margin="0,1,0,0" Click="Button_Click"/>
-            <CheckBox Name="cbGroupByCategory" Content="Group by category" Grid.ColumnSpan="2" Margin="266,0,0,0" IsChecked="False" Checked="cbGroupByCategory_Checked"/>
+            <CheckBox Name="cbGroupByCategory" Content="Group by category" Grid.ColumnSpan="2" Margin="266,0,0,0" IsChecked="False" Checked="cbGroupByCategory_Checked" Unchecked="cbGroupByCategory_Unchecked"/>
 
         </Grid>
 
@@ -49,6 +49,30 @@
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="True">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold"  FontSize="18" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="{Binding ItemCount}" FontSize="16"  FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text=" item(s)" FontSize="12" FontStyle="Italic" VerticalAlignment="Bottom"  />
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
 
         </ListView>
         

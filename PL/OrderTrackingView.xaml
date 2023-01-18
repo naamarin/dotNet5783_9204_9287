@@ -16,7 +16,7 @@
         <Image Name="ImDelivered" Margin="148,294,213,-30" Source="/Delivered.Jpg"/>
 
         <Label Name="lbOrderId" Content="Enter order ID:" Foreground="#FF893E42" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="268,57,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.004,0.729" FontSize="16" Background="#FFFBF9F9"/>
-        <TextBox Name="txbOrderID" HorizontalAlignment="Left" Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Tekton Pro" Margin="393,63,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="txbOrderID" Text="" HorizontalAlignment="Left" Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Tekton Pro" Margin="393,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button Name="btOrderTracking" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Tekton Pro" Content="Display order tracking" HorizontalAlignment="Center" Margin="0,93,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.189,-0.049" Height="44" Width="166" Click="btOrderTracking_Click" FontSize="16"/>
         <Label Name="lbOrderStatus" Content="Status:" Foreground="#FF893E42" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="75,165,0,0" VerticalAlignment="Top" FontSize="16" Background="#FFFDFBFB"/>
         <Label Name="lbTracking" Content="Tracking:" Foreground="#FF893E42" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="69,195,0,0" VerticalAlignment="Top" FontSize="16" Background="#FFFFFBFB"/>

@@ -20,7 +20,6 @@ namespace PL
     public partial class OrderTrackingView : Window
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
-        //BO.Cart cart1 = new BO.Cart();
         public BO.OrderTracking? currentOrderTracking
         {
             get { return (BO.OrderTracking?)GetValue(currentOrderTrackingProperty); }
@@ -29,9 +28,11 @@ namespace PL
         public static readonly DependencyProperty currentOrderTrackingProperty =
             DependencyProperty.Register("currentOrderTracking", typeof(BO.OrderTracking), typeof(Window), new PropertyMetadata(null));
 
-        public OrderTrackingView()
+        public OrderTrackingView(int id = 0)
         {
             InitializeComponent();
+            if (id != 0)
+                txbOrderID.Text = id.ToString();
             btViewOrder.Visibility = Visibility.Hidden;
             lbOrderStatus.Visibility= Visibility.Hidden;
             txbStatus.Visibility = Visibility.Hidden;
@@ -51,7 +52,7 @@ namespace PL
             {
                 try
                 {
-                    currentOrderTracking = bl.Order.TrackingOrder(orderID);
+                    currentOrderTracking = bl!.Order.TrackingOrder(orderID);
                     txbStatus.Text = currentOrderTracking.Status.ToString();
                     btViewOrder.Visibility = Visibility.Visible;
                     lbOrderStatus.Visibility = Visibility.Visible;
@@ -76,25 +77,11 @@ namespace PL
                         ImOrdered.Visibility = Visibility.Hidden;
                         ImShipped.Visibility = Visibility.Visible;
                     }
-                    //else if (txbStatus.Text == "Ordered")
-                    //{
-                    //    ImDelivered.Visibility = Visibility.Hidden;
-                    //    ImShipped.Visibility = Visibility.Hidden;
-                    //    ImOrdered.Visibility = Visibility.Visible;
-                    //}
-                    //if (txbStatus.Text== "Delivered")
-                    //    ImDelivered.Visibility = Visibility.Visible;
-                    //else if (txbStatus.Text == "Shipped")
-                    //    ImSipped.Visibility = Visibility.Visible;
-                    //else if (txbStatus.Text == "Ordered")
-                    //    ImOrdered.Visibility = Visibility.Visible;
-
                 }
                 catch(BO.BlOrderDoesNotExsist ex)
                 {
                     MessageBox.Show(ex.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                
             }
         }
 

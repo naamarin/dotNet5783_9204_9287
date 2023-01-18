@@ -25,8 +25,6 @@ namespace PL
     {
         BlApi.IBl? bl = BlApi.Factory.Get();
 
-        //BO.Cart cart { get; set; }
-
         public BO.Cart? currentCart
         {
             get { return (BO.Cart?)GetValue(currentCartProperty); }
@@ -40,13 +38,7 @@ namespace PL
         {
             InitializeComponent();
             currentCart = c;
-            //cart = c;
         }
-
-        //private void Window_Activated(object sender, EventArgs e)
-        //{
-        //    currentCart = cart;
-        //}
 
         private void btMakeOrder_Click(object sender, RoutedEventArgs e)
         {
@@ -76,10 +68,6 @@ namespace PL
             orderItemListView.ItemsSource = bl.Cart.RemoveOrderItem(currentCart!, orderItem.ProductID);
             totalPriceTextBox.Text = currentCart!.TotalPrice.ToString();
             MessageBox.Show("Order item romoved" , "succuss", MessageBoxButton.OK, MessageBoxImage.Information);
-            //currentCart.Items = cart.Items;
-            //orderItemListView.Items.Refresh();
-            // currentCart = cart;
-            //currentCart = new Cart(currentCart);
         }
 
 

@@ -11,5 +11,6 @@
         <Button Name ="btOrderTracking"  Content="Order tracking" HorizontalAlignment="Left" VerticalAlignment="Top" Height="56" Width="140" Click="btOrderTracking_Click" Margin="100,350,0,0" Background="#FF893E42" Foreground="#FF908989" FontSize="16" FontFamily="Tekton Pro"/>
         <Button Name ="btManagerView"  Content="Manager" HorizontalAlignment="Left" VerticalAlignment="Top" Height="56" Width="140" Click="btManagerView_Click" Margin="325,350,0,0" Background="#FF893E42" Foreground="#FF908989" FontSize="16" FontFamily="Tekton Pro"/>
         <Button Name ="btNewOrderDisplay"  Content="New order" HorizontalAlignment="Left" VerticalAlignment="Top" Height="56" Width="140" Click="btNewOrderDisplay_Click" Margin="550,350,0,0" Background="#FF893E42" Foreground="#FF908989" FontSize="16" FontFamily="Tekton Pro"/>
+        <Button Name="btSimulator" Content="Simulator" HorizontalAlignment="Left" Margin="56,31,0,0" VerticalAlignment="Top" Background="#FF893E42" Foreground="#FF908989" FontSize="16" FontFamily="Tekton Pro" Click="btSimulator_Click"/>
     </Grid>
 </Window>

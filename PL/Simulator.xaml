@@ -1,0 +1,36 @@
+﻿<Window x:Class="PL.Simulator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        DataContext="{Binding currentOrder, RelativeSource={RelativeSource self}}"
+        Title="Simulator" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0"/>
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="lvOrderForList"   ItemsSource="{Binding}" Margin="0,43,0,0"   FontFamily="Tekton Pro" Foreground="#FF893E42" HorizontalAlignment="Center" Width="740">
+            <ListView.View >
+                <GridView>
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn Header="Customer name" DisplayMemberBinding="{Binding CustomerName}"/>
+                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}"/>
+                    <GridViewColumn Header="Amount of items" DisplayMemberBinding="{Binding AmountOfItems}"/>
+                    <GridViewColumn Header="Total price" DisplayMemberBinding="{Binding TotalPrice}"/>
+                    <GridViewColumn x:Name="iDColumn" Header="" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="btViewOrderTracking" Content="View order tracking" Click="btViewOrderTracking_Click" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Name="btStartTracking" Content="Start tracking" HorizontalAlignment="Left" Margin="562,4,0,0" VerticalAlignment="Top" Height="29" Width="98" Click="btStartTracking_Click"/>
+        <Button Name="btStopTracking" Content="Stop tracking" HorizontalAlignment="Left" Margin="672,4,0,0" VerticalAlignment="Top" Height="29" Width="98" Click="btStopTracking_Click"/>
+    </Grid>
+</Window>

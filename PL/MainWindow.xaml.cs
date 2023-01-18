@@ -47,5 +47,10 @@ namespace PL
         {
             new NewOrder(cart).Show();
         }
+
+        private void btSimulator_Click(object sender, RoutedEventArgs e)
+        {
+            new Simulator().Show();
+        }
     }
 }
