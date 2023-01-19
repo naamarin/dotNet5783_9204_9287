@@ -87,23 +87,24 @@ namespace PL
         private void btUpdate_Click(object sender, RoutedEventArgs e)
         { 
             int id = int.Parse(currentOrderr!.ID.ToString());
-            
+            BO.Order order = bl.Order.GetById(id);
             if (cbShipDate.IsChecked == true)
             {
                 bl?.Order.OrderShipUpdate(id);
-                //order.Status = BO.OrderStatus.Shipped;
+                order.Status = BO.OrderStatus.Shipped;
             }
             if (cbDeliveryDate.IsChecked == true)
             {
                 bl?.Order.OrderDeliveryUpdate(id);
-                //order.Status = BO.OrderStatus.Delivered;
+                order.Status = BO.OrderStatus.Delivered;
             }
             if (flag == true)
             {
-                currentOrderr.CustomerName = txbCustomerName.Text;
-                currentOrderr.CustomerEmail = txbCustomerEmail.Text;
-                currentOrderr.CustomerAddress = txbCustomerAddress.Text;
-                bl.Order.UpdateDeatails((BO.Order)currentOrderr);
+                order = bl.Order.GetById(id);
+                order.CustomerName = txbCustomerName.Text;
+                order.CustomerEmail = txbCustomerEmail.Text;
+                order.CustomerAddress = txbCustomerAddress.Text;
+                bl!.Order.UpdateDeatails(order);
                 
             }
             this.Close();

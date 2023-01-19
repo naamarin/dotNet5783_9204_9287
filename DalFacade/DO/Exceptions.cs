@@ -21,7 +21,6 @@ public class DalMissingIdException:Exception
     public DalMissingIdException(string? message) : base(message) { }
 }
 
-//[Serializable]
 public class DalConfigException : Exception
 {
     public DalConfigException(string msg) : base(msg) { }

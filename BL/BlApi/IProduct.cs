@@ -57,5 +57,10 @@ public interface IProduct
     /// <returns></returns>
     public BO.ProductItem ProductDeatails(int productID);
 
+    /// <summary>
+    /// return list of products that much the requested category
+    /// </summary>
+    /// <param name="c"></param>
+    /// <returns></returns>
     public IEnumerable<BO.ProductItem> GetProductItemsByCategory(BO.Category c);
 }

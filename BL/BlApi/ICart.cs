@@ -25,6 +25,12 @@ public interface ICart
     /// <returns></returns>
     public IEnumerable<BO.OrderItem> UpdateCart(BO.Cart cart, int productID, int amount);
 
+    /// <summary>
+    /// Remove item fron the order and returns orderItems list
+    /// </summary>
+    /// <param name="cart"></param>
+    /// <param name="productID"></param>
+    /// <returns></returns>
     public IEnumerable<BO.OrderItem> RemoveOrderItem(BO.Cart cart, int productID);
 
 

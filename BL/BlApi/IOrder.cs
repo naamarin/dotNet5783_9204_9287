@@ -49,5 +49,9 @@ public interface IOrder
     /// <returns></returns>
     public BO.OrderTracking TrackingOrder(int orderID);
 
+    /// <summary>
+    /// u[date client details
+    /// </summary>
+    /// <param name="o"></param>
     public void UpdateDeatails(BO.Order o);
 }

@@ -28,6 +28,7 @@ namespace PL
         static readonly Random rand = new Random();
 
         BlApi.IBl? bl = BlApi.Factory.Get();
+
         public ObservableCollection<BO.OrderForList?> currentOrder
         {
             get { return (ObservableCollection<BO.OrderForList?>)GetValue(currentcurrentOrder); }
