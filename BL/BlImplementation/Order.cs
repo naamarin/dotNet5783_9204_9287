@@ -205,6 +205,21 @@ internal class Order : BlApi.IOrder
             throw new BO.BlOrderAlreadyDelivered("Order already delivered");
     }
 
+
+    public void UpdateDeatails(BO.Order o)
+    {
+        dal?.Order.Update(new DO.Order
+        {
+            CustomerName = o.CustomerName,
+            CustomerAdress=o.CustomerAddress,
+            CustomerEmail=o.CustomerEmail,
+            OrderDate=o.OrderDate,
+            DeliveryDate=o.DeliveryDate,
+            ID = o.ID,
+            ShipDate=o.ShipDate,
+        });
+    }
+
     /// <summary>
     /// function for update delivery date of order
     /// </summary>

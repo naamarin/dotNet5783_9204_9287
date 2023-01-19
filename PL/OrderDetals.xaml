@@ -6,7 +6,7 @@
         DataContext="{Binding currentOrderr, RelativeSource={RelativeSource self}}"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="OrderDetals" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="OrderDetals" Height="450" Width="800" WindowStartupLocation="CenterScreen" Activated="Window_Activated">
     <Grid Margin="0,-7,0,7">
         <Image HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="434" Source="/pattern.jpg" Opacity="0.3" Margin="433,0,0,0"/>
         <Image HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="434" Source="/pattern.jpg" Opacity="0.3"/>

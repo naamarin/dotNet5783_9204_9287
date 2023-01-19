@@ -48,4 +48,6 @@ public interface IOrder
     /// <param name="orderID"></param>
     /// <returns></returns>
     public BO.OrderTracking TrackingOrder(int orderID);
+
+    public void UpdateDeatails(BO.Order o);
 }
