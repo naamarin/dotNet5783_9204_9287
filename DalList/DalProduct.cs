@@ -16,6 +16,7 @@ internal class DalProduct : IProduct
         if (DataSource.ProductList.Exists(x => x.Value.ID == product.ID))
             throw new DalAlreadyExistException("ID Product already exsists");
         DataSource.ProductList.Add(product);
+        DataSource.ProductList.Sort((x, y) => x.Value.Category.Value.CompareTo(y.Value.Category.Value));
         return product.ID;
     }
 
@@ -47,6 +48,7 @@ internal class DalProduct : IProduct
         }
         DataSource.ProductList.Remove(DataSource.ProductList.Find(x => x?.ID == product.ID));
         DataSource.ProductList.Add(product);
+        DataSource.ProductList.Sort((x, y) => x.Value.Category.Value.CompareTo(y.Value.Category.Value));
     }
 
     /// <summary>

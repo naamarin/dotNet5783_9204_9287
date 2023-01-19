@@ -16,7 +16,7 @@ internal static class DataSource
     /// </summary>
     internal static class Config
     {
-        internal const int s_startOrderNumber = 1000;
+        internal const int s_startOrderNumber = 1027;
         private static int s_nextOrderNumber = s_startOrderNumber;
         internal static int NextOrderNumber { get => s_nextOrderNumber++; }
 

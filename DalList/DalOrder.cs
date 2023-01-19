@@ -47,6 +47,7 @@ internal class DalOrder : IOrder
         }
         DataSource.OrderList.Remove(DataSource.OrderList.Find(x => x?.ID == order.ID));
         DataSource.OrderList.Add(order);
+        DataSource.OrderList.Sort((x, y) => x.Value.ID.CompareTo(y.Value.ID));
     }
 
     /// <summary>

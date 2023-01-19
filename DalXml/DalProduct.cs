@@ -17,6 +17,7 @@ internal class DalProduct : IProduct
         if (products.Exists(x => x.Value.ID == product.ID))
             throw new DalAlreadyExistException("ID Product already exsists");
         products.Add(product);
+        products.Sort((x, y) => x.Value.Category.Value.CompareTo(y.Value.Category.Value));
         XMLTools.SaveListToXMLSerializer(products, s_producs);
         return product.ID;
     }
