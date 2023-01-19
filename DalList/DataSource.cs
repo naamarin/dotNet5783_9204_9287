@@ -95,8 +95,8 @@ internal static class DataSource
         0512456325,0552545258,0504060040,0578578859,0532653562,0522238475,0558757856,0454875025,0506085075,039087584,
         0547659804,0513246521,0556485012,0548406711,0503329210,039875486,039095856,037845896,0732122155,};
 
-        int indexDelivery = 0;
-        int indexShip = 0;
+        //int indexDelivery = 0;
+        //int indexShip = 0;
         int count = 0;
         for (int i = 0; i < 27; i++)
         {
@@ -113,17 +113,17 @@ internal static class DataSource
             int second = rand.Next(1,59);
             order.OrderDate =DateTime.Now.AddMinutes(count);
             count -= 9;
-            if (indexShip < 18)
+            if (i > 9)
             {
                 order.ShipDate = order.OrderDate?.AddMinutes(31);
-                indexShip++;
+                //indexShip++;
             }
             else
                 order.ShipDate = null;
-            if (indexDelivery < 5)
+            if (i > 22)
             {
                 order.DeliveryDate = order.ShipDate?.AddMinutes(23);
-                indexDelivery++;
+                //indexDelivery++;
             }
             else
                 order.DeliveryDate = null;

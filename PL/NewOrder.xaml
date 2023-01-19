@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         DataContext="{Binding currentProductItems, RelativeSource={RelativeSource self}}"
-        Title="NewOrder" Height="450" Width="800" Activated="Window_Activated">
+        Title="NewOrder" Height="450" Width="800" Activated="Window_Activated" WindowStartupLocation="CenterScreen">
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="23*"/>
@@ -24,13 +24,13 @@
                 <ColumnDefinition Width="400*"/>
             </Grid.ColumnDefinitions >
 
-            <ComboBox Name="CategorySelector"  FontFamily="Tekton Pro" Background="#FF893E42" Foreground="#FF893E42" BorderBrush="White" Grid.Column="2" SelectionChanged="CategorySelector_SelectionChanged"/>
-            <Button Content="Go to cart" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Tekton Pro" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="97" Margin="0,1,0,0" Click="Button_Click"/>
-            <CheckBox Name="cbGroupByCategory" Content="Group by category" Grid.ColumnSpan="2" Margin="266,0,0,0" IsChecked="False" Checked="cbGroupByCategory_Checked" Unchecked="cbGroupByCategory_Unchecked"/>
+            <ComboBox Name="CategorySelector"  FontFamily="Gill Sans MT" Background="#FF893E42" Foreground="#FF893E42" BorderBrush="White" Grid.Column="2" SelectionChanged="CategorySelector_SelectionChanged"/>
+            <Button Content="Go to cart" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Gill Sans MT" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="97" Margin="0,1,0,0" Click="Button_Click"/>
+            <CheckBox Name="cbGroupByCategory" FontFamily="Gill Sans MT" Foreground="#FF893E42" Content="Group by category" Grid.ColumnSpan="2" Margin="266,0,0,0" IsChecked="False" Checked="cbGroupByCategory_Checked" Unchecked="cbGroupByCategory_Unchecked"/>
 
         </Grid>
 
-        <ListView x:Name="ProductView" ItemsSource="{Binding}" FontFamily="Tekton Pro" Foreground="#FF893E42"  MouseDoubleClick="ProductView_MouseDoubleClick" Margin="0,46,0,0" Grid.RowSpan="2">
+        <ListView x:Name="ProductView" ItemsSource="{Binding}" FontFamily="Gill Sans MT" Foreground="#FF893E42"  MouseDoubleClick="ProductView_MouseDoubleClick" Margin="0,46,0,0" Grid.RowSpan="2">
 
             <ListView.View >
                 <GridView>
@@ -59,9 +59,9 @@
                                         <Expander IsExpanded="True">
                                             <Expander.Header>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold"  FontSize="18" VerticalAlignment="Bottom" />
-                                                    <TextBlock Text="{Binding ItemCount}" FontSize="16"  FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
-                                                    <TextBlock Text=" item(s)" FontSize="12" FontStyle="Italic" VerticalAlignment="Bottom"  />
+                                                    <TextBlock Text="{Binding Name}" FontFamily="Gill Sans MT" FontWeight="Bold"  FontSize="18" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="{Binding ItemCount}" FontFamily="Gill Sans MT" FontSize="16"  FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text=" item(s)" FontSize="12" FontFamily="Gill Sans MT" VerticalAlignment="Bottom"  />
                                                 </StackPanel>
                                             </Expander.Header>
                                             <ItemsPresenter />

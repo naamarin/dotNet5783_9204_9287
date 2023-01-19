@@ -88,7 +88,7 @@ namespace PL
         private void btViewOrder_Click(object sender, RoutedEventArgs e)
         {
             int orderID = int.Parse(txbOrderID.Text);
-            new OrderDetals(orderID, false).ShowDialog();
+            new OrderDetals(orderID, false).Show();
         }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         DataContext="{Binding currentProductForList, RelativeSource={RelativeSource self}}"
-        Title="ProductsView" Height="640" Width="800" Activated="Window_Activated">
+        Title="ProductsView" Height="640" Width="800" Activated="Window_Activated" WindowStartupLocation="CenterScreen">
     
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
@@ -21,14 +21,14 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox Name="CategorySelector" Background="#FF893E42" Foreground="#FF893E42" BorderBrush="White" SelectionChanged="CategorySelector_SelectionChanged"  FontFamily="Tekton Pro" Margin="398,6,2,6" Grid.ColumnSpan="2"/>
+            <ComboBox Name="CategorySelector" Background="#FF893E42" Foreground="#FF893E42" BorderBrush="White" SelectionChanged="CategorySelector_SelectionChanged"  FontFamily="Gill Sans MT" Margin="398,6,2,6" Grid.ColumnSpan="2"/>
         </Grid>
 
 
 
 
 
-        <Button Name="btnAddProduct" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Padding="5" Height="28" VerticalAlignment="Center" Click="btnAddProduct_Click" Width="104" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Tekton Pro" Margin="674,0,0,0"/>
+        <Button Name="btnAddProduct" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Left" Padding="5" Height="28" VerticalAlignment="Center" Click="btnAddProduct_Click" Width="104" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Gill Sans MT" Margin="674,0,0,0"/>
         
         <!--<ScrollViewer Grid.Row="1">
             <ListView x:Name="ProductView" FontFamily="Tekton Pro" ScrollViewer.HorizontalScrollBarVisibility= "Disabled"
@@ -43,7 +43,7 @@
             </ListView>
         </ScrollViewer>-->
 
-        <ListView x:Name="ProductView" ItemsSource="{Binding}" Margin="0,46,0,0" Grid.RowSpan="2" FontFamily="Tekton Pro" Foreground="#FF893E42" HorizontalAlignment="Center" Width="800" MouseDoubleClick="ProductView_MouseDoubleClick">
+        <ListView x:Name="ProductView" ItemsSource="{Binding}" Margin="0,46,0,0" Grid.RowSpan="2" FontFamily="Gill Sans MT" Foreground="#FF893E42" HorizontalAlignment="Center" Width="800" MouseDoubleClick="ProductView_MouseDoubleClick">
             <ListView.View >
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>

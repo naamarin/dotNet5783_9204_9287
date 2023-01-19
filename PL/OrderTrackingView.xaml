@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         DataContext="{Binding currentOrderTracking, RelativeSource={RelativeSource self}}"
-        Title="OrderTrackingView" Height="450" Width="800">
+        Title="OrderTrackingView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Image HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="434" Source="/pattern.jpg" Opacity="0.5" Margin="433,0,0,0"/>
         <Image HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="434" Source="/pattern.jpg" Opacity="0.5"/>
@@ -15,14 +15,14 @@
         <Image Name="ImShipped" Margin="148,294,213,-30" Source="/Shipped.Jpg"/>
         <Image Name="ImDelivered" Margin="148,294,213,-30" Source="/Delivered.Jpg"/>
 
-        <Label Name="lbOrderId" Content="Enter order ID:" Foreground="#FF893E42" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="268,57,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.004,0.729" FontSize="16" Background="#FFFBF9F9"/>
-        <TextBox Name="txbOrderID" Text="" HorizontalAlignment="Left" Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Tekton Pro" Margin="393,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button Name="btOrderTracking" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Tekton Pro" Content="Display order tracking" HorizontalAlignment="Center" Margin="0,93,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.189,-0.049" Height="44" Width="166" Click="btOrderTracking_Click" FontSize="16"/>
-        <Label Name="lbOrderStatus" Content="Status:" Foreground="#FF893E42" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="75,165,0,0" VerticalAlignment="Top" FontSize="16" Background="#FFFDFBFB"/>
-        <Label Name="lbTracking" Content="Tracking:" Foreground="#FF893E42" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="69,195,0,0" VerticalAlignment="Top" FontSize="16" Background="#FFFFFBFB"/>
-        <TextBox Name="txbStatus" IsReadOnly="True" Text="" Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="170,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Height="26" FontSize="16"/>
+        <Label Name="lbOrderId" Content="Enter order ID:" Foreground="#FF893E42" FontFamily="Gill Sans MT" HorizontalAlignment="Left" Margin="268,57,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.004,0.729" FontSize="16" Background="#FFFBF9F9"/>
+        <TextBox Name="txbOrderID" Text="" HorizontalAlignment="Left" Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Gill Sans MT" Margin="393,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button Name="btOrderTracking" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Gill Sans MT" Content="Display order tracking" HorizontalAlignment="Center" Margin="0,93,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.189,-0.049" Height="44" Width="166" Click="btOrderTracking_Click" FontSize="16"/>
+        <Label Name="lbOrderStatus" Content="Status:" Foreground="#FF893E42" FontFamily="Gill Sans MT" HorizontalAlignment="Left" Margin="75,165,0,0" VerticalAlignment="Top" FontSize="16" Background="#FFFDFBFB"/>
+        <Label Name="lbTracking" Content="Tracking:" Foreground="#FF893E42" FontFamily="Gill Sans MT" HorizontalAlignment="Left" Margin="69,195,0,0" VerticalAlignment="Top" FontSize="16" Background="#FFFFFBFB"/>
+        <TextBox Name="txbStatus" IsReadOnly="True" Text="" Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Gill Sans MT" HorizontalAlignment="Left" Margin="170,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144" Height="26" FontSize="16"/>
 
-        <ListView Name="itemSource" ItemsSource="{Binding Tracking}" Foreground="#FF893E42" FontFamily="Tekton Pro" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="173,204,213,106" FontSize="16">
+        <ListView Name="itemSource" ItemsSource="{Binding Tracking}" Foreground="#FF893E42" FontFamily="Gill Sans MT" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="173,204,213,106" FontSize="16">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
@@ -30,7 +30,7 @@
             </ListView.View>
         </ListView>
 
-        <Button Name="btViewOrder" Content="View order" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="650,347,0,0" VerticalAlignment="Top" Height="41" Width="104" Click="btViewOrder_Click" FontSize="16"/>
+        <Button Name="btViewOrder" Content="View order" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Gill Sans MT" HorizontalAlignment="Left" Margin="650,347,0,0" VerticalAlignment="Top" Height="41" Width="104" Click="btViewOrder_Click" FontSize="16"/>
 
 
     </Grid>

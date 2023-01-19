@@ -6,13 +6,19 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         DataContext="{Binding currentOrder, RelativeSource={RelativeSource self}}"
-        Title="Simulator" Height="450" Width="800">
+        Title="Simulator" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+
     <Grid>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="0"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="lvOrderForList"   ItemsSource="{Binding}" Margin="0,43,0,0"   FontFamily="Tekton Pro" Foreground="#FF893E42" HorizontalAlignment="Center" Width="740">
+
+        <Image HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="434" Source="/pattern.jpg" Opacity="1" Margin="428,0,0,0" Grid.ColumnSpan="2"/>
+        <Image HorizontalAlignment="Left" Height="434" VerticalAlignment="Center" Width="434" Source="/pattern.jpg" Opacity="1" Margin="-6,0,0,0"/>
+
+        <ListView x:Name="lvOrderForList"   ItemsSource="{Binding}" Margin="0,43,0,31" Foreground="#FF893E42" FontFamily="Gill Sans MT" HorizontalAlignment="Center" Width="740">
             <ListView.View >
                 <GridView>
                     <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>
@@ -20,17 +26,24 @@
                     <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}"/>
                     <GridViewColumn Header="Amount of items" DisplayMemberBinding="{Binding AmountOfItems}"/>
                     <GridViewColumn Header="Total price" DisplayMemberBinding="{Binding TotalPrice}"/>
-                    <GridViewColumn x:Name="iDColumn" Header="" Width="80">
+                    <GridViewColumn x:Name="btColumn" Header="" Width="110">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Name="btViewOrderTracking" Content="View order tracking" Click="btViewOrderTracking_Click" />
+                                <Button Name="btViewOrderTracking" Content="View order tracking" FontFamily="Gill Sans MT" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" Click="btViewOrderTracking_Click" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="pbColumn" Header="" Width="110">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ProgressBar Name="pbTracking"  Minimum="0" Height="20" Width="100" Foreground="#FF893E42" Maximum="100" Value="{Binding Path=Status,Converter={StaticResource PrograssBarToColor}}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Name="btStartTracking" Content="Start tracking" HorizontalAlignment="Left" Margin="562,4,0,0" VerticalAlignment="Top" Height="29" Width="98" Click="btStartTracking_Click"/>
-        <Button Name="btStopTracking" Content="Stop tracking" HorizontalAlignment="Left" Margin="672,4,0,0" VerticalAlignment="Top" Height="29" Width="98" Click="btStopTracking_Click"/>
+        <Button Name="btStartTracking" FontFamily="Gill Sans MT" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" Content="Start tracking" HorizontalAlignment="Left" Margin="562,4,0,0" VerticalAlignment="Top" Height="29" Width="98" Click="btStartTracking_Click"/>
+        <Button Name="btStopTracking" FontFamily="Gill Sans MT" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" Content="Stop tracking" HorizontalAlignment="Left" Margin="672,4,0,0" VerticalAlignment="Top" Height="29" Width="98" Click="btStopTracking_Click"/>
     </Grid>
 </Window>

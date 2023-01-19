@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         DataContext="{Binding currentCart, RelativeSource={RelativeSource self}}"
-        Title="CartView" Height="450" Width="550" >
+        Title="CartView" Height="450" Width="550" WindowStartupLocation="CenterScreen">
     <Grid>
         <Image HorizontalAlignment="Left" Height="315" VerticalAlignment="Top" Width="315" Source="/pattern.jpg" Opacity="0.5"/>
         <Image HorizontalAlignment="Left" Height="315" VerticalAlignment="Top" Width="315" Source="/pattern.jpg" Margin="314,0,0,0" Opacity="0.5"/>
         <Image HorizontalAlignment="Left" Height="315" VerticalAlignment="Top" Width="315" Source="/pattern.jpg" Margin="314,314,0,0" Opacity="0.5"/>
         <Image HorizontalAlignment="Left" Height="315" VerticalAlignment="Top" Width="315" Source="/pattern.jpg" Margin="-1,314,0,0" Opacity="0.5"/>
 
-        <ListView x:Name="orderItemListView" ItemsSource="{Binding Items}" FontFamily="Tekton Pro" SelectionMode="Single" Margin="36,217,33,17">
+        <ListView x:Name="orderItemListView" ItemsSource="{Binding Items}" FontFamily="Gill Sans MT" SelectionMode="Single" Margin="36,217,33,17">
             <ListView.ItemContainerStyle>
                 <Style>
                     <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
@@ -64,10 +64,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn x:Name="removeButtenColumn" Header="" Width="80">
+                    <GridViewColumn x:Name="removeButtenColumn" Header="" Width="90">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Name="btRemove" Content="Remove" Width="70" Click="btRemove_Click"/>
+                                <Button Name="btRemove" Content="Remove" Width="70" FontFamily="Gill Sans MT" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" Click="btRemove_Click"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -87,17 +87,17 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Column="0"  Foreground="#FF893E42" FontFamily="Tekton Pro" Content="Customer Address:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" FontSize="16"/>
-            <TextBox x:Name="customerAddressTextBox" Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Tekton Pro"  Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="0" Text="{Binding CustomerAddress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="Customer Email:" Foreground="#FF893E42" FontFamily="Tekton Pro"  HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" FontSize="16"/>
-            <TextBox x:Name="customerEmailTextBox" Background="#FF893E42" Foreground="White"  BorderBrush="White" Grid.Column="1" FontFamily="Tekton Pro" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding CustomerEmail, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="Customer Name:" Foreground="#FF893E42" FontFamily="Tekton Pro"  HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" FontSize="16"/>
-            <TextBox x:Name="customerNameTextBox" Background="#FF893E42" Foreground="White"  BorderBrush="White" Grid.Column="1" FontFamily="Tekton Pro"  HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding CustomerName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Grid.Column="0" Content="Total Price:" Foreground="#FF893E42" FontFamily="Tekton Pro"  HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" FontSize="16"/>
-            <TextBox x:Name="totalPriceTextBox" Background="#FF893E42" Foreground="White"  BorderBrush="White" Grid.Column="1" FontFamily="Tekton Pro" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="3" Text="{Binding TotalPrice, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0"  Foreground="#FF893E42" FontFamily="Gill Sans MT" Content="Customer Address:" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" FontSize="16"/>
+            <TextBox x:Name="customerAddressTextBox" Background="#FF893E42" Foreground="White"  BorderBrush="White" FontFamily="Gill Sans MT"  Grid.Column="1" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="0" Text="{Binding CustomerAddress, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="Customer Email:" Foreground="#FF893E42" FontFamily="Gill Sans MT"  HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" FontSize="16"/>
+            <TextBox x:Name="customerEmailTextBox" Background="#FF893E42" Foreground="White"  BorderBrush="White" Grid.Column="1" FontFamily="Gill Sans MT" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="1" Text="{Binding CustomerEmail, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="Customer Name:" Foreground="#FF893E42" FontFamily="Gill Sans MT"  HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" FontSize="16"/>
+            <TextBox x:Name="customerNameTextBox" Background="#FF893E42" Foreground="White"  BorderBrush="White" Grid.Column="1" FontFamily="Gill Sans MT"  HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="2" Text="{Binding CustomerName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <Label Grid.Column="0" Content="Total Price:" Foreground="#FF893E42" FontFamily="Gill Sans MT"  HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" FontSize="16"/>
+            <TextBox x:Name="totalPriceTextBox" Background="#FF893E42" Foreground="White"  BorderBrush="White" Grid.Column="1" FontFamily="Gill Sans MT" HorizontalAlignment="Left" Height="NaN" Margin="3" Grid.Row="3" Text="{Binding TotalPrice, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
-        <Label Content="Items:" Foreground="#FF893E42" FontSize="16" FontFamily="Tekton Pro" HorizontalAlignment="Left" Margin="36,185,0,0" VerticalAlignment="Top"/>
-        <Button Name="btMakeOrder" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Tekton Pro" Content="Make order" HorizontalAlignment="Left" Margin="410,31,0,0" VerticalAlignment="Top" Height="48" Width="107" Click="btMakeOrder_Click"/>
+        <Label Content="Items:" Foreground="#FF893E42" FontSize="16" FontFamily="Gill Sans MT" HorizontalAlignment="Left" Margin="36,185,0,0" VerticalAlignment="Top"/>
+        <Button Name="btMakeOrder" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" FontFamily="Gill Sans MT" Content="Make order" HorizontalAlignment="Left" Margin="410,31,0,0" VerticalAlignment="Top" Height="48" Width="107" Click="btMakeOrder_Click"/>
 
 
 

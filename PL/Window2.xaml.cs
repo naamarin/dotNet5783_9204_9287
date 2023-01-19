@@ -33,8 +33,6 @@ namespace PL
         public Window2()
         {
             InitializeComponent();
-            //var v = bl.Product.GetListProducts(); 
-            //currentProductForList = bl.Product.GetListProducts();
             CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.CategoryForWPF));
             CategorySelector.SelectedItem = BO.CategoryForWPF.All;
         }
@@ -54,7 +52,7 @@ namespace PL
 
         private void btnAddProduct_Click(object sender, RoutedEventArgs e)
         {
-            new Window1().ShowDialog();
+            new Window1().Show();
             currentProductForList = new ObservableCollection<BO.ProductForList?>(bl!.Product.GetListProducts());
             CategorySelector.SelectedItem = BO.CategoryForWPF.All;
         }
@@ -62,8 +60,7 @@ namespace PL
         private void ProductView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             int productID = ((BO.ProductForList)ProductView.SelectedItem).ID;
-            new Window1(productID).ShowDialog();
-            //ProductView.ItemsSource = bl?.Product.GetListProducts();
+            new Window1(productID).Show();
             CategorySelector.SelectedItem = BO.CategoryForWPF.All;
 
         }

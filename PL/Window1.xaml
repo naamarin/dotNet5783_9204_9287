@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         DataContext="{Binding currentProduct, RelativeSource={RelativeSource self}}"
-       Title="AddOrUpdate" Height="450" Width="400" >
+       Title="AddOrUpdate" Height="450" Width="400" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
@@ -21,20 +21,20 @@
 
     <Grid>
         <Grid Margin="0,10,0,-10"  Background="#FF893E42" >
-            <Image Name="NewImage" Source="{Binding Path=ImageRelativeName, Converter= {StaticResource ImagePathToBitmap}}" HorizontalAlignment="Left" Height="123" VerticalAlignment="Top" Width="140" Margin="32,269,0,0"/>
+            <Image Name="NewImage" Source="{Binding Path=ImageRelativeName, Converter= {StaticResource ImagePathToBitmap}}" HorizontalAlignment="Left" Height="123" VerticalAlignment="Top" Width="140" Margin="32,269,0,0" />
         </Grid>
-        <TextBox Name="txbProductID" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,70,0,0" TextWrapping="Wrap" Text="{Binding ID, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}"  VerticalAlignment="Top" Width="120" FontFamily="Tekton Pro"/>
-        <TextBox Name="txbProductName" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,110,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}"  VerticalAlignment="Top" Width="120" FontFamily="Tekton Pro"/>
-        <TextBox Name="txbProductPrice" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,190,0,0" TextWrapping="Wrap" Text="{Binding Price, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}"  VerticalAlignment="Top" Width="120" FontFamily="Tekton Pro"/>
-        <TextBox Name="txbProductStockCount" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,230,0,0" TextWrapping="Wrap" Text="{Binding StockCount, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}"  VerticalAlignment="Top" Width="120" FontFamily="Tekton Pro"/>
-        <ComboBox Name="CategoryOptions" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" Text="{Binding Category, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Margin="160,150,0,0" VerticalAlignment="Top" Width="120" FontFamily="Tekton Pro"/>
-        <Label Name="lID" Content="Product ID:" Foreground="#FF908989" HorizontalAlignment="Left" Margin="45,65,0,0" VerticalAlignment="Top" FontFamily="Tekton Pro"/>
-        <Label Name="lName" Content="Product Name:" Foreground="#FF908989" HorizontalAlignment="Left" Margin="45,105,0,0" VerticalAlignment="Top" FontFamily="Tekton Pro"/>
-        <Label Name="lCategory" Content="Product category:" Foreground="#FF908989" HorizontalAlignment="Left" Margin="45,145,0,0" VerticalAlignment="Top" FontFamily="Tekton Pro"/>
-        <Label Name="lPrice" Content="Product price:" Foreground="#FF908989" HorizontalAlignment="Left" Margin="45,185,0,0" VerticalAlignment="Top" FontFamily="Tekton Pro"/>
-        <Label Name="lAmount" Content="Product amount:" Foreground="#FF908989" HorizontalAlignment="Left" Margin="45,225,0,0" VerticalAlignment="Top" FontFamily="Tekton Pro"/>
-        <Button Name="btAddProduct" Content="Add" Background="#FF893E42" Foreground="#FF908989" HorizontalAlignment="Left" Margin="290,375,0,0" VerticalAlignment="Top" Height="28" Width="88" Click="btAddProduct_Click" FontFamily="Tekton Pro"/>
-        <Button Name="btUpdateProduct" Content="Update" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" HorizontalAlignment="Left" Margin="290,375,0,0" VerticalAlignment="Top" Height="28" Width="88" Click="btUpdateProduct_Click" FontFamily="Tekton Pro"/>
+        <TextBox Name="txbProductID" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,70,0,0" TextWrapping="Wrap" Text="{Binding ID, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}"  VerticalAlignment="Top" Width="120" FontFamily="Gill Sans MT"/>
+        <TextBox Name="txbProductName" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,110,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}"  VerticalAlignment="Top" Width="120" FontFamily="Gill Sans MT"/>
+        <TextBox Name="txbProductPrice" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,190,0,0" TextWrapping="Wrap" Text="{Binding Price, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}"  VerticalAlignment="Top" Width="120" FontFamily="Gill Sans MT"/>
+        <TextBox Name="txbProductStockCount" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" Style="{StaticResource TextBoxStyle}" HorizontalAlignment="Left" Margin="160,230,0,0" TextWrapping="Wrap" Text="{Binding StockCount, Mode=TwoWay,NotifyOnValidationError=True, ValidatesOnExceptions=True}"  VerticalAlignment="Top" Width="120" FontFamily="Gill Sans MT"/>
+        <ComboBox Name="CategoryOptions" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" Text="{Binding Category, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Margin="160,150,0,0" VerticalAlignment="Top" Width="120" FontFamily="Gill Sans MT"/>
+        <Label Name="lID" Content="Product ID:" Foreground="#FF908989" HorizontalAlignment="Left" Margin="45,65,0,0" VerticalAlignment="Top" FontFamily="Gill Sans MT"/>
+        <Label Name="lName" Content="Product Name:" Foreground="#FF908989" HorizontalAlignment="Left" Margin="45,105,0,0" VerticalAlignment="Top" FontFamily="Gill Sans MT"/>
+        <Label Name="lCategory" Content="Product category:" Foreground="#FF908989" HorizontalAlignment="Left" Margin="45,145,0,0" VerticalAlignment="Top" FontFamily="Gill Sans MT"/>
+        <Label Name="lPrice" Content="Product price:" Foreground="#FF908989" HorizontalAlignment="Left" Margin="45,185,0,0" VerticalAlignment="Top" FontFamily="Gill Sans MT"/>
+        <Label Name="lAmount" Content="Product amount:" Foreground="#FF908989" HorizontalAlignment="Left" Margin="45,225,0,0" VerticalAlignment="Top" FontFamily="Gill Sans MT"/>
+        <Button Name="btAddProduct" Content="Add" Background="#FF893E42" Foreground="#FF908989" HorizontalAlignment="Left" Margin="290,375,0,0" VerticalAlignment="Top" Height="28" Width="88" Click="btAddProduct_Click" FontFamily="Gill Sans MT"/>
+        <Button Name="btUpdateProduct" Content="Update" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" HorizontalAlignment="Left" Margin="290,375,0,0" VerticalAlignment="Top" Height="28" Width="88" Click="btUpdateProduct_Click" FontFamily="Gill Sans MT"/>
         <!--<Button Name= "UpdateImage" Content="update Image" Background="#FF893E42" Foreground="#FF908989" BorderBrush="White" HorizontalAlignment="Left" Margin="190,375,0,0" VerticalAlignment="Top" Click="UpdateButton_Click" Height="28" Width="88" FontFamily="Tekton Pro"/>-->
 
 

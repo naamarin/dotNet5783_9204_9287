@@ -42,19 +42,18 @@ namespace PL
                 btUpdateProduct.Visibility = Visibility.Visible;
                 txbProductID.IsReadOnly = true;
                 txbProductID.Foreground =Brushes.White;
-                //AddImage.Visibility = Visibility.Hidden;
-                //UpdateImage.Visibility = Visibility.Visible;
             }
             else
             {
-                currentProduct = new BO.Product();  //?
+                currentProduct = new BO.Product();
                 txbProductID.Visibility = Visibility.Visible;
                 btAddProduct.Visibility = Visibility.Visible;
                 btUpdateProduct.Visibility = Visibility.Hidden;
-                //UpdateImage.Visibility = Visibility.Hidden;
-                //AddImage.Visibility = Visibility.Visible;
+
             }
+            
         }
+
 
         private void btAddProduct_Click(object sender, RoutedEventArgs e)
         {
@@ -98,61 +97,7 @@ namespace PL
             {
                 MessageBox.Show("ID, Price and amount must be numbers", "ERROR", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                //bl!.Product.AddProduct(currentProduct);
-
-                OpenFileDialog openFileDialog = new OpenFileDialog();
-                if (openFileDialog.ShowDialog() == true)
-                {
-                    NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-                    openFileDialog.FileName = txbProductName.Text.ToString() + ".png";
-                    currentProduct.ImageRelativeName = @"\Images\" + currentProduct?.Name + ".png";
-                    string imageName = currentProduct.ImageRelativeName.Substring(currentProduct.ImageRelativeName.LastIndexOf("\\"));
-                    if (!File.Exists(Environment.CurrentDirectory[..^4] + @"\Images\" + imageName))
-                    {
-                        File.Copy(currentProduct.ImageRelativeName, Environment.CurrentDirectory[..^4] + @"\Images\" + imageName);
-                        currentProduct.ImageRelativeName = @"\Images\" + imageName;
-                    }
-                    //bl.Product.AddProduct(currentProduct!);
-                    MessageBox.Show("New Product was added succesfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show("Enter product deatails first");
-            }
-        }
-
-        private void UpdateButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-            //BO.Product product = bl.Product.GetById(int.Parse(txbProductID.Text));
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-                if (openFileDialog.ShowDialog() == true)
-            {
-                //NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-                string imageName = openFileDialog.FileName.Substring(openFileDialog.FileName.LastIndexOf("\\"));
-                string newN = Environment.CurrentDirectory[..^4] + @"\Images" + imageName;// + openFileDialog.FileName;
-                currentProduct.ImageRelativeName = @"\Images" + imageName;
-                openFileDialog.FileName = newN;
-                NewImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
-                //openFileDialog.FileName = txbProductName.Text.ToString() + ".png";
-                //string imageName = product.ImageRelativeName.Substring(product.ImageRelativeName.LastIndexOf("\\"));
-                if (!File.Exists(Environment.CurrentDirectory[..^4] + @"\Images\" + imageName))
-                {
-                    File.Copy(openFileDialog.FileName, newN);
-                    //File.Copy(product.ImageRelativeName, Environment.CurrentDirectory[..^4] + @"\Images\" + imageName);
-                    currentProduct.ImageRelativeName = @"\Images\" + imageName;
-                }
-                //bl.Product.UpdateProduct(product!);
-                MessageBox.Show("New Product was added succesfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
+         }
+           
     }
 }

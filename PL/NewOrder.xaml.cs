@@ -38,7 +38,6 @@ namespace PL
         public NewOrder(BO.Cart c)
         {
             InitializeComponent();
-            //var v = bl.Product.GetListProducts(); 
             currentProductItems = new ObservableCollection<BO.ProductItem?> (bl.Product.Catalog());
             CategorySelector.ItemsSource = Enum.GetValues(typeof(BO.CategoryForWPF));
             CategorySelector.SelectedItem = BO.CategoryForWPF.All;
@@ -63,14 +62,14 @@ namespace PL
         private void ProductView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             int productID = ((BO.ProductItem)ProductView.SelectedItem).ID;
-            new ProductItemView(productID, cart).ShowDialog();
+            new ProductItemView(productID, cart).Show();
             currentProductItems = new ObservableCollection<BO.ProductItem?>(bl!.Product.Catalog());
             CategorySelector.SelectedItem = BO.CategoryForWPF.All;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new CartView(cart).ShowDialog();
+            new CartView(cart).Show();
         }
 
         private void cbGroupByCategory_Checked(object sender, RoutedEventArgs e)

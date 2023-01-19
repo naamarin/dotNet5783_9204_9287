@@ -36,16 +36,12 @@ namespace PL
         public Order()
         {
             InitializeComponent();
-            //currentOrder = bl.Order.OrderListForManager();
-            //lvOrderForList.ItemsSource = currentOrder;
         }
 
         private void lvOrderForList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             int orderID = ((BO.OrderForList)lvOrderForList.SelectedItem).ID; 
-            new OrderDetals(orderID, true).ShowDialog();
-            //ProductView.ItemsSource = bl?.Product.GetListProducts();
-            //CategorySelector.SelectedItem = BO.CategoryForWPF.All;
+            new OrderDetals(orderID, true).Show();
         }
 
         private void Window_Activated(object sender, EventArgs e)
