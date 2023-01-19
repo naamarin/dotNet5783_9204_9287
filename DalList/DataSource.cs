@@ -39,9 +39,6 @@ internal static class DataSource
         createAndInitProducts();
         createAndInitOrders();
         createAndInitOrderItems();
-        //XMLTools.SaveListToXMLSerializer(ProductList, "products");
-        //XMLTools.SaveListToXMLSerializer(OrderList, "orders");
-        //XMLTools.SaveListToXMLSerializer(OrderItemsList, "orderItems");
     }
     /// <summary>
     /// A function to create new objects of product type
@@ -95,13 +92,14 @@ internal static class DataSource
         0512456325,0552545258,0504060040,0578578859,0532653562,0522238475,0558757856,0454875025,0506085075,039087584,
         0547659804,0513246521,0556485012,0548406711,0503329210,039875486,039095856,037845896,0732122155,};
 
-        //int indexDelivery = 0;
-        //int indexShip = 0;
+        int[] ids = {1026, 1025, 1024, 1023, 1022, 1021, 1020, 1019, 1018, 1017, 1016, 1015, 1014, 1013, 1012, 
+            1011, 1010, 1009, 1008, 1007, 1006, 1005, 1004, 1003, 1002, 1001, 1000 };
+
         int count = 0;
         for (int i = 0; i < 27; i++)
         {
             Order order = new Order();
-            order.ID = Config.NextOrderNumber;
+            order.ID = ids[i];
             string firstName = firstNames[rand.Next(0, 27)];
             string lastName = lastNames[rand.Next(0, 27)];
             order.CustomerName = firstName + " " + lastName;
@@ -114,21 +112,16 @@ internal static class DataSource
             order.OrderDate =DateTime.Now.AddMinutes(count);
             count -= 9;
             if (i > 9)
-            {
                 order.ShipDate = order.OrderDate?.AddMinutes(31);
-                //indexShip++;
-            }
             else
                 order.ShipDate = null;
             if (i > 22)
-            {
                 order.DeliveryDate = order.ShipDate?.AddMinutes(23);
-                //indexDelivery++;
-            }
             else
                 order.DeliveryDate = null;
             OrderList.Add(order);
         }
+        OrderList.Sort((x, y) => x.Value.ID.CompareTo(y.Value.ID));
     }
 
     /// <summary>
