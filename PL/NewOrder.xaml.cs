@@ -52,6 +52,7 @@ namespace PL
 
         private void CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ProductView.ItemsSource = currentProductItems;
             BO.CategoryForWPF category = (BO.CategoryForWPF)CategorySelector.SelectedItem;
             if (category == BO.CategoryForWPF.All)
                 currentProductItems = new ObservableCollection<BO.ProductItem?>(bl!.Product.Catalog());
